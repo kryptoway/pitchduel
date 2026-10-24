@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SDF Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;600&display=swap" rel="stylesheet">
+<style id="css">
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#EEF3EF;--card:#fff;--ink:#10251B;--mut:#5B6B62;--line:#CFDAD2;--acc:#1F6B4A;--gold:#F2C230;--silver:#8a95a5;--bronze:#c2763a;--lead:#FBF1C7;--danger:#C8402F}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1B15;--card:#15251C;--ink:#E7F0EA;--mut:#93A69A;--line:#25382D;--acc:#4FB583;--lead:#2c2610;--danger:#EE7A68}}
+:root[data-theme="dark"]{--bg:#0F1B15;--card:#15251C;--ink:#E7F0EA;--mut:#93A69A;--line:#25382D;--acc:#4FB583;--lead:#2c2610;--danger:#EE7A68}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.4 Barlow,system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:1040px;margin:0 auto;padding:16px}
+h1,h2,.num{font-family:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;font-weight:700}
+h1{font-size:34px;margin:4px 0 10px}h2{font-size:24px;margin:0}
+button{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:7px 12px}
+button:hover{border-color:var(--acc)}
+button.pri,button.tab.on{background:var(--acc);border-color:var(--acc);color:#fff}
+button[data-armed="1"]{background:var(--danger);border-color:var(--danger);color:#fff}
+:focus-visible{outline:2px solid var(--acc);outline-offset:1px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+.row label{color:var(--mut);font-size:13px}
+.leaders{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin-bottom:20px}
+.lc{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--gold);border-radius:10px;padding:10px 14px}
+.lc small{color:var(--mut)}.lc .n{font-size:22px;font-weight:700;line-height:1.15}.lc .num{font-size:28px;color:var(--acc)}
+section{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:18px}
+.sh{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:620px}
+th,td{padding:4px 5px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font-weight:600;color:var(--mut);font-size:13px}
+tr.lead td{background:var(--lead)}tr.low td{opacity:.55}
+input,select,textarea{font:inherit;color:var(--ink);background:transparent;border:1px solid transparent;border-radius:6px;padding:4px 6px;width:100%}
+input:hover,select:hover{border-color:var(--line)}
+input.pt{width:64px;text-align:right}input.dnp{color:var(--mut);font-style:italic}
+input.nm{min-width:150px}input.cl{width:70px}input.gl{width:44px}input.rn{width:64px;font-weight:600}
+input.cn,input.mn{width:auto;border-color:var(--line)}input.mn{width:56px}
+textarea{border-color:var(--line);min-height:90px;font:12px monospace}
+td.s,td.a{text-align:right}td.s{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:700;font-size:20px}
+td.a{color:var(--mut)}
+.rk{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;border:2px solid var(--line);font-size:12px;font-weight:700}
+.r1{border-color:var(--gold)}.r2{border-color:var(--silver)}.r3{border-color:var(--bronze)}
+button.x{padding:2px 7px;color:var(--mut);border:none;background:none}
+button.so{border:none;background:none;padding:2px 4px;color:var(--mut);font-size:13px;font-weight:600}button.so.on{color:var(--acc)}
+.hint{color:var(--mut);font-size:13px;margin:6px 0}
+.ptabs{display:flex;flex-wrap:wrap;gap:2px;align-items:flex-end}
+button.ptab{font-family:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;font-weight:700;font-size:22px;line-height:1.1;padding:4px 12px 6px;border:none;border-bottom:3px solid transparent;border-radius:0;background:none;color:var(--mut)}
+button.ptab:hover{color:var(--ink);border-color:transparent}
+button.ptab.on{color:var(--ink);border-bottom-color:var(--acc)}
+.lc[data-pv]{cursor:pointer}.lc[data-pv]:hover{border-color:var(--acc)}
+.allbar{margin-bottom:10px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) button.pri,:root:not([data-theme="light"]) button.tab.on{color:#0F1B15}}
+:root[data-theme="dark"] button.pri,:root[data-theme="dark"] button.tab.on{color:#0F1B15}
+tr.pl{cursor:pointer}tr.pl:hover td{background:var(--bg)}
+.dn{color:var(--danger);font-style:italic;font-size:13px}
+tr.det td{background:var(--bg);padding:12px 14px;white-space:normal;text-align:left}
+.ds{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:6px}.ds div{display:flex;flex-direction:column}
+.ds .num{font-size:26px;line-height:1.1;color:var(--acc)}.ds small{color:var(--mut);font-size:12px}
+.pp{font-size:12px;border:1px solid var(--line);border-radius:4px;padding:1px 6px;color:var(--mut)}
+td.s{color:var(--acc)}
+button:disabled{opacity:.5;cursor:default}
+
+:root{--tn:#3F6FD1;--tp:#C99700}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--tn:#7FA2F0;--tp:#F2C230}}
+:root[data-theme="dark"]{--tn:#7FA2F0;--tp:#F2C230}
+.bd{display:inline-block;font-size:11px;font-weight:700;line-height:1;padding:2px 5px;border-radius:4px;color:#fff;margin-left:4px;vertical-align:middle}
+.bd.N{background:var(--tn)}.bd.C{background:var(--tp);color:#10251B}
+th.tN,td.tN{background:color-mix(in srgb,var(--tn) 10%,transparent)}th.tC,td.tC{background:color-mix(in srgb,var(--tp) 12%,transparent)}
+.lg{display:flex;flex-wrap:wrap;gap:6px 18px;margin:4px 0 16px;font-size:13px;color:var(--mut)}
+.sw{display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--acc);margin-right:2px}
+table th,table td{padding-left:6px;padding-right:6px}
+.hd{display:flex;justify-content:flex-end;align-items:center;gap:3px;min-height:22px}.hd .bd{margin:0}
+.dt{font-size:13px;line-height:1.2}.dt .rn{width:64px}
+main{max-width:1680px}
+th{vertical-align:bottom}
+@media (min-width:1100px){table th,table td{padding-left:11px;padding-right:11px}}
+@media (min-width:1500px){table{font-size:16px}th{font-size:14px}}
+</style></head><body><main>
+<h1>SDF Dashboard</h1>
+<div id="top"></div>
+<p class="hint" id="msg" role="status" style="color:var(--danger);margin:0 0 8px"></p>
+<div class="leaders" id="lead"></div>
+<div id="secs"></div>
+<p class="hint">Read-only data. Average = total ÷ number of matches played with points (DNP and empty rounds are excluded). In the “Combined” view the average is calculated across all matches together, not from monthly averages. Dimmed rows have fewer matches played than the minimum. Click a player to see their stats and form.</p>
+</main>
+<script id="data" type="application/json">{"comps":[{"id":"c135","name":"October 2026","rounds":["1-3N","4-6N","7-13","13-16C","16-20","20-23C","23-29"]}],"players":[{"id":2,"pos":"FWD","name":"Adeyemi","club":"BAR","pts":{"c135":[null,null,31.8,81.5,61,31.8,null]},"g":{"c135":1},"a":{"c135":0}},{"id":3,"pos":"DEF","name":"Aina","club":"NFO","pts":{"c135":[null,null,51,"DNP","DNP","DNP",null]}},{"id":4,"pos":"MID","name":"Akliouche","club":"PSG","pts":{"c135":["DNP",51.3,141.8,98.8,45,51.8,null]},"g":{"c135":2},"a":{"c135":0}},{"id":5,"pos":"DEF","name":"Alexander-Arnold","club":"RMD","pts":{"c135":["DNP",103.5,94,"DNP","DNP","DNP",null]},"g":{"c135":0},"a":{"c135":0}},{"id":6,"pos":"GK","name":"Alisson Becker","club":"LIV","pts":{"c135":[null,null,22.8,59.5,75.5,61.5,null]}},{"id":7,"pos":"FWD","name":"Alvarez","club":"ATM","pts":{"c135":[null,null,51,42.5,98,142.5,null]},"g":{"c135":1},"a":{"c135":1}},{"id":8,"pos":"DEF","name":"Amir Rrahmani","club":"NAP","pts":{"c135":[null,null,97.5,164.8,71.3,85.8,null]},"g":{"c135":1},"a":{"c135":0}},{"id":9,"pos":"MID","name":"Anderson","club":"MCI","pts":{"c135":[110.3,59.8,175,64,53.5,157.3,null]},"a":{"c135":1},"g":{"c135":1}},{"id":10,"pos":"FWD","name":"Antony","club":"BET","pts":{"c135":[null,null,46.5,130.5,"DNP",95.3,null]},"a":{"c135":1}},{"id":11,"pos":"MID","name":"Barella","club":"INT","pts":{"c135":[12,103.8,"DNP",72.3,122,83,null]},"g":{"c135":0},"a":{"c135":1}},{"id":12,"pos":"DEF","name":"Bastoni","club":"INT","pts":{"c135":[129.3,70.5,"DNP",62.8,72.3,88,null]},"g":{"c135":0},"a":{"c135":0}},{"id":13,"pos":"MID","name":"Bellingham","club":"RMD","pts":{"c135":[311.3,68.8,76.3,62.8,133.8,92.5,null]},"g":{"c135":0},"a":{"c135":1}},{"id":14,"pos":"MID","name":"Bellingham","club":"BVB","pts":{"c135":[null,null,76.3,82.3,51,42.5,null]},"g":{"c135":0},"a":{"c135":0}},{"id":15,"pos":"MID","name":"Bruno Fernandes","club":"MUN","pts":{"c135":[156,52.3,51.5,60,48.5,15,null]},"g":{"c135":0},"a":{"c135":0}},{"id":16,"pos":"FWD","name":"Burkardt","club":"SGE","pts":{"c135":[null,null,71.5,"DNP",57.8,"DNP",null]}},{"id":17,"pos":"MID","name":"Caicedo","club":"CHE","pts":{"c135":[null,null,101,"DNP",87.5,"DNP",null]},"g":{"c135":0},"a":{"c135":0}},{"id":18,"pos":"MID","name":"Çalhanoglu","club":"INT","pts":{"c135":[null,null,173.8,0.5,44.5,80.3,null]},"g":{"c135":1},"a":{"c135":0}},{"id":19,"pos":"DEF","name":"Carreras","club":"RMD","pts":{"c135":[null,null,106,23.5,"DNP",100.5,null]},"g":{"c135":0},"a":{"c135":0}},{"id":20,"pos":"MID","name":"Cherki","club":"MCI","pts":{"c135":[115.5,125,192.8,21.3,"DNP",183.3,null]},"g":{"c135":2}},{"id":21,"pos":"GK","name":"Chevalier","club":"PSG","pts":{"c135":[null,null,"DNP","DNP","DNP","DNP",null]},"g":{"c135":0},"a":{"c135":0}},{"id":22,"pos":"GK","name":"Courtois","club":"RMD","pts":{"c135":[null,null,128,103.5,81.5,104.5,null]},"g":{"c135":0},"a":{"c135":0}},{"id":23,"pos":"DEF","name":"Cubarsí","club":"BAR","pts":{"c135":["DNP",92.8,"DNP",69.5,180.5,31,null]},"g":{"c135":0},"a":{"c135":2}},{"id":24,"pos":"DEF","name":"Cucurella","club":"RMD","pts":{"c135":["DNP",68.3,131.5,57.3,55.3,41,null]},"g":{"c135":0},"a":{"c135":0}},{"id":25,"pos":"MID","name":"De Bruyne","club":"NAP","pts":{"c135":[218.8,"DNP",230.3,22.8,49,148.3,null]},"g":{"c135":2},"a":{"c135":1}},{"id":26,"pos":"GK","name":"Dean Henderson","club":"CRY","pts":{"c135":[null,null,"DNP","DNP","DNP","DNP",null]}},{"id":27,"pos":"FWD","name":"Dembélé","club":"PSG","pts":{"c135":[76.3,75.8,"DNP",153,136.5,42.5,null]},"g":{"c135":2},"a":{"c135":2}},{"id":28,"pos":"GK","name":"Di Gregorio","club":"BOU","pts":{"c135":[null,null,"DNP","DNP","DNP",83.8,null]},"g":{"c135":0},"a":{"c135":0}},{"id":29,"pos":"DEF","name":"Di Lorenzo","club":"NAP","pts":{"c135":[null,null,128.3,22.5,59.5,57.3,null]},"g":{"c135":0},"a":{"c135":0}},{"id":30,"pos":"FWD","name":"Diallo","club":"MUN","pts":{"c135":[null,null,60,34.5,74.5,131,null]},"g":{"c135":0},"a":{"c135":1}},{"id":31,"pos":"FWD","name":"Díaz","club":"FCB","pts":{"c135":[null,null,79.3,122.3,319.5,25,null]},"g":{"c135":4},"a":{"c135":1}},{"id":32,"pos":"FWD","name":"Doku","club":"MCI","pts":{"c135":[null,null,177.3,58.8,126.8,"DNP",null]},"g":{"c135":1},"a":{"c135":1}},{"id":33,"pos":"GK","name":"Donnarumma","club":"MCI","pts":{"c135":[77,72,138.3,72,59.3,68.3,null]}},{"id":34,"pos":"FWD","name":"Doué","club":"PSG","pts":{"c135":[102.3,179.3,30.5,185,108,214.8,null]},"g":{"c135":3},"a":{"c135":2}},{"id":35,"pos":"DEF","name":"Dumfries","club":"RMD","pts":{"c135":[35.3,65.5,10.8,44.5,"DNP","DNP",null]},"g":{"c135":0},"a":{"c135":0}},{"id":36,"pos":"DEF","name":"Éder Militão","club":"RMD","pts":{"c135":[null,null,"DNP","DNP",18,"DNP",null]},"g":{"c135":0},"a":{"c135":0}},{"id":37,"pos":"FWD","name":"Ekitiké","club":"LIV","pts":{"c135":[null,null,"DNP","DNP","DNP","DNP",null]}},{"id":38,"pos":"MID","name":"Eze","club":"ARS","pts":{"c135":[35.8,79.8,"DNP",186.5,54.8,151.3,null]},"g":{"c135":2},"a":{"c135":0}},{"id":39,"pos":"MID","name":"Fernández","club":"MCI","pts":{"c135":[null,null,105.5,57.8,65.5,68,null]}},{"id":40,"pos":"GK","name":"Flekken","club":"B04","pts":{"c135":[null,null,50.3,91.5,85.5,"DNP",null]},"g":{"c135":0},"a":{"c135":0}},{"id":41,"pos":"MID","name":"Foden","club":"MCI","pts":{"c135":["DNP","DNP","DNP","DNP",154.3,324,null]},"g":{"c135":4},"a":{"c135":1}},{"id":42,"pos":"DEF","name":"Gabriel Magalhães","club":"ARS","pts":{"c135":[null,null,58.5,75.3,157.8,66.8,null]},"g":{"c135":0},"a":{"c135":0}},{"id":43,"pos":"MID","name":"Gibbs-White","club":"NFO","pts":{"c135":[12.3,17,44.3,"DNP","DNP","DNP",null]}},{"id":44,"pos":"FWD","name":"Gnabry","club":"FCB","pts":{"c135":[null,null,25.5,"DNP",40.5,44.5,null]},"g":{"c135":0},"a":{"c135":0}},{"id":45,"pos":"MID","name":"Gravenberch","club":"LIV","pts":{"c135":[null,null,69.8,63.8,"DNP",59.5,null]}},{"id":46,"pos":"DEF","name":"Grimaldo","club":"ATM","pts":{"c135":[null,null,176,115.3,82.3,65.8,null]},"g":{"c135":1},"a":{"c135":0}},{"id":47,"pos":"DEF","name":"Guéhi","club":"MCI","pts":{"c135":[125,91.3,109.3,27,77.8,"DNP",null]}},{"id":48,"pos":"FWD","name":"Guirassy","club":"BVB","pts":{"c135":[null,null,36.8,22.5,27,176,null]},"g":{"c135":2},"a":{"c135":0}},{"id":49,"pos":"MID","name":"Güler","club":"RMD","pts":{"c135":[122.5,"DNP",65.8,133.3,163.8,191.8,null]},"g":{"c135":2},"a":{"c135":2}},{"id":50,"pos":"DEF","name":"Gvardiol","club":"MCI","pts":{"c135":[null,null,81,106.8,28.8,66.5,null]},"a":{"c135":1}},{"id":51,"pos":"FWD","name":"Gyökeres","club":"ARS","pts":{"c135":[122.3,117.3,55.5,32,34.8,50.8,null]},"g":{"c135":0},"a":{"c135":1}},{"id":52,"pos":"FWD","name":"Haaland","club":"MCI","pts":{"c135":[24.8,15.8,107.5,165.5,228.3,"DNP",null]},"g":{"c135":5}},{"id":53,"pos":"DEF","name":"Hakimi","club":"PSG","pts":{"c135":[null,null,68,73,23.8,153.8,null]},"g":{"c135":0},"a":{"c135":1}},{"id":54,"pos":"MID","name":"Højbjerg","club":"OM","pts":{"c135":[53,10.5,"DNP","DNP","DNP",49.5,null]}},{"id":55,"pos":"FWD","name":"Højlund","club":"NAP","pts":{"c135":[111.8,129,100,30.5,35.8,39,null]},"g":{"c135":0},"a":{"c135":0}},{"id":56,"pos":"DEF","name":"Huijsen","club":"RMD","pts":{"c135":["DNP","DNP","DNP","DNP",91.8,107.5,null]},"g":{"c135":0},"a":{"c135":0}},{"id":57,"pos":"FWD","name":"Isak","club":"LIV","pts":{"c135":["DNP","DNP","DNP","DNP",110.5,32,null]},"g":{"c135":1}},{"id":58,"pos":"GK","name":"Joan García","club":"BAR","pts":{"c135":[null,null,108,107.3,101.5,105.5,null]},"g":{"c135":0},"a":{"c135":0}},{"id":59,"pos":"MID","name":"João Neves","club":"PSG","pts":{"c135":[null,null,37.3,52,63.5,140.8,null]},"g":{"c135":0},"a":{"c135":1}},{"id":60,"pos":"FWD","name":"João Pedro","club":"CHE","pts":{"c135":[null,null,204.5,"DNP",61,"DNP",null]},"g":{"c135":2},"a":{"c135":0}},{"id":61,"pos":"FWD","name":"Jonathan David","club":"ATM","pts":{"c135":[null,null,89.5,29,55,30.3,null]},"g":{"c135":0},"a":{"c135":1}},{"id":62,"pos":"DEF","name":"Jurriën Timber","club":"ARS","pts":{"c135":[null,null,39,198.3,51.8,31,null]},"g":{"c135":1},"a":{"c135":0}},{"id":63,"pos":"FWD","name":"Kane","club":"FCB","pts":{"c135":[252.3,196.8,115.5,206.3,228.8,166.5,null]},"g":{"c135":4},"a":{"c135":5}},{"id":64,"pos":"DEF","name":"Kerkez","club":"LIV","pts":{"c135":[170.3,"DNP",59.3,"DNP",94,"DNP",null]}},{"id":65,"pos":"MID","name":"Kimmich","club":"FCB","pts":{"c135":["DNP","DNP",105.3,108.8,181.5,"DNP",null]},"g":{"c135":0},"a":{"c135":2}},{"id":66,"pos":"GK","name":"Kobel","club":"BVB","pts":{"c135":[47.5,"DNP",53.3,42.8,88,67.3,null]},"g":{"c135":0},"a":{"c135":0}},{"id":67,"pos":"DEF","name":"Konsa","club":"ARS","pts":{"c135":[119.3,"DNP",106.8,105.3,131.5,64.3,null]},"g":{"c135":0},"a":{"c135":0}},{"id":68,"pos":"DEF","name":"Koundé","club":"BAR","pts":{"c135":["DNP",88.3,216.3,30.8,105.3,"DNP",null]},"g":{"c135":1},"a":{"c135":1}},{"id":69,"pos":"MID","name":"Kudus","club":"TOT","pts":{"c135":[null,null,53.5,"DNP",107.8,"DNP",null]},"g":{"c135":0},"a":{"c135":1}},{"id":70,"pos":"FWD","name":"Kvaratskhelia","club":"PSG","pts":{"c135":[null,null,104.8,40.8,71,95.3,null]},"g":{"c135":1},"a":{"c135":0}},{"id":71,"pos":"FWD","name":"Lamine Yamal","club":"BAR","pts":{"c135":[102.5,89.3,105,161.3,227.5,185.8,null]},"g":{"c135":2},"a":{"c135":4}},{"id":72,"pos":"FWD","name":"Lautaro Martínez","club":"INT","pts":{"c135":[null,null,18.3,196.3,"DNP","DNP",null]},"g":{"c135":2},"a":{"c135":0}},{"id":73,"pos":"DEF","name":"Le Normand","club":"ATM","pts":{"c135":[null,null,10.3,1.3,"DNP",23.5,null]},"g":{"c135":0},"a":{"c135":0}},{"id":74,"pos":"MID","name":"Locatelli","club":"JUV","pts":{"c135":[null,null,"DNP","DNP","DNP","DNP",null]}},{"id":75,"pos":"GK","name":"Maignan","club":"ACM","pts":{"c135":[52.3,"DNP",76.3,135,68,-17.5,null]}},{"id":76,"pos":"GK","name":"Martínez","club":"CHE","pts":{"c135":[null,null,128.3,"DNP",142.5,"DNP",null]},"g":{"c135":0},"a":{"c135":0}},{"id":77,"pos":"FWD","name":"Matheus Cunha","club":"MUN","pts":{"c135":[null,null,117.8,39.3,17.8,19.5,null]},"g":{"c135":0},"a":{"c135":1}},{"id":78,"pos":"FWD","name":"Mbappé","club":"RMD","pts":{"c135":["DNP","DNP",51,175.5,219.3,158.3,null]},"g":{"c135":4},"a":{"c135":1}},{"id":79,"pos":"FWD","name":"Mbeumo","club":"MUN","pts":{"c135":[null,null,122,41,83.8,22.5,null]},"g":{"c135":2},"a":{"c135":0}},{"id":80,"pos":"MID","name":"McTominay","club":"NAP","pts":{"c135":[null,null,49.3,18,71.5,223.5,null]},"g":{"c135":2},"a":{"c135":0}},{"id":81,"pos":"DEF","name":"Mittelstädt","club":"STU","pts":{"c135":[114,"DNP",170.5,"DNP","DNP",106.3,null]},"g":{"c135":0},"a":{"c135":1}},{"id":82,"pos":"GK","name":"Neuer","club":"FCB","pts":{"c135":[null,null,48.5,"DNP","DNP",66.5,null]},"g":{"c135":0},"a":{"c135":0}},{"id":83,"pos":"MID","name":"Nmecha","club":"BVB","pts":{"c135":["DNP","DNP",84.5,55.8,53,74.8,null]},"g":{"c135":0},"a":{"c135":0}},{"id":84,"pos":"DEF","name":"Nuno Mendes","club":"PSG","pts":{"c135":[95.3,90.8,"DNP",136.5,40.3,"DNP",null]},"g":{"c135":0},"a":{"c135":0}},{"id":85,"pos":"GK","name":"Oblak","club":"ATM","pts":{"c135":[63,83.3,47.5,145.5,102.5,85.3,null]},"g":{"c135":0},"a":{"c135":0}},{"id":86,"pos":"MID","name":"Ødegaard","club":"ARS","pts":{"c135":[123,84,79.8,45.8,81,119.3,null]},"g":{"c135":0},"a":{"c135":1}},{"id":87,"pos":"MID","name":"Olise","club":"FCB","pts":{"c135":[170.3,231.3,109,67,208.3,"DNP",null]},"g":{"c135":1},"a":{"c135":1}},{"id":88,"pos":"MID","name":"Olmo","club":"BAR","pts":{"c135":[100.8,81,73.8,95.3,128.8,23,null]},"g":{"c135":1},"a":{"c135":1}},{"id":89,"pos":"FWD","name":"Omar Marmoush","club":"TOT","pts":{"c135":[null,null,37,"DNP",136.3,"DNP",null]},"g":{"c135":1},"a":{"c135":0}},{"id":90,"pos":"MID","name":"Palacios","club":"IPS","pts":{"c135":[null,null,74.5,"DNP",74.5,"DNP",null]}},{"id":91,"pos":"MID","name":"Palmer","club":"CHE","pts":{"c135":[null,null,108.8,"DNP",98.3,"DNP",null]},"g":{"c135":0},"a":{"c135":1}},{"id":92,"pos":"DEF","name":"Pavlovic","club":"ACM","pts":{"c135":[null,null,64.5,101.5,58.8,29.8,null]}},{"id":93,"pos":"MID","name":"Pedri","club":"BAR","pts":{"c135":[101.5,105.3,69.3,89,108,53.5,null]},"g":{"c135":0},"a":{"c135":0}},{"id":94,"pos":"FWD","name":"Pedro Neto","club":"CHE","pts":{"c135":[36,"DNP",116.3,"DNP",237.5,"DNP",null]},"g":{"c135":2},"a":{"c135":1}},{"id":95,"pos":"GK","name":"Pickford","club":"EVE","pts":{"c135":[110.5,94.3,63.8,"DNP",53.3,"DNP",null]}},{"id":96,"pos":"GK","name":"Pope","club":"NEW","pts":{"c135":[null,null,"DNP","DNP","DNP","DNP",null]}},{"id":97,"pos":"DEF","name":"Porro","club":"TOT","pts":{"c135":[null,null,"DNP","DNP","DNP","DNP",null]},"g":{"c135":0},"a":{"c135":0}},{"id":98,"pos":"MID","name":"Pulisic","club":"ACM","pts":{"c135":[null,null,56.8,44.5,36.5,"DNP",null]}},{"id":99,"pos":"DEF","name":"Quansah","club":"B04","pts":{"c135":[117,104.5,101.3,"DNP",84.8,73.5,null]},"g":{"c135":1},"a":{"c135":0}},{"id":100,"pos":"FWD","name":"Raphinha","club":"BAR","pts":{"c135":[null,null,"DNP","DNP",56.5,37,null]},"g":{"c135":0},"a":{"c135":0}},{"id":101,"pos":"FWD","name":"Rashford","club":"MUN","pts":{"c135":[null,null,10.5,-16.5,"DNP","DNP",null]},"g":{"c135":0},"a":{"c135":0}},{"id":102,"pos":"GK","name":"Raya","club":"ARS","pts":{"c135":[null,null,116.5,86.3,143.5,81.3,null]},"g":{"c135":0},"a":{"c135":0}},{"id":103,"pos":"MID","name":"Rice","club":"ARS","pts":{"c135":["DNP","DNP",143.5,103.3,145.3,181.5,null]},"g":{"c135":1},"a":{"c135":2}},{"id":104,"pos":"DEF","name":"Rodon","club":"LEE","pts":{"c135":[null,null,"DNP","DNP","DNP","DNP",null]},"g":{"c135":0},"a":{"c135":0}},{"id":105,"pos":"MID","name":"Rodri","club":"BAR","pts":{"c135":[131,79,158.3,108.8,184.8,32.5,null]},"g":{"c135":1},"a":{"c135":0}},{"id":106,"pos":"DEF","name":"Romero","club":"ATM","pts":{"c135":[null,null,179.8,121.8,103.8,"DNP",null]},"g":{"c135":1},"a":{"c135":0}},{"id":107,"pos":"DEF","name":"Rúben Dias","club":"MCI","pts":{"c135":[70.3,60.8,102.3,26,100,85.5,null]}},{"id":108,"pos":"MID","name":"Ruiz","club":"PSG","pts":{"c135":[null,null,60.5,117.5,"DNP",185.8,null]},"g":{"c135":1},"a":{"c135":1}},{"id":109,"pos":"GK","name":"Rulli","club":"MCI","pts":{"c135":[null,null,"DNP","DNP","DNP","DNP",null]}},{"id":110,"pos":"FWD","name":"Saka","club":"ARS","pts":{"c135":[176,"DNP",71.8,131.3,88.8,27,null]},"g":{"c135":1},"a":{"c135":1}},{"id":111,"pos":"DEF","name":"Saliba","club":"ARS","pts":{"c135":[null,null,"DNP","DNP","DNP","DNP",null]},"g":{"c135":0},"a":{"c135":0}},{"id":112,"pos":"GK","name":"Sánchez","club":"COM","pts":{"c135":[null,null,"DNP",25.5,"DNP","DNP",null]}},{"id":113,"pos":"DEF","name":"Schlotterbeck","club":"BVB","pts":{"c135":[null,null,191.8,"DNP",126,86.3,null]},"g":{"c135":1},"a":{"c135":0}},{"id":114,"pos":"GK","name":"Sels","club":"NFO","pts":{"c135":[null,null,64.8,"DNP",42,"DNP",null]}},{"id":115,"pos":"MID","name":"Simons","club":"TOT","pts":{"c135":[null,null,"DNP","DNP","DNP","DNP",null]},"g":{"c135":0},"a":{"c135":0}},{"id":116,"pos":"GK","name":"Simón","club":"ATH","pts":{"c135":["DNP",74.8,32,"DNP",110,74.3,null]}},{"id":117,"pos":"FWD","name":"Soulé","club":"ROM","pts":{"c135":[null,null,21.3,131,95.3,75.3,null]},"a":{"c135":2}},{"id":118,"pos":"MID","name":"Stiller","club":"STU","pts":{"c135":[null,null,188,131.5,64.5,104.3,null]},"g":{"c135":0},"a":{"c135":3}},{"id":119,"pos":"DEF","name":"Svensson","club":"BVB","pts":{"c135":["DNP",50.8,104.8,36.3,67.5,32.8,null]},"g":{"c135":1},"a":{"c135":0}},{"id":120,"pos":"DEF","name":"Tah","club":"FCB","pts":{"c135":["DNP","DNP",59.5,44.5,"DNP",50.5,null]},"g":{"c135":0},"a":{"c135":0}},{"id":121,"pos":"DEF","name":"Tapsoba","club":"B04","pts":{"c135":[null,null,86.3,137.8,98.8,16.5,null]},"g":{"c135":0},"a":{"c135":0}},{"id":122,"pos":"MID","name":"Tillman","club":"B04","pts":{"c135":[null,null,16.5,167.8,31.8,113.3,null]},"g":{"c135":1},"a":{"c135":1}},{"id":123,"pos":"MID","name":"Tonali","club":"TOT","pts":{"c135":[null,null,123.3,"DNP",106.8,"DNP",null]},"g":{"c135":0},"a":{"c135":1}},{"id":124,"pos":"GK","name":"Trafford","club":"LEE","pts":{"c135":["DNP","DNP",79.5,"DNP",84.8,"DNP",null]},"g":{"c135":0},"a":{"c135":0}},{"id":125,"pos":"DEF","name":"Upamecano","club":"FCB","pts":{"c135":[58.8,"DNP",94.5,36.8,134.5,102,null]},"g":{"c135":0},"a":{"c135":0}},{"id":126,"pos":"MID","name":"Valverde","club":"RMD","pts":{"c135":[null,null,152,72.8,81.5,145,null]},"g":{"c135":0},"a":{"c135":1}},{"id":127,"pos":"DEF","name":"van Dijk","club":"LIV","pts":{"c135":[152.5,91.8,24.5,18,124.5,58.8,null]}},{"id":128,"pos":"GK","name":"Vicario","club":"JUV","pts":{"c135":[null,null,37.5,70.5,34.8,45.3,null]}},{"id":129,"pos":"FWD","name":"Vinícius Júnior","club":"RMD","pts":{"c135":[null,null,29.5,44.8,"DNP",106.3,null]},"g":{"c135":0},"a":{"c135":0}},{"id":130,"pos":"MID","name":"Vitinha","club":"PSG","pts":{"c135":[137.3,101,44.5,193.5,41.8,138.3,null]},"g":{"c135":2},"a":{"c135":0}},{"id":131,"pos":"MID","name":"Wirtz","club":"LIV","pts":{"c135":[155.3,102.8,19,149.5,97,200.5,null]},"a":{"c135":3}},{"id":132,"pos":"FWD","name":"Woltemade","club":"JUV","pts":{"c135":[null,null,22,121.8,10,157,null]},"g":{"c135":2},"a":{"c135":1}},{"id":133,"pos":"FWD","name":"Yildiz","club":"JUV","pts":{"c135":[null,null,"DNP","DNP","DNP","DNP",null]}},{"id":134,"pos":"DEF","name":"Yoro","club":"MUN","pts":{"c135":["DNP",122,113,40.5,60,"DNP",null]},"g":{"c135":0},"a":{"c135":0}}],"min":2,"sort":{"k":"avg","d":"desc"},"view":"c135","seedVer":5,"mig":5,"touched":true,"gi":{"c135|7-13":{"2":{"g":0,"a":0},"4":{"g":1,"a":0},"5":{"g":0,"a":0},"7":{"g":0,"a":0},"8":{"g":0,"a":0},"11":{"g":0,"a":0},"12":{"g":0,"a":0},"13":{"g":0,"a":0},"14":{"g":0,"a":0},"15":{"g":0,"a":0},"17":{"g":0,"a":0},"18":{"g":1,"a":0},"19":{"g":0,"a":0},"21":{"g":0,"a":0},"22":{"g":0,"a":0},"23":{"g":0,"a":0},"24":{"g":0,"a":0},"25":{"g":2,"a":0},"27":{"g":0,"a":0},"28":{"g":0,"a":0},"29":{"g":0,"a":0},"30":{"g":0,"a":0},"31":{"g":0,"a":0},"34":{"g":0,"a":0},"35":{"g":0,"a":0},"36":{"g":0,"a":0},"38":{"g":0,"a":0},"40":{"g":0,"a":0},"42":{"g":0,"a":0},"44":{"g":0,"a":0},"46":{"g":1,"a":0},"48":{"g":0,"a":0},"49":{"g":0,"a":0},"51":{"g":0,"a":0},"53":{"g":0,"a":0},"55":{"g":0,"a":0},"56":{"g":0,"a":0},"58":{"g":0,"a":0},"59":{"g":0,"a":0},"60":{"g":2,"a":0},"61":{"g":0,"a":1},"62":{"g":0,"a":0},"63":{"g":0,"a":2},"65":{"g":0,"a":0},"66":{"g":0,"a":0},"67":{"g":0,"a":0},"68":{"g":1,"a":0},"69":{"g":0,"a":0},"70":{"g":1,"a":0},"71":{"g":0,"a":1},"72":{"g":0,"a":0},"73":{"g":0,"a":0},"76":{"g":0,"a":0},"77":{"g":0,"a":1},"78":{"g":0,"a":0},"79":{"g":1,"a":0},"80":{"g":0,"a":0},"81":{"g":0,"a":0},"82":{"g":0,"a":0},"83":{"g":0,"a":0},"84":{"g":0,"a":0},"85":{"g":0,"a":0},"86":{"g":0,"a":0},"87":{"g":0,"a":0},"88":{"g":0,"a":0},"89":{"g":0,"a":0},"91":{"g":0,"a":1},"93":{"g":0,"a":0},"94":{"g":0,"a":1},"97":{"g":0,"a":0},"99":{"g":1,"a":0},"100":{"g":0,"a":0},"101":{"g":0,"a":0},"102":{"g":0,"a":0},"103":{"g":0,"a":1},"104":{"g":0,"a":0},"105":{"g":0,"a":0},"106":{"g":1,"a":0},"108":{"g":0,"a":0},"110":{"g":0,"a":0},"111":{"g":0,"a":0},"113":{"g":1,"a":0},"115":{"g":0,"a":0},"118":{"g":0,"a":2},"119":{"g":1,"a":0},"120":{"g":0,"a":0},"121":{"g":0,"a":0},"122":{"g":0,"a":0},"123":{"g":0,"a":1},"124":{"g":0,"a":0},"125":{"g":0,"a":0},"126":{"g":0,"a":1},"129":{"g":0,"a":0},"130":{"g":0,"a":0},"134":{"g":0,"a":0}}},"lastBackup":"2026-10-21T20:52:26.172Z","pv":"DEF"}</script><script id="code">
+const SEED=`FWD|Zawodnik F1|KL1|120.5|DNP|95|140.2
+FWD|Zawodnik F2|KL2|88|110.5|DNP|76.3
+FWD|Zawodnik F3|KL3|45.5||60|DNP
+MID|Zawodnik M1|KL1|101|87.5|130|DNP
+MID|Zawodnik M2|KL2|DNP|64|72.8|90
+MID|Zawodnik M3|KL3|55||48.5|
+DEF|Zawodnik D1|KL1|75|90.5|DNP|110
+DEF|Zawodnik D2|KL2|60.5|DNP|82|45
+DEF|Zawodnik D3|KL3|||30|
+GK|Bramkarz 1|KL1|95|80.5|70|100.5
+GK|Bramkarz 2|KL2|DNP|55|65.5|
+GK|Bramkarz 3|KL3||||`;
+const POS=['FWD','MID','DEF','GK'],KEY='sdf_dashboard_v1';
+const SEED_VER=5,MIG=5,MOVES={};let uid=1;const nid=()=>uid++;
+const isN=v=>typeof v==='number';
+const r1=x=>Math.round(x*10)/10;
+const DATA=JSON.parse(document.getElementById('data').textContent);
+function seed(){const o=JSON.parse(JSON.stringify(DATA));o.view=o.comps[o.comps.length-1].id;o.pv='ALL';return o}
+function blank(){const c='c'+nid();return{comps:[{id:c,name:'Rozgrywki 1',rounds:['R1']}],players:[],min:2,sort:{k:'avg',d:'desc'},view:c,seedVer:SEED_VER,mig:MIG,touched:false}}
+function migrate(){
+  if(S.mig>=MIG)return;
+  const used=new Set();
+  SEED.split('\n').forEach(l=>{const[pos,name,club]=l.split('|');
+    const p=S.players.find(x=>!used.has(x.id)&&x.name===name&&(!x.club||x.club===club));
+    if(p){used.add(p.id);if(!p.club)p.club=club;if(MOVES[name]&&p.pos!==MOVES[name]&&p.pos!==pos)p.pos=MOVES[name];if(MOVES[name]&&p.pos!==pos&&MOVES[name]===pos)p.pos=pos}
+    else{const q={id:nid(),pos,name,club,pts:{}};S.players.push(q);used.add(q.id)}});
+  S.mig=MIG;S.seedVer=SEED_VER;
+}
+let S=seed();const save=()=>{},stash=()=>{},PREV=KEY+'_prev';
+let DL=null;
+function doImport(text){
+  try{const o=JSON.parse(text);if(!o||!Array.isArray(o.comps)||!Array.isArray(o.players)||!o.comps.length)throw 0;
+    stash();o.touched=true;S=o;fix();migrate();fix();save();render();toast('Kopia wczytana. Poprzedni stan można cofnąć przyciskiem Cofnij ostatni reset.')}
+  catch(x){toast('Nieprawidłowa kopia zapasowa.')}
+}
+function fix(){
+  S.players.forEach(p=>uid=Math.max(uid,p.id+1));S.comps.forEach(c=>uid=Math.max(uid,+c.id.slice(1)+1));
+  S.comps.forEach(c=>S.players.forEach(p=>{p.pts=p.pts||{};const a=p.pts[c.id]=p.pts[c.id]||[];while(a.length<c.rounds.length)a.push(null);a.length=c.rounds.length}));
+  if(S.view!=='all'&&!S.comps.some(c=>c.id===S.view))S.view=S.comps[0].id;
+  if(!S.min||S.min<1)S.min=1;
+  if(S.pv!=='ALL'&&!POS.includes(S.pv))S.pv='FWD';
+  const k=(S.sort||{}).k||'';const cv=S.comps.find(c=>c.id===S.view);
+  const rk=/^r:\d+$/.test(k)&&S.view!=='all'&&cv&&+k.slice(2)<cv.rounds.length;
+  if(!S.sort||!(['sum','avg','apps','goals','ass','best'].includes(k)||rk||(S.view==='all'&&/^c:/.test(k)))||(S.view==='all'&&k==='sum'))S.sort={k:'avg',d:'desc'};
+}
+fix();migrate();fix();
+const cur=()=>S.comps.find(c=>c.id===S.view);
+const rtype=n=>{const m=/[NPC]\s*$/i.exec(String(n));if(!m)return'L';const t=m[0].trim().toUpperCase();return t==='P'?'C':t};
+const TF=new Set(['L','C','N']),TC={L:'var(--acc)',C:'var(--tp)',N:'var(--tn)'},TN={L:'League',C:'Cups',N:'National'};
+const badge=t=>t==='L'?'':`<span class="bd ${t}">${t}</span>`;
+const LEGEND='<div class="lg"><span><i class="sw"></i> No letter: league matches</span><span><span class="bd C">C</span> cups (Champions League, Europa League, etc.)</span><span><span class="bd N">N</span> national team matches</span></div>';
+const labsAll=()=>S.view==='all'?S.comps.flatMap(c=>c.rounds):cur().rounds;
+const raw=p=>S.view==='all'?S.comps.flatMap(c=>p.pts[c.id]):p.pts[S.view];
+const series=p=>TF.size===3?raw(p):raw(p).filter((_,i)=>TF.has(rtype(labsAll()[i])));
+const cs=(p,c)=>TF.size===3?p.pts[c.id]:p.pts[c.id].filter((_,i)=>TF.has(rtype(c.rounds[i])));
+const ST={sum:a=>r1(a.filter(isN).reduce((x,y)=>x+y,0)),apps:a=>a.filter(isN).length,
+ avg:a=>{const n=a.filter(isN);return n.length?r1(n.reduce((x,y)=>x+y,0)/n.length):null},
+ form:a=>ST.avg(a.filter(isN).slice(-3)),best:a=>{const n=a.filter(isN);return n.length?Math.max(...n):null},dnp:a=>a.filter(v=>v==='DNP').length};
+const SC=[['avg','Avg'],['sum','Total'],['apps','Played'],['goals','Goals'],['ass','Assists'],['best','Max']];
+const gTot=(p,k)=>S.view==='all'?S.comps.reduce((x,c)=>x+(+((p[k]||{})[c.id])||0),0):(+((p[k]||{})[S.view])||0);
+const stat=(p,k)=>k==='goals'?gTot(p,'g'):k==='ass'?gTot(p,'a'):ST[k](series(p));
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+const fmt=n=>n===null||n===undefined?'–':String(n);
+const byId=id=>S.players.find(p=>p.id==id);
+function valOf(p,k){if(k.startsWith('r:'))return S.view==='all'?null:p.pts[S.view][+k.slice(2)];
+  if(k.startsWith('c:'))return ST.avg(cs(p,S.comps.find(x=>x.id===k.slice(2))));return stat(p,k)}
+function sorted(list){const desc=S.sort.d==='desc';
+  return list.slice().sort((a,b)=>{const x=valOf(a,S.sort.k),y=valOf(b,S.sort.k),mx=!isN(x),my=!isN(y);
+    if(mx||my)return mx&&my?0:mx?1:-1;return(x===y?0:desc?y-x:x-y)||ST.sum(series(b))-ST.sum(series(a))})}
+const arrow=k=>S.sort.k===k?(S.sort.d==='desc'?'▼':'▲'):'⇅';
+const sbtn=(k,t)=>`<button class="so${S.sort.k===k?' on':''}" data-sort="${k}" title="Sort" aria-label="Sort by ${esc(t||(k.startsWith('r:')?'round '+(+k.slice(2)+1):k))}">${t?esc(t)+' ':''}${arrow(k)}</button>`;
+function toast(m,ms){const e=document.getElementById('msg');e.textContent=m;clearTimeout(toast.t);toast.t=setTimeout(()=>e.textContent='',ms||3500)}
+
+function render(){
+  fix();const all=S.view==='all',c=cur();
+  document.getElementById('top').innerHTML=`<div class="row">${S.comps.map(x=>`<button class="tab${x.id===S.view?' on':''}" data-tab="${x.id}">${esc(x.name)}</button>`).join('')}
+<button class="tab${all?' on':''}" data-tab="all">Combined</button><button data-addc="1">+ Rozgrywki</button></div>
+<div class="row">${all?'':`<label>Nazwa rozgrywek <input class="cn" data-f="cname" value="${esc(c.name)}"></label><button class="pri" id="addR">+ Kolejka</button>${c.rounds.length>1?`<button data-arm="delr" data-r="${c.rounds.length-1}">Usuń ostatnią kolejkę</button>`:''}${S.comps.length>1?`<button data-arm="delc">Usuń rozgrywki</button>`:''}`}
+<label>Min. matches played for leaders <input class="mn" type="number" min="1" data-f="min" value="${S.min}"></label></div>`;
+  let lh='',sh='';
+  const ptabs=`<div class="ptabs" role="tablist" aria-label="Position">${[...POS,'ALL'].map(x=>`<button class="ptab${S.pv===x?' on':''}" role="tab" aria-selected="${S.pv===x}" data-pv="${x}">${x==='ALL'?'ALL':x}</button>`).join('')}</div>`;
+  POS.forEach(pos=>{
+    const P=S.players.filter(p=>p.pos===pos),L=sorted(P);
+    const E=P.filter(p=>ST.apps(series(p))>=S.min).sort((a,b)=>ST.avg(series(b))-ST.avg(series(a))),t=E[0];
+    lh+=`<div class="lc" data-pv="${pos}" title="Show ${pos}"><small>${pos} · average leader</small><div class="n">${t?esc(t.name):'none (min '+S.min+')'}</div>${t?`<span class="num">${fmt(ST.avg(series(t)))}</span> <small>avg · ${all?'':'total '+fmt(ST.sum(series(t)))+' · '}${ST.apps(series(t))} played</small>`:''}</div>`;
+    const SCV=SC.filter(([k])=>!(all&&k==='sum'));
+    const cols=SCV.map(([k,l])=>`<th style="text-align:right">${sbtn(k,l)}</th>`).join('');
+    const head=all?''
+      :c.rounds.map((n,r)=>`<th><div style="display:flex;align-items:center;gap:2px"><input class="rn" data-k="r:${r}" data-r="${r}" data-f="rname" value="${esc(n)}" aria-label="Nazwa kolejki">${sbtn('r:'+r,'')}</div></th>`).join('');
+    let rows=L.map((p,i)=>{const a=series(p),low=ST.apps(a)<S.min;
+      const mid=all?''
+        :p.pts[S.view].map((v,r)=>`<td><input type="text" inputmode="decimal" class="pt${v==='DNP'?' dnp':''}" data-k="${p.id}:${r}" data-id="${p.id}" data-r="${r}" value="${v??''}" aria-label="Punkty, ${esc(c.rounds[r])}"></td>`).join('');
+      const st=SCV.map(([k])=>{const v=stat(p,k);
+        if((k==='goals'||k==='ass')&&!all)return `<td class="a"><input type="text" inputmode="numeric" class="pt gl" data-k="${p.id}:${k}" data-id="${p.id}" data-f="${k}" value="${v||''}" aria-label="${k==='goals'?'Gole':'Asysty'}"></td>`;
+        return `<td class="${k==='avg'?'s':'a'}">${fmt(v)}</td>`}).join('');
+      const end=all?'':`<td><button class="x" data-arm="delp" data-id="${p.id}" title="Usuń zawodnika">✕</button></td>`;
+      return `<tr class="${i?'':'lead'}${low?' low':''}"><td><span class="rk r${i+1}">${i+1}</span></td><td>${all?esc(p.name):`<input class="nm" data-k="${p.id}:n" data-id="${p.id}" data-f="name" value="${esc(p.name)}" aria-label="Nazwa zawodnika">`}</td><td>${all?esc(p.club||''):`<input class="cl" data-k="${p.id}:c" data-id="${p.id}" data-f="club" value="${esc(p.club||'')}" aria-label="Klub">`}</td>${mid}${st}${end}</tr>`}).join('');
+    if(!rows)rows=`<tr><td colspan="20" style="color:var(--mut)">No players.</td></tr>`;
+    if(S.pv!=='ALL'&&S.pv!==pos)return;
+    sh+=`<section><div class="sh">${S.pv==='ALL'?`<h2>${pos}</h2>`:ptabs}<button data-add="${pos}">+ Zawodnik</button></div><div class="wrap"><table><thead><tr><th></th><th>Player</th><th>Club</th>${head}${cols}${all?'':'<th></th>'}</tr></thead><tbody>${rows}</tbody></table></div></section>`;
+  });
+  document.getElementById('lead').innerHTML=lh;document.getElementById('secs').innerHTML=(S.pv==='ALL'?`<div class="allbar">${ptabs}</div>`:'')+sh;
+  const q=id=>document.getElementById(id);
+  q('dl').hidden=!DL;
+  let pv=false;try{pv=!!localStorage.getItem(PREV)}catch(e){}
+  q('undo').hidden=!pv;
+  q('bkinfo').textContent=(S.lastBackup?'Ostatnia kopia pobrana: '+new Date(S.lastBackup).toLocaleString('pl-PL')+'. ':'Kopia jeszcze nie była pobrana. ')+(DL?'Pobierz plik po każdej większej serii wpisów i zapisz go poza przeglądarką.':'Pobieranie plików jest niedostępne w tym widoku, użyj kopii jako tekstu poniżej.');
+}
+
+document.addEventListener('change',e=>{
+  const el=e.target,d=el.dataset;
+  if(el.id==='fi'){const f=el.files&&el.files[0];if(f)f.text().then(doImport).catch(()=>toast('Nie udało się odczytać pliku.'));try{el.value=''}catch(x){}return}
+  if(!d.f&&!d.id)return;
+  if(d.f==='cname')cur().name=el.value||'Month';
+  else if(d.f==='min')S.min=Math.max(1,parseInt(el.value)||1);
+  else if(d.f==='rname')cur().rounds[+d.r]=el.value||('R'+(+d.r+1));
+  else if(d.id){const p=byId(d.id);if(!p)return;
+    if(d.f==='name')p.name=el.value;
+    else if(d.f==='club')p.club=el.value;
+    else if(d.f==='pos')p.pos=el.value;
+    else if(d.f==='goals'||d.f==='ass'){const t=el.value.trim(),n=t===''?0:(/^\d+$/.test(t)?parseInt(t,10):NaN);
+      if(isNaN(n))toast('Enter a whole number.');else{const key=d.f==='goals'?'g':'a';(p[key]=p[key]||{})[S.view]=n}}
+    else if(d.r!==undefined){const t=el.value.trim().replace(',','.'),a=p.pts[S.view];
+      if(t==='')a[+d.r]=null;
+      else if(t.toUpperCase()==='DNP')a[+d.r]='DNP';
+      else if(/^-?\d+(\.\d+)?$/.test(t))a[+d.r]=parseFloat(t);
+      else toast('Enter a number or DNP.')}}
+  S.touched=true;save();
+  setTimeout(()=>{const a=document.activeElement,k=a&&a.dataset&&a.dataset.k;render();
+    if(k){const n=document.querySelector(`[data-k="${k}"]`);if(n){n.focus();if(n.select)n.select()}}},0);
+});
+const nrm=x=>String(x==null?'':x).normalize('NFD').replace(/[̀-ͯ]/g,'').trim().toLowerCase();
+const stripInit=x=>String(x).replace(/^(?:\p{Lu}\.\s*)+/u,'').trim();
+function findP(name,club,strict){
+  const n=nrm(stripInit(name)),pool=S.players.filter(p=>!club||nrm(p.club||'')===nrm(club));
+  let m=pool.filter(p=>nrm(p.name)===n);
+  if(!m.length&&!strict)m=pool.filter(p=>{const x=nrm(p.name);return x.endsWith(' '+n)||n.endsWith(' '+x)});
+  return m}
+function parseMatches(text){
+  const clubs=[...new Set(S.players.map(p=>p.club).filter(Boolean))].sort((x,y)=>y.length-x.length);
+  const homeOf=l=>{for(const c of clubs){if(l.startsWith(c)&&/^\d{1,2}$/.test(l.slice(c.length)))return c}const m=/^([A-Z]{2,5})\d{1,2}$/.exec(l);return m&&m[1]};
+  const awayOf=l=>{for(const c of clubs){if(l.endsWith(c)&&/^\d{1,2}$/.test(l.slice(0,l.length-c.length)))return c}const m=/^\d{1,2}([A-Z]{2,5})$/.exec(l);return m&&m[1]};
+  const L=text.split(/\r?\n/).map(x=>x.trim()),H=[];
+  for(let i=0;i<L.length;i++){const h=homeOf(L[i]);if(!h)continue;
+    let j=i+1;while(j<L.length&&!L[j])j++;
+    const aw=j<L.length&&awayOf(L[j]);if(aw)H.push({i,home:h,away:aw})}
+  const num=t=>/^-?\d+([.,]\d+)?$/.test(t||'');
+  return H.map((h,k)=>{
+    const seg=L.slice(h.i,k+1<H.length?H[k+1].i:L.length),ev=[],pl=[];
+    let block=0,saw=false,mode='ev',club=null;
+    const entry=y=>/^\d+$/.test(seg[y]||'')&&!!seg[y+1]&&!num(seg[y+1])&&/^OWNED/i.test(seg[y+2]||'');
+    for(let x=0;x<seg.length;x++){const l=seg[x];
+      if(/^Players$/i.test(l)){mode='pl';continue}
+      if(mode==='ev'){
+        const m=/^\*?\s*(\d+(?:\+\d+)?)\s*[′'’´]\s*(.+)$/.exec(l);
+        if(m){const bm=/^(.*?)\s*\((.+)\)\s*$/.exec(m[2]);
+          ev.push({club:block===0?h.home:h.away,min:m[1],who:bm?bm[1]:m[2],ast:bm?bm[2]:null});saw=true}
+        else if(!l&&saw){block++;saw=false}
+      }else{
+        if(entry(x)){const pt=seg[x+4];
+          pl.push({club,name:seg[x+1],v:num(pt)?parseFloat(pt.replace(',','.')):undefined});x+=num(pt)?4:2}
+        else if(/^[A-Z0-9]{2,5}$/.test(l)&&l!=='FT'&&entry(x+1))club=l;
+      }}
+    return{home:h.home,away:h.away,ev,pl}})}
+function importRound(){
+  const q=id=>document.getElementById(id);
+  if(S.view==='all'){toast('Przejdź do zakładki rozgrywek, do której ma trafić kolejka.',7000);return}
+  const name=q('irn').value.trim(),raw=q('itx').value;
+  if(!name||!raw.trim()){toast('Wpisz nazwę kolejki i wklej dane do importu.',7000);return}
+  const c=cur(),rows=new Map(),bad=[],notes=[];
+  const get=p=>{let r=rows.get(p.id);if(!r){r={p,v:undefined,g:0,a:0};rows.set(p.id,r)}return r};
+  if(/^\s*Players\s*$/im.test(raw)){
+    const ms=parseMatches(raw);
+    if(!ms.length)bad.push('nie rozpoznano nagłówka meczu (np. BVB2 w jednej linii i 2SVW w następnej)');
+    ms.forEach(m=>{
+      m.pl.forEach(e=>{const f=findP(e.name,e.club,true);
+        if(f.length===1){if(e.v===undefined)bad.push(e.name+' (brak punktów)');else get(f[0]).v=e.v}
+        else bad.push(e.name+(f.length?' (niejednoznaczne)':' (brak na liście)'))});
+      m.ev.forEach(e=>{const f=findP(e.who,e.club,false);
+        if(e.ast!==null){
+          if(f.length===1)get(f[0]).g++;
+          const fa=findP(e.ast,e.club,false);if(fa.length===1)get(fa[0]).a++;
+        }else if(f.length===1)notes.push(f[0].name+' '+e.min+"'")})});
+  }else{
+    raw.split('\n').map(l=>l.trim()).filter(Boolean).forEach(l=>{
+      const[n,cl,pt,g,a]=l.split('|').map(x=>x.trim());
+      const t=String(pt==null?'':pt).replace(',','.');let v;
+      if(t.toUpperCase()==='DNP')v='DNP';else if(/^-?\d+(\.\d+)?$/.test(t))v=parseFloat(t);else if(t==='')v=null;else{bad.push(l+' (zły wynik)');return}
+      const gg=g?parseInt(g,10):0,aa=a?parseInt(a,10):0;
+      if(isNaN(gg)||isNaN(aa)||gg<0||aa<0){bad.push(l+' (zła liczba goli lub asyst)');return}
+      const m=findP(n,cl,true);
+      if(m.length!==1){bad.push(l+(m.length?' (niejednoznaczne, dopisz klub)':' (brak na liście)'));return}
+      const r=get(m[0]);r.v=v;r.g=gg;r.a=aa});
+  }
+  if(!rows.size){toast('Nie rozpoznano żadnego zawodnika z listy. '+bad.join('; '),12000);return}
+  stash();
+  let r=c.rounds.indexOf(name);
+  if(r<0){
+    if(c.rounds.length===1&&S.players.every(p=>p.pts[c.id][0]==null)){r=0;c.rounds[0]=name}
+    else{c.rounds.push(name);r=c.rounds.length-1;fix()}}
+  const key=c.id+'|'+name;S.gi=S.gi||{};const prev=S.gi[key]=S.gi[key]||{};
+  let np=0,ng=0,na=0;
+  rows.forEach(({p,v,g,a})=>{const o=prev[p.id]||{g:0,a:0};
+    (p.g=p.g||{})[c.id]=Math.max(0,(+p.g[c.id]||0)-o.g+g);
+    (p.a=p.a||{})[c.id]=Math.max(0,(+p.a[c.id]||0)-o.a+a);
+    if(v!==undefined){p.pts[c.id][r]=v;np++}
+    prev[p.id]={g,a};ng+=g;na+=a});
+  S.touched=true;fix();save();render();q('itx').value='';
+  toast('Kolejka „'+name+'": wczytano punkty dla '+np+' zawodników, gole '+ng+', asysty '+na+'.'
+    +(notes.length?' Sprawdź ręcznie (linia bez asysty: kartka czy gol?): '+notes.join(', ')+'.':'')
+    +(bad.length?' Pominięto: '+bad.join('; ')+'.':''),(notes.length||bad.length)?20000:6000);
+}
+const ACT={
+  pts(){S.comps.forEach(c=>c.rounds=['K1']);S.players.forEach(p=>{p.pts={};p.g={};p.a={}});S.gi={}},
+  all(){S=blank()},seed(){S=seed()},
+  delp(b){S.players=S.players.filter(p=>p.id!=b.dataset.id)},
+  delr(b){const r=+b.dataset.r,c=cur();c.rounds.splice(r,1);S.players.forEach(p=>p.pts[c.id].splice(r,1))},
+  delc(){const id=S.view;S.comps=S.comps.filter(c=>c.id!==id);S.players.forEach(p=>{delete p.pts[id];if(p.g)delete p.g[id];if(p.a)delete p.a[id]});S.view=S.comps[0].id}
+};
+document.addEventListener('click',e=>{
+  const b=e.target.closest('button,.lc[data-pv]');if(!b)return;const d=b.dataset;
+  if(d.arm){
+    if(d.armed!=='1'){const o=b.textContent;d.o=o;d.armed='1';b.textContent='Sure?';
+      setTimeout(()=>{if(b.isConnected){d.armed='';b.textContent=o}},3000);return}
+    if(['pts','all','seed','delc'].includes(d.arm))stash();const was=S;ACT[d.arm](b);if(S===was)S.touched=true;fix();save();render();if(b.isConnected){d.armed='';if(d.o)b.textContent=d.o}return}
+  if(d.sort!==undefined){const k=d.sort;if(S.sort.k===k)S.sort.d=S.sort.d==='desc'?'asc':'desc';else S.sort={k,d:'desc'};save();render();return}
+  if(d.pv){S.pv=d.pv;save();render();return}
+  if(d.tab){S.view=d.tab;save();render();return}
+  if(d.addc){const c={id:'c'+nid(),name:'New month',rounds:['R1']};S.comps.push(c);S.view=c.id;S.touched=true;fix();save();render();return}
+  if(b.id==='addR'){const c=cur();c.rounds.push('R'+(c.rounds.length+1));S.touched=true;fix();save();render()}
+  else if(d.add){const p={id:nid(),pos:d.add,name:'Nowy zawodnik',club:'',pts:{}};S.players.push(p);S.touched=true;fix();save();render();
+    const n=document.querySelector(`[data-k="${p.id}:n"]`);if(n){n.focus();n.select()}}
+  else if(b.id==='ibtn'){importRound()}
+  else if(b.id==='exp'){document.getElementById('bk').value=JSON.stringify(S)}
+  else if(b.id==='imp'){doImport(document.getElementById('bk').value)}
+  else if(b.id==='ld'){document.getElementById('fi').click()}
+  else if(b.id==='undo'){try{const o=JSON.parse(localStorage.getItem(PREV));if(!o||!o.comps||!o.players)throw 0;
+    localStorage.setItem(PREV+'_2',JSON.stringify(S));S=o;S.touched=true;fix();migrate();fix();save();render();toast('Przywrócono poprzedni stan.')}catch(x){toast('Brak stanu do cofnięcia.')}}
+  else if(b.id==='dl'){if(!DL)return;const day=new Date().toISOString().slice(0,10);
+    DL.save({filename:'ranking-sdf-kopia-'+day+'.json',data:JSON.stringify(S)}).then(()=>{S.lastBackup=new Date().toISOString();save();render();toast('Kopia zapisana. Przechowuj plik poza przeglądarką.')})
+      .catch(e=>{if(!e||e.code!=='declined')toast('Nie udało się zapisać pliku ('+((e&&(e.code||e.message))||'błąd')+'). Użyj kopii jako tekstu.')})}
+});
+
+let SEL=null;
+function detail(p){const a=raw(p),fs=series(p),all=S.view==='all',labs=all?S.comps.flatMap(c=>c.rounds):cur().rounds,PAL=['var(--acc)','#E0A800','#6B8FD6','#C2763A','#9B6BD6','#3FA7A0'],CI=S.comps.flatMap((c,ci)=>c.rounds.map(()=>ci)),n=a.length,W=Math.max(300,n*60),m=Math.max(...a.filter(isN),1),bw=Math.min(44,W/n*.6),gap=(W-bw*n)/(n+1),avg=ST.avg(fs);
+let s=`<svg viewBox="0 0 ${W} 160" role="img" aria-label="Points: ${esc(p.name)}" style="width:100%;max-width:${W*1.4}px;height:auto;display:block">`;
+a.forEach((v,i)=>{const x=gap+i*(bw+gap),cx=x+bw/2;
+if(isN(v)){const h=v/m*90,y=118-h;s+=`<rect x="${x}" y="${y}" width="${bw}" height="${h}" rx="3" fill="${TC[rtype(labs[i])]}"/><text x="${cx}" y="${y-5}" text-anchor="middle" font-size="12" font-weight="600" fill="currentColor">${fmt(v)}</text>`}
+else s+=`<text x="${cx}" y="112" text-anchor="middle" font-size="12" fill="${v==='DNP'?'var(--danger)':'var(--mut)'}">${v==='DNP'?'DNP':'no data'}</text>`;
+s+=`<text x="${cx}" y="140" text-anchor="middle" font-size="11" fill="var(--mut)">${esc(labs[i])}</text>`});
+if(avg!==null){const y=118-avg/m*90;s+=`<line x1="0" x2="${W}" y1="${y}" y2="${y}" stroke="var(--gold)" stroke-width="2" stroke-dasharray="5 4"/>`}
+s+='</svg>';
+const it=[['Average',avg],['Form (last 3)',ST.form(fs)],['Best',ST.best(fs)],...(all?[]:[['Total',ST.sum(fs)]]),['Played',ST.apps(fs)],['DNP',ST.dnp(fs)],['Goals',gTot(p,'g')],['Assists',gTot(p,'a')],...(tv=>tv.length>1?tv:[])(['L','C','N'].map(t=>[TN[t]+' avg',ST.avg(a.filter((_,i)=>rtype(labs[i])===t))]).filter(x=>x[1]!==null))];
+const per=all?S.comps.map(c=>esc(c.name)+' '+fmt(ST.avg(cs(p,c)))).join(' · '):'';
+return`<strong class="nm">${esc(p.name)}</strong> <span class="hint">${esc(p.club||'')} · ${p.pos}</span>${s}<div class="ds">${it.map(([l,v])=>`<div><span class="num">${fmt(v)}</span><small>${l}</small></div>`).join('')}</div>`+(per?`<p class="hint">Average by month: ${per}</p>`:'')}
+function render(){
+fix();const all=S.view==='all',c=cur(),ge=id=>document.getElementById(id);
+const ED=EDIT&&!all,DIRTY=EDIT&&snap()!==SNAP0;
+ge('top').innerHTML=`<div class="row">${S.comps.map(x=>`<button class="tab${x.id===S.view?' on':''}" data-tab="${x.id}">${esc(x.name)}</button>`).join('')}<button class="tab${all?' on':''}" data-tab="all">Combined</button>${EDIT?'<button data-addc="1">+ Month</button>':''}</div><div class="row"><label>Min. matches played for leaders <input class="mn" type="number" min="1" data-f="min" value="${S.min}"></label>${CAN?`<button id="edt" class="${EDIT?'pri':''}">${EDIT?'Done editing':'Edit data'}</button>`:''}</div>`
++`<div class="row"><span class="hint">Match types:</span>${['L','C','N'].map(t=>`<button class="tab${TF.has(t)?' on':''}" data-tf="${t}">${TN[t]}</button>`).join('')}${TF.size<3?'<span class="hint">Averages and appearances use only the selected types. Goals and assists are monthly totals and are not filtered.</span>':''}</div>`
++(ED?`<div class="row"><label>Month name <input class="cn" data-f="cname" value="${esc(c.name)}"></label><button class="pri" id="addR">+ Round</button>${c.rounds.length>1?`<button data-arm="delr" data-r="${c.rounds.length-1}">Remove last round</button>`:''}</div>`:'')
++(EDIT&&all?'<p class="hint">Select a month tab to edit its data.</p>':'')
++(EDIT?`<div class="row"><button class="pri" id="pub"${DIRTY?'':' disabled'}>Publish changes</button><button id="disc"${DIRTY?'':' disabled'}>Discard changes</button><span class="hint">${DIRTY?'Unpublished changes. Visitors see them only after you publish.':'No unpublished changes.'}</span></div>`:'');
+const ptabs=`<div class="ptabs" role="tablist" aria-label="Position">${[...POS,'ALL'].map(x=>`<button class="ptab${S.pv===x?' on':''}" role="tab" aria-selected="${S.pv===x}" data-pv="${x}">${x}</button>`).join('')}</div>`;
+let lh='',sh='';
+POS.forEach(pos=>{
+const P=S.players.filter(p=>p.pos===pos),L=sorted(S.pv==='ALL'?S.players:P);
+const E=P.filter(p=>ST.apps(series(p))>=S.min).sort((a,b)=>ST.avg(series(b))-ST.avg(series(a))),t=E[0];
+lh+=`<div class="lc" data-pv="${pos}" title="Show ${pos}"><small>${pos} · average leader</small><div class="n">${t?esc(t.name):'none (min '+S.min+')'}</div>${t?`<span class="num">${fmt(ST.avg(series(t)))}</span> <small>avg · ${all?'':'total '+fmt(ST.sum(series(t)))+' · '}${ST.apps(series(t))} played</small>`:''}</div>`;
+const SCV=SC.filter(([k])=>!(all&&k==='sum')),MC=all&&S.comps.length>1?S.comps:[];
+const cols=SCV.map(([k,l])=>`<th style="text-align:right"><div class="hd">${sbtn(k,'')}</div><div class="dt">${l}</div></th>`).join('')+MC.map(c=>`<th style="text-align:right"><div class="hd">${sbtn('c:'+c.id,'')}</div><div class="dt">Avg ${esc(c.name)}</div></th>`).join('');
+const head=all?'':c.rounds.map((n,r)=>{const t=rtype(n);return`<th class="t${t}" style="text-align:right"><div class="hd">${badge(t)}${sbtn('r:'+r,'')}</div><div class="dt">${ED?`<input class="rn" data-k="r:${r}" data-r="${r}" data-f="rname" value="${esc(n)}" aria-label="Round name">`:esc(t==='L'?n:String(n).trim().slice(0,-1))}</div></th>`}).join('');
+let rows=L.map((p,i)=>{const a=series(p),low=ST.apps(a)<S.min,o=SEL==p.id&&!ED;
+const mid=all?'':p.pts[S.view].map((v,r)=>ED?`<td class="t${rtype(c.rounds[r])}"><input type="text" inputmode="decimal" class="pt${v==='DNP'?' dnp':''}" data-k="${p.id}:${r}" data-id="${p.id}" data-r="${r}" value="${v??''}" aria-label="Points, ${esc(c.rounds[r])}"></td>`:`<td class="a t${rtype(c.rounds[r])}">${v==='DNP'?'<span class="dn">DNP</span>':fmt(v)}</td>`).join('');
+const st=SCV.map(([k])=>{const v=stat(p,k);return(ED&&(k==='goals'||k==='ass'))?`<td class="a"><input type="text" inputmode="numeric" class="pt gl" data-k="${p.id}:${k}" data-id="${p.id}" data-f="${k}" value="${v||''}" aria-label="${k==='goals'?'Goals':'Assists'}"></td>`:`<td class="${k==='avg'?'s':'a'}">${(k==='goals'||k==='ass')?(v||'–'):fmt(v)}</td>`}).join('');
+return`<tr class="pl${i?'':' lead'}${low?' low':''}" tabindex="0" data-pl="${p.id}" aria-expanded="${o}"><td><span class="rk r${i+1}">${i+1}</span></td><td><span class="nm">${o?'▾':'▸'} ${esc(p.name)}</span></td><td>${esc(p.club||'')}</td>${S.pv==='ALL'?`<td><span class="pp">${p.pos}</span></td>`:''}${mid}${st}${MC.map(c=>`<td class="a">${fmt(ST.avg(cs(p,c)))}</td>`).join('')}</tr>`+(o?`<tr class="det"><td colspan="30">${detail(p)}</td></tr>`:'')}).join('');
+if(!rows)rows=`<tr><td colspan="30" style="color:var(--mut)">No players.</td></tr>`;
+if(S.pv==='ALL'?pos!==POS[0]:S.pv!==pos)return;
+sh+=`<section><div class="sh">${S.pv==='ALL'?'<h2>All players</h2>':ptabs}</div><div class="wrap"><table><thead><tr><th></th><th>Player</th><th>Club</th>${S.pv==='ALL'?'<th>Pos.</th>':''}${head}${cols}</tr></thead><tbody>${rows}</tbody></table></div></section>`});
+ge('lead').innerHTML=lh;ge('secs').innerHTML=(S.pv==='ALL'?`<div class="allbar">${ptabs}</div>`:'')+sh+LEGEND}
+document.addEventListener('click',e=>{const tr=e.target.closest('tr[data-pl]');if(!tr||e.target.closest('input,button'))return;const id=tr.dataset.pl;SEL=SEL==id?null:id;render();const r=document.querySelector(`tr[data-pl="${id}"]`);if(r)r.focus({preventScroll:true})});
+document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches&&e.target.matches('tr[data-pl]')){e.preventDefault();e.target.click()}});
+let ART=null,CAN=false,EDIT=false;
+const snap=()=>JSON.stringify([S.comps,S.players,S.gi]);let SNAP0=snap();
+const PRE_HEAD="<!DOCTYPE html>\n<html lang=\"en\"><head><meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\">\n<title>SDF Dashboard</title>\n<link href=\"https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;600&display=swap\" rel=\"stylesheet\">\n",MID="</head><body><main>\n<h1>SDF Dashboard</h1>\n<div id=\"top\"></div>\n<p class=\"hint\" id=\"msg\" role=\"status\" style=\"color:var(--danger);margin:0 0 8px\"></p>\n<div class=\"leaders\" id=\"lead\"></div>\n<div id=\"secs\"></div>\n<p class=\"hint\">Read-only data. Average = total ÷ number of matches played with points (DNP and empty rounds are excluded). In the “Combined” view the average is calculated across all matches together, not from monthly averages. Dimmed rows have fewer matches played than the minimum. Click a player to see their stats and form.</p>\n</main>\n";
+function buildHTML(){const d=JSON.stringify(S).replace(/</g,'\\u003c'),g=id=>document.getElementById(id).textContent;
+return PRE_HEAD+'<style id="css">'+g('css')+'</style>'+MID+'<script id="data" type="application/json">'+d+'<'+'/script><script id="code">'+g('code')+'<'+'/script></body></html>'}
+async function publishNow(){if(!ART)return;
+try{toast('Publishing…',60000);await ART.publish(buildHTML())}
+catch(e){const c=e&&e.code,ro=['not_writer','not_granted','capability_disabled','not_declared'].includes(c);
+toast(c==='conflict'?'A newer version was published. Reloading…':ro?'Publishing is not available in this view.':c==='rate_limited'?'Too many publishes. Wait a moment and try again.':c==='too_large'?'The page is too large to publish.':'Publishing failed. Try again.',9000);
+if(ro){CAN=false;EDIT=false;render()}}}
+document.addEventListener('click',e=>{const b=e.target.closest('#edt,#pub,#disc');if(!b||b.disabled)return;
+if(b.id==='edt'){EDIT=!EDIT;render()}else if(b.id==='disc'){S=seed();fix();render()}else if(b.id==='pub')publishNow()});
+(async()=>{try{if(typeof claude==='undefined'||!claude.use)return;const[a,u]=await Promise.all([claude.use('artifact'),claude.use('user')]);ART=a;CAN=!!(a&&u&&await u.canEdit());render()}catch(e){}})();
+
+document.addEventListener('click',e=>{const b=e.target.closest('[data-tf]');if(!b)return;const t=b.dataset.tf;if(TF.has(t)){if(TF.size>1)TF.delete(t)}else TF.add(t);render()});
+
+render();
+</script></body></html>
