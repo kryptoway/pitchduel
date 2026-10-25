@@ -78,6 +78,16 @@ th{vertical-align:bottom}
 @media (min-width:1500px){table{font-size:16px}th{font-size:14px}}
 .ft{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;margin:6px 0 20px;padding-top:10px;border-top:1px solid var(--line);font-size:13px;color:var(--mut)}
 .ft a{color:var(--acc);text-decoration:none;font-weight:600}.ft a:hover{text-decoration:underline}
+.bd.L{background:var(--acc);color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .bd.L{color:#0F1B15}}
+:root[data-theme="dark"] .bd.L{color:#0F1B15}
+th.tL,td.tL{background:color-mix(in srgb,var(--acc) 9%,transparent)}
+.allbar{margin:0;position:relative;z-index:1}
+.ptabs{gap:4px;padding-left:0}
+button.ptab{border:1px solid transparent;border-bottom:none;border-radius:12px 12px 0 0;padding:6px 16px 9px;margin-bottom:-1px;position:relative}
+button.ptab:hover{border-color:transparent}
+button.ptab.on{background:var(--card);color:var(--ink);border-color:var(--line);border-bottom:none}
+section.tl0{border-top-left-radius:0}
 </style><script data-goatcounter="https://kryptoway.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 <style>.brand{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 28px;margin:0 0 16px}
@@ -141,10 +151,10 @@ function fix(){
 }
 fix();migrate();fix();
 const cur=()=>S.comps.find(c=>c.id===S.view);
-const rtype=n=>{const m=/[NPC]\s*$/i.exec(String(n));if(!m)return'L';const t=m[0].trim().toUpperCase();return t==='P'?'C':t};
+const rtype=n=>{const m=/[NPCL]\s*$/i.exec(String(n));if(!m)return'L';const t=m[0].trim().toUpperCase();return t==='P'?'C':t};
 const TF=new Set(['L','C','N']),TC={L:'var(--acc)',C:'var(--tp)',N:'var(--tn)'},TN={L:'League',C:'Cups',N:'National'};
-const badge=t=>t==='L'?'':`<span class="bd ${t}">${t}</span>`;
-const LEGEND='<div class="lg"><span><i class="sw"></i> No letter: league matches</span><span><span class="bd C">C</span> cups (Champions League, Europa League, etc.)</span><span><span class="bd N">N</span> national team matches</span></div>';
+const badge=t=>`<span class="bd ${t}">${t}</span>`;
+const LEGEND='<div class="lg"><span><span class="bd L">L</span> league matches</span><span><span class="bd C">C</span> cups (Champions League, Europa League, etc.)</span><span><span class="bd N">N</span> national team matches</span></div>';
 const labsAll=()=>S.view==='all'?S.comps.flatMap(c=>c.rounds):cur().rounds;
 const raw=p=>S.view==='all'?S.comps.flatMap(c=>p.pts[c.id]):p.pts[S.view];
 const series=p=>TF.size===3?raw(p):raw(p).filter((_,i)=>TF.has(rtype(labsAll()[i])));
@@ -357,7 +367,7 @@ ge('top').innerHTML=`<div class="row">${S.comps.map(x=>`<button class="tab${x.id
 +(ED?`<div class="row"><label>Month name <input class="cn" data-f="cname" value="${esc(c.name)}"></label><button class="pri" id="addR">+ Round</button>${c.rounds.length>1?`<button data-arm="delr" data-r="${c.rounds.length-1}">Remove last round</button>`:''}</div>`:'')
 +(EDIT&&all?'<p class="hint">Select a month tab to edit its data.</p>':'')
 +(EDIT?`<div class="row"><button class="pri" id="pub"${DIRTY?'':' disabled'}>Publish changes</button><button id="disc"${DIRTY?'':' disabled'}>Discard changes</button><span class="hint">${DIRTY?'Unpublished changes. Visitors see them only after you publish.':'No unpublished changes.'}</span></div>`:'');
-const ptabs=`<div class="ptabs" role="tablist" aria-label="Position">${[...POS,'ALL'].map(x=>`<button class="ptab${S.pv===x?' on':''}" role="tab" aria-selected="${S.pv===x}" data-pv="${x}">${x}</button>`).join('')}</div>`;
+const ptabs=`<div class="ptabs" role="tablist" aria-label="Position">${['ALL','GK','DEF','MID','FWD'].map(x=>`<button class="ptab${S.pv===x?' on':''}" role="tab" aria-selected="${S.pv===x}" data-pv="${x}">${x}</button>`).join('')}</div>`;
 let lh='',sh='';
 POS.forEach(pos=>{
 const P=S.players.filter(p=>p.pos===pos),L=sorted(S.pv==='ALL'?S.players:P);
@@ -365,15 +375,15 @@ const E=P.filter(p=>ST.apps(series(p))>=S.min).sort((a,b)=>ST.avg(series(b))-ST.
 lh+=`<div class="lc" data-pv="${pos}" title="Show ${pos}"><small>${pos} · average leader</small><div class="n">${t?esc(t.name):'none (min '+S.min+')'}</div>${t?`<span class="num">${fmt(ST.avg(series(t)))}</span> <small>avg · ${all?'':'total '+fmt(ST.sum(series(t)))+' · '}${ST.apps(series(t))} played</small>`:''}</div>`;
 const SCV=SC.filter(([k])=>!(all&&k==='sum')),MC=all&&S.comps.length>1?S.comps:[];
 const cols=SCV.map(([k,l])=>`<th style="text-align:right"><div class="hd">${sbtn(k,'')}</div><div class="dt">${l}</div></th>`).join('')+MC.map(c=>`<th style="text-align:right"><div class="hd">${sbtn('c:'+c.id,'')}</div><div class="dt">Avg ${esc(c.name)}</div></th>`).join('');
-const head=all?'':c.rounds.map((n,r)=>{const t=rtype(n);return`<th class="t${t}" style="text-align:right"><div class="hd">${badge(t)}${sbtn('r:'+r,'')}</div><div class="dt">${ED?`<input class="rn" data-k="r:${r}" data-r="${r}" data-f="rname" value="${esc(n)}" aria-label="Round name">`:esc(t==='L'?n:String(n).trim().slice(0,-1))}</div></th>`}).reverse().join('');
+const head=all?'':c.rounds.map((n,r)=>{const t=rtype(n);return`<th class="t${t}" style="text-align:right"><div class="hd">${badge(t)}${sbtn('r:'+r,'')}</div><div class="dt">${ED?`<input class="rn" data-k="r:${r}" data-r="${r}" data-f="rname" value="${esc(n)}" aria-label="Round name">`:esc(String(n).trim().replace(/[NPCL]$/i,''))}</div></th>`}).reverse().join('');
 let rows=L.map((p,i)=>{const a=series(p),low=ST.apps(a)<S.min,o=SEL==p.id&&!ED;
 const mid=all?'':p.pts[S.view].map((v,r)=>ED?`<td class="t${rtype(c.rounds[r])}"><input type="text" inputmode="decimal" class="pt${v==='DNP'?' dnp':''}" data-k="${p.id}:${r}" data-id="${p.id}" data-r="${r}" value="${v??''}" aria-label="Points, ${esc(c.rounds[r])}"></td>`:`<td class="a t${rtype(c.rounds[r])}">${v==='DNP'?'<span class="dn">DNP</span>':fmt(v)}</td>`).reverse().join('');
 const st=SCV.map(([k])=>{const v=stat(p,k);return(ED&&(k==='goals'||k==='ass'))?`<td class="a"><input type="text" inputmode="numeric" class="pt gl" data-k="${p.id}:${k}" data-id="${p.id}" data-f="${k}" value="${v||''}" aria-label="${k==='goals'?'Goals':'Assists'}"></td>`:`<td class="${k==='avg'?'s':'a'}">${(k==='goals'||k==='ass')?(v||'–'):fmt(v)}</td>`}).join('');
 return`<tr class="pl${i?'':' lead'}${low?' low':''}" tabindex="0" data-pl="${p.id}" aria-expanded="${o}"><td><span class="rk r${i+1}">${i+1}</span></td><td><span class="nm">${o?'▾':'▸'} ${esc(p.name)}</span></td><td>${esc(p.club||'')}</td>${S.pv==='ALL'?`<td><span class="pp">${p.pos}</span></td>`:''}${st}${MC.map(c=>`<td class="a">${fmt(ST.avg(cs(p,c)))}</td>`).join('')}${mid}</tr>`+(o?`<tr class="det"><td colspan="30">${detail(p)}</td></tr>`:'')}).join('');
 if(!rows)rows=`<tr><td colspan="30" style="color:var(--mut)">No players.</td></tr>`;
 if(S.pv==='ALL'?pos!==POS[0]:S.pv!==pos)return;
-sh+=`<section><div class="sh">${S.pv==='ALL'?'<h2>All players</h2>':ptabs}</div><div class="wrap"><table><thead><tr><th></th><th>Player</th><th>Club</th>${S.pv==='ALL'?'<th>Pos.</th>':''}${cols}${head}</tr></thead><tbody>${rows}</tbody></table></div></section>`});
-ge('lead').innerHTML=lh;ge('secs').innerHTML=(S.pv==='ALL'?`<div class="allbar">${ptabs}</div>`:'')+sh+LEGEND+foot()}
+sh+=`<section${S.pv==='ALL'?' class="tl0"':''}><div class="sh"><h2>${PN[S.pv]}</h2></div><div class="wrap"><table><thead><tr><th></th><th>Player</th><th>Club</th>${S.pv==='ALL'?'<th>Pos.</th>':''}${cols}${head}</tr></thead><tbody>${rows}</tbody></table></div></section>`});
+ge('lead').innerHTML=lh;ge('secs').innerHTML=`<div class="allbar">${ptabs}</div>`+sh+LEGEND+foot()}
 document.addEventListener('click',e=>{const tr=e.target.closest('tr[data-pl]');if(!tr||e.target.closest('input,button'))return;const id=tr.dataset.pl;SEL=SEL==id?null:id;render();const r=document.querySelector(`tr[data-pl="${id}"]`);if(r)r.focus({preventScroll:true})});
 document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches&&e.target.matches('tr[data-pl]')){e.preventDefault();e.target.click()}});
 let ART=null,CAN=false,EDIT=false,DLC=null;
@@ -397,5 +407,6 @@ function foot(){let last='';for(let i=S.comps.length-1;i>=0&&!last;i--){const c=
 const d=S.updated?new Date(S.updated+'T00:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}):'';
 return`<footer class="ft"><span>${d?'Data updated: '+d:''}${d&&last?' · ':''}${last?'Latest round with data: '+esc(last):''}</span><span>Created by <a href="https://x.com/kryptoway_ai" target="_blank" rel="noopener noreferrer">@kryptoway_ai</a></span></footer>`}
 
+const PN={ALL:'All players',GK:'Goalkeepers',DEF:'Defenders',MID:'Midfielders',FWD:'Forwards'};
 render();
 </script></body></html>
