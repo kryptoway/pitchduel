@@ -65,6 +65,18 @@ tr.me td{background:rgba(242,194,48,.12);font-weight:600}
 .ft{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;margin:40px 0 0;padding-top:12px;border-top:1px solid var(--line);font-size:13px;color:var(--mut)}
 a{color:var(--acc)}
 .sum{max-width:760px;margin:0 auto}.sum h2{font-size:clamp(26px,4vw,34px);margin:0 0 4px;text-align:center}.sr{display:grid;grid-template-columns:auto 1fr auto;gap:6px 12px;align-items:center;padding:9px 12px;border:1px solid #2b4538;border-radius:10px;margin:6px 0;background:rgba(255,255,255,.03)}.sr .ps{font-size:12px;font-weight:700;color:var(--gold);min-width:34px}.sr .pk{font-size:15px;line-height:1.25}.sr .pk small{display:block;color:var(--mut);font-size:12px}.sr .rt{font-size:12px;color:var(--mut);text-align:right}.sr button{font:inherit;font-size:13px;padding:5px 12px;border-radius:8px;border:1px solid var(--gold);background:transparent;color:var(--gold);cursor:pointer}.sr.no{opacity:.75}
+@media(max-width:640px){.brand{flex-wrap:nowrap;gap:0 12px;margin:0 0 2px;white-space:nowrap}.brand a{font-size:16px;border-bottom-width:2px}
+.hero h1,.hero .sub:not(.tn){display:none}.hero .eb{font-size:12px}.tn{font-size:12px!important;margin-top:4px!important;line-height:1.3}.tn .rib{padding:2px 8px;font-size:10px}
+.rh{display:none}.bar2{margin:0 0 8px;font-size:14px}.bar2 .chip{padding:2px 8px!important}.chips{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;padding-bottom:4px}.chips .chip{flex:0 0 auto}
+main{padding:12px 10px 30px}.hero{margin:12px 0 10px}h1{font-size:40px;margin:4px 0 6px}.sub{font-size:15px}.tabs{margin:10px 0;gap:6px}.tab{padding:6px 11px;font-size:14px}.chips{margin:0 0 10px;gap:6px}.chip{padding:4px 10px}
+.duel{flex-direction:column;flex-wrap:nowrap;gap:0}.cd{flex:0 0 auto;width:100%;max-width:none;padding:12px 14px 10px;border-radius:18px}.rib{top:-10px;right:14px;padding:3px 10px;font-size:11px}
+.pos{padding:3px 9px;font-size:11px}.clb{font-size:17px}.who{margin:8px 0;gap:12px}.mono{width:46px;height:46px;font-size:18px;border-width:2px}.nm{font-size:30px}
+.fx{margin:0 0 8px;padding:7px 10px;gap:10px;border-radius:12px}.dt{width:40px;font-size:9px}.dt b{font-size:24px}.fx strong{font-size:15px}.fx span{font-size:12px}
+.sts{padding:6px 0}.st b{font-size:24px}.st i{font-size:10px}.fm,.bars{display:none}
+.vs{width:40px;height:40px;font-size:17px;border-width:2px;margin:-12px 0}.nav2{margin-top:14px}.stat{margin-top:10px}}
+@media(max-width:640px){.hero{margin:4px 0 4px}.tabs{margin:6px 0;gap:5px}.tab{padding:5px 9px;font-size:13px}.bar2{flex-wrap:nowrap;font-size:13px;gap:6px}.bar2 .chip{font-size:12px!important}.chips{margin:0 0 8px}.chip{padding:3px 9px;font-size:13px}
+.cd{padding:9px 12px 8px}.who{margin:4px 0}.mono{width:38px;height:38px;font-size:15px}.nm{font-size:26px}.fx{margin:0 0 6px;padding:5px 9px}.fx small{font-size:9px}.fx strong{font-size:14px}.fx span{font-size:11px}.dt b{font-size:20px}.dt{width:34px}
+.sts{padding:4px 0;border-bottom:0}.st b{font-size:20px;display:inline}.st i{font-size:9px;margin-left:5px}.vs{width:34px;height:34px;font-size:14px;margin:-10px 0}.stat{margin-top:6px;min-height:20px;font-size:14px}.nav2{margin-top:8px}.nav2 button{padding:7px 16px}}
 </style></head><body><main>
 <nav class="brand" aria-label="Pages"><a href="./">SDF Dashboard</a><a href="about.html">About the Game</a><a class="on" href="play.html" aria-current="page">SDF Battle</a></nav>
 <div id="app" aria-live="polite"><p class="sub" style="text-align:center">Loading…</p></div>
@@ -121,7 +133,7 @@ const n=Object.keys(S.picks).filter(k=>P.some(q=>q.id===k)).length;
 const chips=P.map((q,i)=>{const c=done(q)||locked(q)?'l':S.picks[q.id]?'p':'';return`<button class="chip${i===S.cur?' on':''}" data-act="pair" data-i="${i}"><span class="dot ${c}"></span>${i+1}</button>`}).join('');
 return`<div class="bar2"><span>Playing as <b>${esc(S.user.nick)}</b> · <button class="chip" style="padding:3px 10px;font-size:13px" data-act="logout">Log out</button></span><span class="${n===P.length?'ok':''}"><b>${n}</b> of ${P.length} pairs picked</span></div>
 <div class="chips" role="group" aria-label="Pairs">${chips}</div>
-<div style="text-align:center;margin-bottom:22px"><div class="eb">ROUND ${esc(S.round)} · ${POSN[p.pos]||p.pos}</div><div class="cn" style="font-size:clamp(30px,5vw,44px);font-weight:700">Who scores more?</div></div>
+<div class="rh" style="text-align:center;margin-bottom:22px"><div class="eb">ROUND ${esc(S.round)} · ${POSN[p.pos]||p.pos}</div><div class="cn" style="font-size:clamp(30px,5vw,44px);font-weight:700">Who scores more?</div></div>
 <div class="duel">${card(p,'a')}<div class="vs">VS</div>${card(p,'b')}</div>
 <div class="stat" role="status">${S.msg?`<span class="ok">${esc(S.msg)}</span>`:status(p)}</div>
 <div class="nav2"><button data-act="prev"${S.cur===0?' disabled':''}>Previous pair</button><button data-act="next"${S.cur>=P.length-1?' disabled':''}>Next pair</button></div>
@@ -134,7 +146,7 @@ function rulesView(){return`<div class="txt"><h2>How to play</h2><ul><li>Every r
 <h2>Privacy</h2><p>We store only your nickname, a scrambled (hashed) version of your PIN and your picks, in a Google Sheet owned by the site creator. No email, no advertising cookies. Your nickname and score are shown publicly on the leaderboard. Page views are counted anonymously. To delete your data, message <a href="https://x.com/kryptoway_ai" target="_blank" rel="noopener noreferrer">@kryptoway_ai</a> on X.</p>
 <h2>Fair play</h2><p>One account per person. Offensive nicknames and attempts to cheat can lead to removal. Fixture times come from public schedules and may change. This is an unofficial fan project, not affiliated with Sport.fun or any club. Curious about the real game? <a href="about.html">Read the About page</a>.</p></div>`}
 function draw(){const t=[['picks','Picks'],['mine','My picks'],['board','Leaderboard'],['rules','Rules']],cur=S.view==='picks'?(S.sum?'mine':'picks'):S.view;
-$('app').innerHTML=`<div class="hero"><div class="eb">NOVEMBER LEAGUE</div><h1>WHO SCORES MORE?</h1><p class="sub">Pick the better player in each battle. Every correct pick is worth 1 point.</p><p class="sub" style="margin-top:10px"><span class="rib" style="position:static;display:inline-block">TEST ROUND</span> This is the first test game of November. The league runs all month.</p></div>
+$('app').innerHTML=`<div class="hero"><div class="eb">NOVEMBER LEAGUE</div><h1>WHO SCORES MORE?</h1><p class="sub">Pick the better player in each battle. Every correct pick is worth 1 point.</p><p class="sub tn" style="margin-top:10px"><span class="rib" style="position:static;display:inline-block">TEST ROUND</span> This is the first test game of November.<br>The league runs all month.</p></div>
 <div class="tabs" role="tablist">${t.map(([k,l])=>`<button class="tab${cur===k?' on':''}" role="tab" aria-selected="${cur===k}" data-act="view" data-v="${k}">${l}</button>`).join('')}</div>
 ${S.failed?'<p class="err" style="text-align:center">Could not load the pairs. Please refresh the page.</p>':S.view==='picks'?(S.loaded?picksView():'<p class="sub" style="text-align:center">Loading…</p>'):S.view==='board'?boardView():rulesView()}`;tick()}
 function tick(){const e=$('cd');if(e){const p=S.pairs[S.cur];e.textContent=p?left(p):''}}
