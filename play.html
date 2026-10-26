@@ -118,13 +118,14 @@ return`<div class="bar2"><span>Playing as <b>${esc(S.user.nick)}</b> · <button 
 <div class="sum"><h2>${miss?'Your picks so far':'All picks saved ✓'}</h2><p class="sub" style="text-align:center;margin:0 0 14px">${miss?miss+' pair'+(miss>1?'s':'')+' still open.':'You can change any pick until its pair locks.'}</p>${rows}<div class="nav2" style="margin-top:16px"><button data-act="back">Back to cards</button></div></div>`}
 function picksView(){if(!S.user)return loginPanel();if(S.sum)return sumView();const P=S.pairs,p=P[S.cur];if(!p)return'<p class="sub" style="text-align:center">No pairs are open right now. Check back soon.</p>';
 const n=Object.keys(S.picks).filter(k=>P.some(q=>q.id===k)).length;
-const cnt={};const chips=P.map((q,i)=>{cnt[q.pos]=(cnt[q.pos]||0)+1;const c=done(q)||locked(q)?'l':S.picks[q.id]?'p':'';return`<button class="chip${i===S.cur?' on':''}" data-act="pair" data-i="${i}"><span class="dot ${c}"></span>${q.pos} ${cnt[q.pos]}</button>`}).join('');
-return`<div class="bar2"><span>Playing as <b>${esc(S.user.nick)}</b> · <button class="chip" style="padding:3px 10px;font-size:13px" data-act="logout">Log out</button></span><span class="${n===P.length?'ok':''}"><b>${n}</b> of ${P.length} pairs picked · <button class="chip" style="padding:3px 10px;font-size:13px" data-act="sum">My picks</button></span></div>
+const chips=P.map((q,i)=>{const c=done(q)||locked(q)?'l':S.picks[q.id]?'p':'';return`<button class="chip${i===S.cur?' on':''}" data-act="pair" data-i="${i}"><span class="dot ${c}"></span>${i+1}</button>`}).join('');
+return`<div class="bar2"><span>Playing as <b>${esc(S.user.nick)}</b> · <button class="chip" style="padding:3px 10px;font-size:13px" data-act="logout">Log out</button></span><span class="${n===P.length?'ok':''}"><b>${n}</b> of ${P.length} pairs picked</span></div>
 <div class="chips" role="group" aria-label="Pairs">${chips}</div>
 <div style="text-align:center;margin-bottom:22px"><div class="eb">ROUND ${esc(S.round)} · ${POSN[p.pos]||p.pos}</div><div class="cn" style="font-size:clamp(30px,5vw,44px);font-weight:700">Who scores more?</div></div>
 <div class="duel">${card(p,'a')}<div class="vs">VS</div>${card(p,'b')}</div>
 <div class="stat" role="status">${S.msg?`<span class="ok">${esc(S.msg)}</span>`:status(p)}</div>
-<div class="nav2"><button data-act="prev"${S.cur===0?' disabled':''}>Previous pair</button><button data-act="next"${S.cur>=P.length-1?' disabled':''}>Next pair</button></div>`}
+<div class="nav2"><button data-act="prev"${S.cur===0?' disabled':''}>Previous pair</button><button data-act="next"${S.cur>=P.length-1?' disabled':''}>Next pair</button></div>
+${P.some(q=>!locked(q)&&!done(q)&&!S.picks[q.id])?'':'<div style="text-align:center;margin-top:18px"><button class="btn" style="width:auto;padding:12px 34px" data-act="sum">My picks</button></div>'}`}
 function boardView(){const b=S.board;let h='<div class="txt"><h2>Leaderboard · November</h2>';if(!b)return h+'<p>Loading…</p></div>';if(!b.ok)return h+`<p class="err">${esc(ERR[b.error]||ERR.default)}</p></div>`;
 if(!b.board.length)return h+`<p>No scored pairs yet. The table fills in as soon as a round’s results are published on the SDF Dashboard.</p><p><button class="chip" data-act="refresh">Refresh</button></p></div>`;
 return h+`<p class="hint" style="margin:0 0 12px">${b.scoredPairs} scored pairs so far. 1 point for every correct pick.</p><table><thead><tr><th>#</th><th>NICKNAME</th><th class="n">POINTS</th><th class="n">PICKS</th></tr></thead><tbody>${b.board.map((r,i)=>`<tr${S.user&&r.nick.toLowerCase()===S.user.nick.toLowerCase()?' class="me"':''}><td>${i+1}</td><td>${esc(r.nick)}</td><td class="n">${r.points}</td><td class="n">${r.answered}</td></tr>`).join('')}</tbody></table><p><button class="chip" data-act="refresh" style="margin-top:12px">Refresh</button></p></div>`}
@@ -132,9 +133,9 @@ function rulesView(){return`<div class="txt"><h2>How to play</h2><ul><li>Every r
 <h2>Prizes</h2><p>SDF Battle is a free fan game: no entry fee, no purchase, no betting and no money involved. In the November test month there are no material prizes. The top players get a place in the Hall of Fame and a shout-out on X.</p>
 <h2>Privacy</h2><p>We store only your nickname, a scrambled (hashed) version of your PIN and your picks, in a Google Sheet owned by the site creator. No email, no advertising cookies. Your nickname and score are shown publicly on the leaderboard. Page views are counted anonymously. To delete your data, message <a href="https://x.com/kryptoway_ai" target="_blank" rel="noopener noreferrer">@kryptoway_ai</a> on X.</p>
 <h2>Fair play</h2><p>One account per person. Offensive nicknames and attempts to cheat can lead to removal. Fixture times come from public schedules and may change. This is an unofficial fan project, not affiliated with Sport.fun or any club. Curious about the real game? <a href="about.html">Read the About page</a>.</p></div>`}
-function draw(){const t=[['picks','Picks'],['board','Leaderboard'],['rules','Rules']];
+function draw(){const t=[['picks','Picks'],['mine','My picks'],['board','Leaderboard'],['rules','Rules']],cur=S.view==='picks'?(S.sum?'mine':'picks'):S.view;
 $('app').innerHTML=`<div class="hero"><div class="eb">NOVEMBER LEAGUE</div><h1>WHO SCORES MORE?</h1><p class="sub">Pick the better player in each battle. Every correct pick is worth 1 point.</p><p class="sub" style="margin-top:10px"><span class="rib" style="position:static;display:inline-block">TEST ROUND</span> This is the first test game of November. The league runs all month.</p></div>
-<div class="tabs" role="tablist">${t.map(([k,l])=>`<button class="tab${S.view===k?' on':''}" role="tab" aria-selected="${S.view===k}" data-act="view" data-v="${k}">${l}</button>`).join('')}</div>
+<div class="tabs" role="tablist">${t.map(([k,l])=>`<button class="tab${cur===k?' on':''}" role="tab" aria-selected="${cur===k}" data-act="view" data-v="${k}">${l}</button>`).join('')}</div>
 ${S.failed?'<p class="err" style="text-align:center">Could not load the pairs. Please refresh the page.</p>':S.view==='picks'?(S.loaded?picksView():'<p class="sub" style="text-align:center">Loading…</p>'):S.view==='board'?boardView():rulesView()}`;tick()}
 function tick(){const e=$('cd');if(e){const p=S.pairs[S.cur];e.textContent=p?left(p):''}}
 setInterval(()=>{tick();const p=S.pairs[S.cur];if(S.view==='picks'&&p&&$('cd')&&locked(p))draw()},1000);
@@ -150,7 +151,7 @@ else{if(prev)S.picks[p.id]=prev;else delete S.picks[p.id];S.msg='';if(r.error===
 async function loadBoard(){S.board=null;draw();S.board=await api({action:'board',month:MONTH});draw()}
 document.addEventListener('submit',e=>{if(e.target&&e.target.id==='f')submit(e)});
 document.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b)return;const a=b.dataset.act;
-if(a==='view'){S.view=b.dataset.v;S.msg='';if(S.view==='board')loadBoard();else draw()}
+if(a==='view'){const v=b.dataset.v;S.msg='';if(v==='mine'){S.view='picks';S.sum=true;draw()}else{S.view=v;if(v==='picks')S.sum=false;if(v==='board')loadBoard();else draw()}}
 else if(a==='mode'){S.mode=b.dataset.v;S.err='';draw()}
 else if(a==='pair'){S.cur=+b.dataset.i;S.msg='';S.sum=false;draw()}
 else if(a==='edit'){S.cur=+b.dataset.i;S.msg='';S.sum=false;draw();scrollTo(0,0)}
