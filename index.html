@@ -88,6 +88,11 @@ button.ptab{border:1px solid transparent;border-bottom:none;border-radius:12px 1
 button.ptab:hover{border-color:transparent}
 button.ptab.on{background:var(--card);color:var(--ink);border-color:var(--line);border-bottom:none}
 section.tl0{border-top-left-radius:0}
+.sh{justify-content:flex-start;gap:10px 18px;flex-wrap:wrap}
+.flt{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.flt input{width:170px;border:1px solid var(--line);background:var(--bg);padding:6px 12px;border-radius:999px;font-size:14px}
+.flt input:focus-visible{border-color:var(--acc)}
+@media (max-width:640px){.flt{width:100%;flex-wrap:nowrap}.flt input{flex:1 1 0;min-width:0;width:auto;font-size:16px;padding:6px 10px}.flt .hint{flex:0 0 auto;margin:0}}
 </style><script data-goatcounter="https://kryptoway.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 <style>.brand{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 28px;margin:0 0 16px}
@@ -371,23 +376,25 @@ ge('top').innerHTML=`<div class="row">${S.comps.map(x=>`<button class="tab${x.id
 const ptabs=`<div class="ptabs" role="tablist" aria-label="Position">${['ALL','GK','DEF','MID','FWD'].map(x=>`<button class="ptab${S.pv===x?' on':''}" role="tab" aria-selected="${S.pv===x}" data-pv="${x}">${x}</button>`).join('')}</div>`;
 let lh='',sh='';
 POS.forEach(pos=>{
-const P=S.players.filter(p=>p.pos===pos),L=sorted(S.pv==='ALL'?S.players:P);
+const P=S.players.filter(p=>p.pos===pos),L=sorted(S.pv==='ALL'?S.players:P);const shown=L.filter(FM).length;
 const E=P.filter(p=>ST.apps(series(p))>=S.min).sort((a,b)=>ST.avg(series(b))-ST.avg(series(a))),t=E[0];
 lh+=`<div class="lc" data-pv="${pos}" title="Show ${pos}"><small>${pos} · average leader</small><div class="n">${t?esc(t.name):'none (min '+S.min+')'}</div>${t?`<span class="num">${fmt(ST.avg(series(t)))}</span> <small>avg · ${all?'':'total '+fmt(ST.sum(series(t)))+' · '}${ST.apps(series(t))} played</small>`:''}</div>`;
 const SCV=SC.filter(([k])=>!(all&&k==='sum')),MC=all&&S.comps.length>1?S.comps:[];
 const cols=SCV.map(([k,l])=>`<th style="text-align:right"><div class="hd">${sbtn(k,'')}</div><div class="dt">${l}</div></th>`).join('')+MC.map(c=>`<th style="text-align:right"><div class="hd">${sbtn('c:'+c.id,'')}</div><div class="dt">Avg ${esc(c.name)}</div></th>`).join('');
 const head=all?'':c.rounds.map((n,r)=>{const t=rtype(n);return`<th class="t${t}" style="text-align:right"><div class="hd">${badge(t)}${sbtn('r:'+r,'')}</div><div class="dt">${ED?`<input class="rn" data-k="r:${r}" data-r="${r}" data-f="rname" value="${esc(n)}" aria-label="Round name">`:esc(String(n).trim().replace(/[NPCL]$/i,''))}</div></th>`}).reverse().join('');
-let rows=L.map((p,i)=>{const a=series(p),low=ST.apps(a)<S.min,o=SEL==p.id&&!ED;
+let rows=L.map((p,i)=>{if(!FM(p))return'';const a=series(p),low=ST.apps(a)<S.min,o=SEL==p.id&&!ED;
 const mid=all?'':p.pts[S.view].map((v,r)=>ED?`<td class="t${rtype(c.rounds[r])}"><input type="text" inputmode="decimal" class="pt${v==='DNP'?' dnp':''}" data-k="${p.id}:${r}" data-id="${p.id}" data-r="${r}" value="${v??''}" aria-label="Points, ${esc(c.rounds[r])}"></td>`:`<td class="a t${rtype(c.rounds[r])}">${v==='DNP'?'<span class="dn">DNP</span>':fmt(v)}</td>`).reverse().join('');
 const st=SCV.map(([k])=>{const v=stat(p,k);return(ED&&(k==='goals'||k==='ass'))?`<td class="a"><input type="text" inputmode="numeric" class="pt gl" data-k="${p.id}:${k}" data-id="${p.id}" data-f="${k}" value="${v||''}" aria-label="${k==='goals'?'Goals':'Assists'}"></td>`:`<td class="${k==='avg'?'s':'a'}">${(k==='goals'||k==='ass')?(v||'–'):fmt(v)}</td>`}).join('');
 return`<tr class="pl${i?'':' lead'}${low?' low':''}" tabindex="0" data-pl="${p.id}" aria-expanded="${o}"><td><span class="rk r${i+1}">${i+1}</span></td><td><span class="nm">${o?'▾':'▸'} ${esc(p.name)}</span></td><td>${esc(p.club||'')}</td>${S.pv==='ALL'?`<td><span class="pp">${p.pos}</span></td>`:''}${st}${MC.map(c=>`<td class="a">${fmt(ST.avg(cs(p,c)))}</td>`).join('')}${mid}</tr>`+(o?`<tr class="det"><td colspan="30">${detail(p)}</td></tr>`:'')}).join('');
-if(!rows)rows=`<tr><td colspan="30" style="color:var(--mut)">No players.</td></tr>`;
+if(!rows)rows=`<tr><td colspan="30" style="color:var(--mut)">${(FQ||FC)?'No matching players.':'No players.'}</td></tr>`;
 if(S.pv==='ALL'?pos!==POS[0]:S.pv!==pos)return;
-sh+=`<section${S.pv==='ALL'?' class="tl0"':''}><div class="sh"><h2>${PN[S.pv]}</h2></div><div class="wrap"><table><thead><tr><th></th><th>Player</th><th>Club</th>${S.pv==='ALL'?'<th>Pos.</th>':''}${cols}${head}</tr></thead><tbody>${rows}</tbody></table></div></section>`});
+sh+=`<section${S.pv==='ALL'?' class="tl0"':''}><div class="sh"><h2>${PN[S.pv]}</h2><div class="flt"><input id="fq" type="search" placeholder="Search player…" aria-label="Filter by player name" value="${esc(FQ)}" autocomplete="off"><input id="fc" type="search" placeholder="Club…" aria-label="Filter by club" value="${esc(FC)}" autocomplete="off">${(FQ||FC)?`<span class="hint">${shown} of ${L.length}</span>`:''}</div></div><div class="wrap"><table><thead><tr><th></th><th>Player</th><th>Club</th>${S.pv==='ALL'?'<th>Pos.</th>':''}${cols}${head}</tr></thead><tbody>${rows}</tbody></table></div></section>`});
 ge('lead').innerHTML=lh;ge('secs').innerHTML=`<div class="allbar">${ptabs}</div>`+sh+LEGEND+foot()}
 document.addEventListener('click',e=>{const tr=e.target.closest('tr[data-pl]');if(!tr||e.target.closest('input,button'))return;const id=tr.dataset.pl;SEL=SEL==id?null:id;render();const r=document.querySelector(`tr[data-pl="${id}"]`);if(r)r.focus({preventScroll:true})});
 document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches&&e.target.matches('tr[data-pl]')){e.preventDefault();e.target.click()}});
 let ART=null,CAN=false,EDIT=false,DLC=null;
+let FQ='',FC='';const FM=p=>(!FQ||nrm(p.name).includes(nrm(FQ)))&&(!FC||nrm(p.club||'').includes(nrm(FC)));
+document.addEventListener('input',e=>{const el=e.target;if(!el||(el.id!=='fq'&&el.id!=='fc'))return;if(el.id==='fq')FQ=el.value;else FC=el.value;const id=el.id,pos=el.selectionStart;render();const n=document.getElementById(id);if(n){n.focus();try{n.setSelectionRange(pos,pos)}catch(x){}}});
 const snap=()=>JSON.stringify([S.comps,S.players,S.gi]);let SNAP0=snap();
 const PRE_HEAD="<!DOCTYPE html>\n<html lang=\"en\"><head><meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\">\n<title>SDF Dashboard</title>\n<link href=\"https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;600&display=swap\" rel=\"stylesheet\">\n",MID="</head><body><main>\n<h1>SDF Dashboard</h1>\n<div id=\"top\"></div>\n<p class=\"hint\" id=\"msg\" role=\"status\" style=\"color:var(--danger);margin:0 0 8px\"></p>\n<div class=\"leaders\" id=\"lead\"></div>\n<div id=\"secs\"></div>\n<p class=\"hint\">Read-only data. Average = total ÷ number of matches played with points (DNP and empty rounds are excluded). In the “Combined” view the average is calculated across all matches together, not from monthly averages. Dimmed rows have fewer matches played than the minimum. Click a player to see their stats and form.</p>\n</main>\n";
 function buildHTML(){const d=JSON.stringify(S).replace(/</g,'\\u003c'),g=id=>document.getElementById(id).textContent;
