@@ -96,7 +96,7 @@ section.tl0{border-top-left-radius:0}
 .brand a:hover{color:var(--ink)}.brand a.on{color:var(--ink);border-bottom-color:var(--acc)}
 </style>
 </head><body><main>
-<nav class="brand" aria-label="Pages"><h1><a class="on" href="./" aria-current="page">SDF Dashboard</a></h1><a href="about.html">About the Game</a></nav>
+<nav class="brand" aria-label="Pages"><h1><a class="on" href="./" aria-current="page">SDF Dashboard</a></h1><a href="about.html">About the Game</a><a href="play.html">SDF Battle</a></nav>
 <div id="top"></div>
 <p class="hint" id="msg" role="status" style="color:var(--danger);margin:0 0 8px"></p>
 <div class="leaders" id="lead"></div>
@@ -228,9 +228,9 @@ document.addEventListener('change',e=>{
       if(isNaN(n))toast('Enter a whole number.');else{const key=d.f==='goals'?'g':'a';(p[key]=p[key]||{})[S.view]=n}}
     else if(d.r!==undefined){const t=el.value.trim().replace(',','.'),a=p.pts[S.view];
       if(t==='')a[+d.r]=null;
-      else if(t.toUpperCase()==='DNP')a[+d.r]='DNP';
+      else if(t.toUpperCase()==='DNP'||t.toUpperCase()==='D')a[+d.r]='DNP';
       else if(/^-?\d+(\.\d+)?$/.test(t))a[+d.r]=parseFloat(t);
-      else toast('Enter a number or DNP.')}}
+      else toast('Enter a number, d or DNP.')}}
   S.touched=true;save();
   setTimeout(()=>{const a=document.activeElement,k=a&&a.dataset&&a.dataset.k;render();
     if(k){const n=document.querySelector(`[data-k="${k}"]`);if(n){n.focus();if(n.select)n.select()}}},0);

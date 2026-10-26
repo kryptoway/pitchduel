@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SDF Battle – pick the better player</title>
+<meta name="description" content="A free monthly prediction game: pick which player scores more in the next round and climb the leaderboard.">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;600&display=swap" rel="stylesheet">
+<script data-goatcounter="https://kryptoway.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<style>
+:root{--bg:#0A1812;--card:#0f2118;--ink:#E7F0EA;--mut:#9FB2A6;--line:#2b4538;--acc:#4FB583;--gold:#F2C230;--red:#EE7A68;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}html{background:#0A1812}
+body{margin:0;background:#0A1812 repeating-linear-gradient(90deg,#0c1e15 0 96px,#0a1812 96px 192px);color:var(--ink);font:16px/1.5 Barlow,system-ui,sans-serif;min-height:100vh}
+main{max-width:1100px;margin:0 auto;padding:20px 14px 40px}
+button,input{font:inherit;color:inherit}button{cursor:pointer}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.brand{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 28px;margin:0 0 16px}
+.brand a{font:700 clamp(28px,7vw,40px)/1.05 "Barlow Condensed",Impact,sans-serif;letter-spacing:.5px;text-decoration:none;color:var(--mut);padding-bottom:3px;border-bottom:3px solid transparent}
+.brand a:hover{color:var(--ink)}.brand a.on{color:var(--ink);border-bottom-color:var(--acc)}
+.cn{font-family:"Barlow Condensed",Impact,sans-serif}
+.hero{text-align:center;margin:26px 0 20px}
+.eb{font-size:14px;letter-spacing:.2em;color:var(--gold);font-weight:600}
+h1{margin:8px 0 10px;font:700 clamp(44px,8vw,80px)/.95 "Barlow Condensed",Impact,sans-serif}
+.sub{margin:0 auto;max-width:560px;font-size:18px;color:#B8C8BE}
+.tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:18px 0}
+.tab,.chip{border:1.5px solid var(--line);background:var(--card);border-radius:999px;padding:7px 16px;font-weight:600}
+.tab.on{background:var(--ink);color:#0A1812;border-color:var(--ink)}
+.panel{max-width:460px;margin:0 auto;background:var(--card);border:1.5px solid var(--line);border-radius:22px;padding:24px}
+.panel label{display:block;font-size:13px;letter-spacing:.12em;color:var(--mut);margin:14px 0 6px}
+.panel input[type=text],.panel input[type=password]{width:100%;background:#0A1812;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font-size:18px}
+.btn{display:block;width:100%;margin-top:18px;padding:13px;border:0;border-radius:12px;background:var(--gold);color:#10251B;font-weight:700;font-size:18px}
+.btn:disabled{opacity:.55;cursor:default}
+.hint{font-size:13px;color:var(--mut);margin:10px 0 0}.err{color:var(--red);font-weight:600;margin:12px 0 0}
+.bar2{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 16px;margin:0 0 14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:0 0 20px}
+.chip{display:flex;align-items:center;gap:7px;padding:6px 13px;font-size:14px}.chip.on{border-color:var(--gold);color:var(--gold)}
+.dot{width:10px;height:10px;border-radius:50%;border:2px solid var(--mut)}.dot.p{background:var(--acc);border-color:var(--acc)}.dot.l{background:#59685f;border-color:#59685f}
+.duel{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:22px}
+.cd{position:relative;flex:1 1 340px;max-width:460px;text-align:left;border-radius:26px;padding:26px 26px 24px;background:linear-gradient(160deg,#173320 0%,#0f2118 55%,#0c1a13 100%);border:1.5px solid var(--line);box-shadow:0 24px 48px -24px #000}
+.cd:disabled{cursor:default}.cd.on{border-color:var(--gold);box-shadow:0 0 0 5px rgba(242,194,48,.16),0 34px 70px -24px rgba(242,194,48,.4)}
+.cd.win{border-color:var(--acc)}.cd.dim{opacity:.72}
+.rib{position:absolute;top:-14px;right:24px;padding:6px 14px;border-radius:999px;background:var(--gold);color:#10251B;font-size:13px;font-weight:700;letter-spacing:.12em}.rib.w{background:var(--acc)}
+.r1{display:flex;align-items:center;justify-content:space-between}
+.pos{padding:5px 12px;border-radius:8px;background:var(--acc);color:#0A1812;font-weight:700;font-size:13px;letter-spacing:.1em}
+.clb{font:600 22px/1 "Barlow Condensed",sans-serif;letter-spacing:.12em;color:#B8C8BE}
+.who{display:flex;align-items:center;gap:18px;margin:20px 0}
+.mono{flex:0 0 auto;width:88px;height:88px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 30% 25%,#2d5a3f,#0f2118);border:3px solid var(--line);font:700 32px/1 "Barlow Condensed",sans-serif;letter-spacing:.04em}
+.cd.on .mono{border-color:var(--acc)}
+.nm{font:700 clamp(36px,5vw,54px)/.95 "Barlow Condensed",sans-serif;overflow-wrap:anywhere}
+.fx{display:flex;align-items:center;gap:16px;margin:0 0 16px;padding:12px 16px;border-radius:16px;background:rgba(10,24,18,.75);border:1px solid var(--line)}
+.dt{flex:0 0 auto;width:54px;text-align:center;line-height:1;font-size:11px;letter-spacing:.14em;color:var(--mut)}.dt b{display:block;font:700 36px/1.05 "Barlow Condensed",sans-serif;color:var(--gold)}
+.fx small{display:block;font-size:11px;letter-spacing:.14em;color:var(--mut)}.fx strong{display:block;font-size:18px;margin-top:2px}.fx span{font-size:13px;color:var(--mut)}.fx span b{color:var(--ink)}
+.sts{display:flex;justify-content:space-between;padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.st b{display:block;font:700 40px/1 "Barlow Condensed",sans-serif}.st i{font-style:normal;font-size:12px;letter-spacing:.14em;color:var(--mut)}
+.fm{margin-top:14px;font-size:12px;letter-spacing:.14em;color:var(--mut)}
+.bars{display:flex;align-items:flex-end;gap:8px;height:104px;margin-top:8px}
+.b{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px;flex:1;font-size:11px;color:var(--mut)}.b i{display:block;width:62%;border-radius:6px 6px 2px 2px}
+.vs{flex:0 0 auto;width:66px;height:66px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#0A1812;border:3px solid var(--gold);font:700 27px/1 "Barlow Condensed",sans-serif;color:var(--gold);z-index:1}
+.nav2{display:flex;justify-content:center;gap:12px;margin-top:26px}
+.nav2 button{padding:10px 22px;border:1.5px solid var(--line);background:var(--card);border-radius:12px;font-weight:600}.nav2 button:disabled{opacity:.4;cursor:default}
+.stat{text-align:center;margin-top:18px;min-height:28px;font-weight:600}.ok{color:var(--acc)}.gold{color:var(--gold)}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--line)}th{font-size:12px;letter-spacing:.14em;color:var(--mut)}td.n,th.n{text-align:right}
+tr.me td{background:rgba(242,194,48,.12);font-weight:600}
+.txt{max-width:760px;margin:0 auto}.txt h2{font:700 28px/1.1 "Barlow Condensed",sans-serif;margin:26px 0 8px}.txt p,.txt li{color:#C9D6CE}
+.ft{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;margin:40px 0 0;padding-top:12px;border-top:1px solid var(--line);font-size:13px;color:var(--mut)}
+a{color:var(--acc)}
+</style></head><body><main>
+<nav class="brand" aria-label="Pages"><a href="./">SDF Dashboard</a><a href="about.html">About the Game</a><a class="on" href="play.html" aria-current="page">SDF Battle</a></nav>
+<div id="app" aria-live="polite"><p class="sub" style="text-align:center">Loading…</p></div>
+<noscript><p class="sub">SDF Battle needs JavaScript to run.</p></noscript>
+<footer class="ft"><span>Free fan game. Unofficial, not affiliated with Sport.fun.</span><span>Created by <a href="https://x.com/kryptoway_ai" target="_blank" rel="noopener noreferrer">@kryptoway_ai</a></span></footer>
+</main>
+<script>
+const API='https://script.google.com/macros/s/AKfycbyT3yIdS3C_5P_eoLDubkP7HbEWmvAHaoxb663VbunPZzI8z7Fqr4Mc5zj4_gjby_wK/exec',MONTH='2026-10';
+const $=id=>document.getElementById(id);
+const S={pairs:[],round:'',user:null,picks:{},view:'picks',cur:0,mode:'new',err:'',nickDraft:'',msg:'',board:null,busy:false,loaded:false,remember:true,failed:false};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const num=v=>typeof v==='number';
+const POSN={GK:'Goalkeepers',DEF:'Defenders',MID:'Midfielders',FWD:'Forwards'};
+const COL={L:'#4FB583',C:'#F2C230',N:'#7FA2F0'};
+const ERR={bad_nick:'Nickname: 3–16 characters, letters, numbers or _ only.',bad_pin:'PIN must be exactly 4 digits.',nick_taken:'That nickname is already taken.',bad_credentials:'Wrong nickname or PIN.',too_many_attempts:'Too many wrong PINs. Try again in 15 minutes.',locked:'This pair is already locked.',network:'Cannot reach the server. Check your connection and try again.',default:'Something went wrong. Please try again.'};
+const typ=r=>{const m=/[NPCL]\s*$/i.exec(String(r));if(!m)return'L';const t=m[0].trim().toUpperCase();return t==='P'?'C':t};
+const lab=r=>String(r).trim().replace(/[NPCL]$/i,'');
+const locked=p=>Date.now()>=Date.parse(p.lock);
+const done=p=>p.result==='A'||p.result==='B'||p.result==='void';
+async function api(b){try{const r=await fetch(API,{method:'POST',body:JSON.stringify(b)});return await r.json()}catch(e){return{ok:false,error:'network'}}}
+function stash(){try{if(S.remember&&S.user)localStorage.setItem('sdfbattle',JSON.stringify({n:S.user.nick,p:S.user.pin}));else localStorage.removeItem('sdfbattle')}catch(e){}}
+function dateBlock(d){const t=new Date(d+'T12:00:00Z'),o={timeZone:'UTC'};return`<div class="dt">${t.toLocaleDateString('en-GB',{...o,weekday:'short'}).toUpperCase()}<b>${t.getUTCDate()}</b>${t.toLocaleDateString('en-GB',{...o,month:'short'}).toUpperCase()}</div>`}
+function card(p,side){const x=p[side],m=x.match,pk=S.picks[p.id],on=pk===side.toUpperCase(),fin=done(p),win=p.result===side.toUpperCase(),vals=[...p.a.form,...p.b.form].map(f=>f.v).filter(num),mx=Math.max(...vals,1);
+const off=!S.user||locked(p);
+const bars=x.form.map(f=>{const t=typ(f.r),lb=lab(f.r);return num(f.v)?`<div class="b"><i style="height:${Math.max(3,Math.round(f.v/mx*60))}px;background:${COL[t]}"></i><span>${esc(lb)}</span><span>${Math.round(f.v)}</span></div>`:`<div class="b"><i style="height:3px;background:#EE7A68"></i><span>${esc(lb)}</span><span style="color:#EE7A68">${f.v==='DNP'?'DNP':'–'}</span></div>`}).join('');
+const hs=p.score&&num(p.score[side]),pts=hs?p.score[side]+' PTS':'',yp='<span class="rib">YOUR PICK</span>';
+const sc=fin?(win?`<span class="rib w">HIGHER SCORE${hs?' · '+pts:''}</span>`:hs?`<span class="rib" style="background:#2b4538;color:#E7F0EA">${pts}</span>`:on?yp:''):on?yp:'';
+return`<button class="cd${on?' on':''}${fin&&win?' win':''}${fin&&!win&&p.result!=='void'?' dim':''}" data-act="pick" data-side="${side}" aria-pressed="${on}" aria-label="Pick ${esc(x.name)}"${off?' disabled':''}>${sc}
+<div class="r1"><span class="pos">${x.pos}</span><span class="clb">${esc(x.club)}</span></div>
+<div class="who"><div class="mono">${esc(x.name.replace(/[^A-Za-zÀ-ž]/g,'').slice(0,3).toUpperCase())}</div><div class="nm">${esc(x.name)}</div></div>
+<div class="fx">${dateBlock(m.date)}<div><small>NEXT MATCH</small><strong>${esc(m.venue==='H'?m.clubName+' v '+m.oppName:m.oppName+' v '+m.clubName)}</strong><span>${esc(m.comp||'')}${m.comp?' · ':''}${m.venue==='H'?'Home':'Away'} · <b>${esc(m.time)} CET</b></span></div></div>
+<div class="sts"><div class="st"><b style="color:var(--gold)">${x.avg.toFixed(1)}</b><i>AVG</i></div><div class="st"><b>${x.played}</b><i>PLAYED</i></div><div class="st"><b>${x.max}</b><i>MAX</i></div></div>
+<div class="fm">FORM · LAST 4 ROUNDS</div><div class="bars">${bars}</div></button>`}
+function status(p){if(done(p)){const pk=S.picks[p.id];if(p.result==='void')return'<span class="gold">Void: no points for this pair</span>';return!pk?'<span style="color:var(--mut)">Scored. You did not pick this pair.</span>':pk===p.result?'<span class="ok">Correct: +1 point</span>':'<span style="color:var(--red)">Missed: 0 points</span>'}
+if(locked(p))return`<span style="color:var(--mut)">Locked.${S.picks[p.id]?' Your pick is saved.':' You did not pick this pair.'}</span>`;
+return`<span id="cd" data-lock="${p.lock}"></span>`}
+function left(p){let s=Math.floor((Date.parse(p.lock)-Date.now())/1000);if(s<=0)return'Locking…';const d=Math.floor(s/86400);s%=86400;const h=Math.floor(s/3600),m=Math.floor(s%3600/60),c=s%60,z=n=>String(n).padStart(2,'0');return`Locks in ${d?d+'d ':''}${z(h)}:${z(m)}:${z(c)}`}
+function loginPanel(){const n=S.mode==='new';return`<form class="panel" id="f" autocomplete="off"><div class="tabs" style="margin:0 0 6px"><button type="button" class="tab${n?' on':''}" data-act="mode" data-v="new">New nickname</button><button type="button" class="tab${n?'':' on'}" data-act="mode" data-v="login">I have one</button></div>
+<label for="nick">NICKNAME</label><input id="nick" type="text" maxlength="16" autocapitalize="off" spellcheck="false" value="${esc(S.nickDraft)}" required>
+<label for="pin">4-DIGIT PIN</label><input id="pin" type="password" inputmode="numeric" maxlength="4" pattern="[0-9]{4}" required>
+<label style="display:flex;gap:8px;align-items:center;letter-spacing:0;font-size:14px;margin-top:14px"><input id="rem" type="checkbox"${S.remember?' checked':''}> Remember me on this device</label>
+${S.err?`<p class="err">${esc(S.err)}</p>`:''}<button class="btn" type="submit"${S.busy?' disabled':''}>${S.busy?'One moment…':n?'Create nickname and play':'Log in'}</button>
+<p class="hint">No email needed. Don’t reuse a PIN from anywhere important. A forgotten PIN can’t be recovered, so write it down.</p></form>`}
+function picksView(){if(!S.user)return loginPanel();const P=S.pairs,p=P[S.cur];if(!p)return'<p class="sub" style="text-align:center">No pairs are open right now. Check back soon.</p>';
+const n=Object.keys(S.picks).filter(k=>P.some(q=>q.id===k)).length;
+const cnt={};const chips=P.map((q,i)=>{cnt[q.pos]=(cnt[q.pos]||0)+1;const c=done(q)||locked(q)?'l':S.picks[q.id]?'p':'';return`<button class="chip${i===S.cur?' on':''}" data-act="pair" data-i="${i}"><span class="dot ${c}"></span>${q.pos} ${cnt[q.pos]}</button>`}).join('');
+return`<div class="bar2"><span>Playing as <b>${esc(S.user.nick)}</b> · <button class="chip" style="padding:3px 10px;font-size:13px" data-act="logout">Log out</button></span><span class="${n===P.length?'ok':''}"><b>${n}</b> of ${P.length} pairs picked</span></div>
+<div class="chips" role="group" aria-label="Pairs">${chips}</div>
+<div style="text-align:center;margin-bottom:22px"><div class="eb">ROUND ${esc(S.round)} · ${POSN[p.pos]||p.pos}</div><div class="cn" style="font-size:clamp(30px,5vw,44px);font-weight:700">Who scores more?</div></div>
+<div class="duel">${card(p,'a')}<div class="vs">VS</div>${card(p,'b')}</div>
+<div class="stat" role="status">${S.msg?`<span class="ok">${esc(S.msg)}</span>`:status(p)}</div>
+<div class="nav2"><button data-act="prev"${S.cur===0?' disabled':''}>Previous pair</button><button data-act="next"${S.cur>=P.length-1?' disabled':''}>Next pair</button></div>`}
+function boardView(){const b=S.board;let h='<div class="txt"><h2>Leaderboard · October</h2>';if(!b)return h+'<p>Loading…</p></div>';if(!b.ok)return h+`<p class="err">${esc(ERR[b.error]||ERR.default)}</p></div>`;
+if(!b.board.length)return h+`<p>No scored pairs yet. The table fills in as soon as a round’s results are published on the SDF Dashboard.</p><p><button class="chip" data-act="refresh">Refresh</button></p></div>`;
+return h+`<p class="hint" style="margin:0 0 12px">${b.scoredPairs} scored pairs so far. 1 point for every correct pick.</p><table><thead><tr><th>#</th><th>NICKNAME</th><th class="n">POINTS</th><th class="n">PICKS</th></tr></thead><tbody>${b.board.map((r,i)=>`<tr${S.user&&r.nick.toLowerCase()===S.user.nick.toLowerCase()?' class="me"':''}><td>${i+1}</td><td>${esc(r.nick)}</td><td class="n">${r.points}</td><td class="n">${r.answered}</td></tr>`).join('')}</tbody></table><p><button class="chip" data-act="refresh" style="margin-top:12px">Refresh</button></p></div>`}
+function rulesView(){return`<div class="txt"><h2>How to play</h2><ul><li>Every round there are pairs of players, at least one per position (GK, DEF, MID, FWD).</li><li>Pick the player you think will score <b>more fantasy points</b> in his next match. Points are the ones shown on the SDF Dashboard.</li><li>You can change a pick until the pair locks. A pair locks at the <b>earlier kick-off</b> of the two players’ matches. The server checks the time, not your device.</li><li>1 point for every correct pick. If both players score the same or one of them does not play (DNP), the pair is void and nobody gets a point.</li><li>Points add up for the whole month, then a new month and a new league start. The leaderboard updates after the results of a round are published.</li></ul>
+<h2>Prizes</h2><p>SDF Battle is a free fan game: no entry fee, no purchase, no betting and no money involved. In the October pilot there are no material prizes. The top players get a place in the Hall of Fame and a shout-out on X.</p>
+<h2>Privacy</h2><p>We store only your nickname, a scrambled (hashed) version of your PIN and your picks, in a Google Sheet owned by the site creator. No email, no advertising cookies. Your nickname and score are shown publicly on the leaderboard. Page views are counted anonymously. To delete your data, message <a href="https://x.com/kryptoway_ai" target="_blank" rel="noopener noreferrer">@kryptoway_ai</a> on X.</p>
+<h2>Fair play</h2><p>One account per person. Offensive nicknames and attempts to cheat can lead to removal. Fixture times come from public schedules and may change. This is an unofficial fan project, not affiliated with Sport.fun or any club. Curious about the real game? <a href="about.html">Read the About page</a>.</p></div>`}
+function draw(){const t=[['picks','Picks'],['board','Leaderboard'],['rules','Rules']];
+$('app').innerHTML=`<div class="hero"><div class="eb">OCTOBER LEAGUE</div><h1>WHO SCORES MORE?</h1><p class="sub">Pick the better player in each battle. Every correct pick is worth 1 point.</p></div>
+<div class="tabs" role="tablist">${t.map(([k,l])=>`<button class="tab${S.view===k?' on':''}" role="tab" aria-selected="${S.view===k}" data-act="view" data-v="${k}">${l}</button>`).join('')}</div>
+${S.failed?'<p class="err" style="text-align:center">Could not load the pairs. Please refresh the page.</p>':S.view==='picks'?(S.loaded?picksView():'<p class="sub" style="text-align:center">Loading…</p>'):S.view==='board'?boardView():rulesView()}`;tick()}
+function tick(){const e=$('cd');if(e){const p=S.pairs[S.cur];e.textContent=p?left(p):''}}
+setInterval(()=>{tick();const p=S.pairs[S.cur];if(S.view==='picks'&&p&&$('cd')&&locked(p))draw()},1000);
+async function loadPicks(){const r=await api({action:'mypicks',nick:S.user.nick,pin:S.user.pin});if(r.ok){S.picks={};r.picks.forEach(x=>S.picks[x.pair]=x.choice)}return r}
+async function submit(e){e.preventDefault();const nick=$('nick').value.trim(),pin=$('pin').value.trim();S.remember=$('rem').checked;S.nickDraft=nick;S.busy=true;S.err='';draw();
+let r=await api({action:S.mode==='new'?'register':'login',nick,pin});
+if(r.ok){S.user={nick:r.nick,pin};r=await loadPicks()}
+S.busy=false;if(!r.ok){S.user=null;S.err=ERR[r.error]||ERR.default}else{stash();S.cur=Math.max(0,S.pairs.findIndex(q=>!locked(q)&&!S.picks[q.id]))}draw()}
+async function pick(side){side=side.toUpperCase();const p=S.pairs[S.cur];if(!S.user||locked(p))return;const prev=S.picks[p.id];S.picks[p.id]=side;S.msg='Saving…';draw();
+const r=await api({action:'pick',nick:S.user.nick,pin:S.user.pin,pair:p.id,choice:side});
+if(r.ok){S.msg='Pick saved';draw();setTimeout(()=>{S.msg='';const i=S.pairs.findIndex((q,k)=>k>S.cur&&!locked(q)&&!S.picks[q.id]);if(i>=0)S.cur=i;draw()},900)}
+else{if(prev)S.picks[p.id]=prev;else delete S.picks[p.id];S.msg='';if(r.error==='bad_credentials'){S.user=null;stash()}S.err=ERR[r.error]||ERR.default;if(S.user){S.msg=S.err;S.err=''}draw()}}
+async function loadBoard(){S.board=null;draw();S.board=await api({action:'board',month:MONTH});draw()}
+document.addEventListener('submit',e=>{if(e.target&&e.target.id==='f')submit(e)});
+document.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b)return;const a=b.dataset.act;
+if(a==='view'){S.view=b.dataset.v;S.msg='';if(S.view==='board')loadBoard();else draw()}
+else if(a==='mode'){S.mode=b.dataset.v;S.err='';draw()}
+else if(a==='pair'){S.cur=+b.dataset.i;S.msg='';draw()}
+else if(a==='prev'){S.cur=Math.max(0,S.cur-1);S.msg='';draw()}
+else if(a==='next'){S.cur=Math.min(S.pairs.length-1,S.cur+1);S.msg='';draw()}
+else if(a==='pick')pick(b.dataset.side)
+else if(a==='logout'){S.user=null;S.picks={};S.remember=false;stash();S.remember=true;draw()}
+else if(a==='refresh')loadBoard()});
+(async function init(){try{const r=await fetch('pairs.json?'+Date.now());const d=await r.json();S.pairs=d.pairs||[];S.round=d.round||'';S.loaded=true}catch(e){S.failed=true}
+let sv=null;try{sv=JSON.parse(localStorage.getItem('sdfbattle')||'null')}catch(e){}
+draw();if(sv&&sv.n&&sv.p&&S.loaded){const r=await api({action:'login',nick:sv.n,pin:sv.p});if(r.ok){S.user={nick:r.nick,pin:sv.p};await loadPicks();S.cur=Math.max(0,S.pairs.findIndex(q=>!locked(q)&&!S.picks[q.id]));draw()}}})();
+</script></body></html>
