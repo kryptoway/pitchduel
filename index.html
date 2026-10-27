@@ -1,7 +1,17 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>SDF Dashboard</title>
+<meta name="description" content="Free monthly football duels and a live player-stats dashboard for sport.fun. Pick the better player every round. By Kryptoway.">
+<link rel="canonical" href="https://kryptoway.github.io/sdf-dashboard/">
+<link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="theme-color" content="#0d1716">
+<meta property="og:type" content="website"><meta property="og:site_name" content="PitchDuel">
+<meta property="og:title" content="PitchDuel – sport.fun football duels &amp; player stats"><meta property="og:description" content="Free monthly football duels and a live player-stats dashboard for sport.fun. Pick the better player every round. By Kryptoway.">
+<meta property="og:url" content="https://kryptoway.github.io/sdf-dashboard/"><meta property="og:image" content="https://kryptoway.github.io/sdf-dashboard/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="PitchDuel – sport.fun football duels &amp; player stats">
+<meta name="twitter:description" content="Free monthly football duels and a live player-stats dashboard for sport.fun. Pick the better player every round. By Kryptoway."><meta name="twitter:image" content="https://kryptoway.github.io/sdf-dashboard/og.png">
+<title>PitchDuel – sport.fun football duels &amp; player stats</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;600&display=swap" rel="stylesheet">
 <style id="css">
 :root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
@@ -102,7 +112,7 @@ section.tl0{border-top-left-radius:0}
 </style>
 <style>@media(max-width:640px){.brand{flex-wrap:nowrap;justify-content:space-between;gap:0 6px;white-space:nowrap;margin:0 0 8px}.brand a{font-size:min(4vw,24px);border-bottom-width:2px;padding-bottom:2px}}</style>
 </head><body><main>
-<nav class="brand" aria-label="Pages"><h1><a class="on" href="./" aria-current="page">SDF Dashboard</a></h1><a href="about.html">About the Game</a><a href="play.html">SDF Battle</a></nav>
+<nav class="brand" aria-label="Pages"><h1><a class="on" href="./" aria-current="page">PitchDuel</a></h1><a href="about.html">About the Game</a><a href="play.html">Battle</a></nav>
 <div id="top"></div>
 <p class="hint" id="msg" role="status" style="color:var(--danger);margin:0 0 8px"></p>
 <div class="leaders" id="lead"></div>
@@ -396,7 +406,7 @@ let ART=null,CAN=false,EDIT=false,DLC=null;
 let FQ='',FC='';const FM=p=>(!FQ||nrm(p.name).includes(nrm(FQ)))&&(!FC||nrm(p.club||'').includes(nrm(FC)));
 document.addEventListener('input',e=>{const el=e.target;if(!el||(el.id!=='fq'&&el.id!=='fc'))return;if(el.id==='fq')FQ=el.value;else FC=el.value;const id=el.id,pos=el.selectionStart;render();const n=document.getElementById(id);if(n){n.focus();try{n.setSelectionRange(pos,pos)}catch(x){}}});
 const snap=()=>JSON.stringify([S.comps,S.players,S.gi]);let SNAP0=snap();
-const PRE_HEAD="<!DOCTYPE html>\n<html lang=\"en\"><head><meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\">\n<title>SDF Dashboard</title>\n<link href=\"https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;600&display=swap\" rel=\"stylesheet\">\n",MID="</head><body><main>\n<h1>SDF Dashboard</h1>\n<div id=\"top\"></div>\n<p class=\"hint\" id=\"msg\" role=\"status\" style=\"color:var(--danger);margin:0 0 8px\"></p>\n<div class=\"leaders\" id=\"lead\"></div>\n<div id=\"secs\"></div>\n<p class=\"hint\">Read-only data. Average = total ÷ number of matches played with points (DNP and empty rounds are excluded). In the “Combined” view the average is calculated across all matches together, not from monthly averages. Dimmed rows have fewer matches played than the minimum. Click a player to see their stats and form.</p>\n</main>\n";
+const PRE_HEAD="<!DOCTYPE html>\n<html lang=\"en\"><head><meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\">\n<title>PitchDuel</title>\n<link href=\"https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;600&display=swap\" rel=\"stylesheet\">\n",MID="</head><body><main>\n<h1>PitchDuel</h1>\n<div id=\"top\"></div>\n<p class=\"hint\" id=\"msg\" role=\"status\" style=\"color:var(--danger);margin:0 0 8px\"></p>\n<div class=\"leaders\" id=\"lead\"></div>\n<div id=\"secs\"></div>\n<p class=\"hint\">Read-only data. Average = total ÷ number of matches played with points (DNP and empty rounds are excluded). In the “Combined” view the average is calculated across all matches together, not from monthly averages. Dimmed rows have fewer matches played than the minimum. Click a player to see their stats and form.</p>\n</main>\n";
 function buildHTML(){const d=JSON.stringify(S).replace(/</g,'\\u003c'),g=id=>document.getElementById(id).textContent;
 return PRE_HEAD+'<style id="css">'+g('css')+'</style>'+MID+'<script id="data" type="application/json">'+d+'<'+'/script><script id="code">'+g('code')+'<'+'/script></body></html>'}
 async function publishNow(){if(!ART)return;
