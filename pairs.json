@@ -256,8 +256,8 @@
     "name": "Hakimi",
     "pos": "DEF",
     "club": "PSG",
-    "avg": 79.7,
-    "played": 4,
+    "avg": 85.2,
+    "played": 5,
     "max": 153.8,
     "form": [
      {
@@ -274,7 +274,7 @@
      },
      {
       "r": "23-29",
-      "v": null
+      "v": 107.5
      }
     ],
     "match": {
@@ -416,8 +416,8 @@
     "name": "Ruiz",
     "pos": "MID",
     "club": "PSG",
-    "avg": 121.3,
-    "played": 3,
+    "avg": 119.2,
+    "played": 4,
     "max": 185.8,
     "form": [
      {
@@ -434,7 +434,7 @@
      },
      {
       "r": "23-29",
-      "v": null
+      "v": 112.8
      }
     ],
     "match": {
@@ -576,8 +576,8 @@
     "name": "Doué",
     "pos": "FWD",
     "club": "PSG",
-    "avg": 136.7,
-    "played": 6,
+    "avg": 128.0,
+    "played": 7,
     "max": 214.8,
     "form": [
      {
@@ -594,7 +594,7 @@
      },
      {
       "r": "23-29",
-      "v": null
+      "v": 76
      }
     ],
     "match": {
@@ -1252,8 +1252,8 @@
     "name": "Doué",
     "pos": "FWD",
     "club": "PSG",
-    "avg": 136.7,
-    "played": 6,
+    "avg": 128.0,
+    "played": 7,
     "max": 214.8,
     "form": [
      {
@@ -1270,7 +1270,7 @@
      },
      {
       "r": "23-29",
-      "v": null
+      "v": 76
      }
     ],
     "match": {
