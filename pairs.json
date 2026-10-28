@@ -2,7 +2,7 @@
  "month": "2026-11",
  "round": "30-5 Nov",
  "tz": "CET",
- "generated": "2026-10-25",
+ "generated": "2026-10-28",
  "pairs": [
   {
    "id": "r30-5-gk1",
@@ -16,14 +16,10 @@
     "name": "Joan García",
     "pos": "GK",
     "club": "BAR",
-    "avg": 105.6,
-    "played": 4,
+    "avg": 95.9,
+    "played": 5,
     "max": 108,
     "form": [
-     {
-      "r": "7-13",
-      "v": 108
-     },
      {
       "r": "13-16C",
       "v": 107.3
@@ -35,6 +31,10 @@
      {
       "r": "20-23C",
       "v": 105.5
+     },
+     {
+      "r": "23-29",
+      "v": 57
      }
     ],
     "match": {
@@ -52,14 +52,10 @@
     "name": "Raya",
     "pos": "GK",
     "club": "ARS",
-    "avg": 93.3,
-    "played": 5,
-    "max": 144,
+    "avg": 98.4,
+    "played": 6,
+    "max": 143.5,
     "form": [
-     {
-      "r": "7-13",
-      "v": 116.5
-     },
      {
       "r": "13-16C",
       "v": 86.3
@@ -71,6 +67,10 @@
      {
       "r": "20-23C",
       "v": 81.3
+     },
+     {
+      "r": "23-29",
+      "v": 124
      }
     ],
     "match": {
@@ -101,10 +101,6 @@
     "max": 128,
     "form": [
      {
-      "r": "7-13",
-      "v": 128
-     },
-     {
       "r": "13-16C",
       "v": 103.5
      },
@@ -115,6 +111,10 @@
      {
       "r": "20-23C",
       "v": 104.5
+     },
+     {
+      "r": "23-29",
+      "v": "DNP"
      }
     ],
     "match": {
@@ -132,14 +132,10 @@
     "name": "Oblak",
     "pos": "GK",
     "club": "ATM",
-    "avg": 87.9,
-    "played": 6,
-    "max": 146,
+    "avg": 91.9,
+    "played": 7,
+    "max": 145.5,
     "form": [
-     {
-      "r": "7-13",
-      "v": 47.5
-     },
      {
       "r": "13-16C",
       "v": 145.5
@@ -151,6 +147,10 @@
      {
       "r": "20-23C",
       "v": 85.3
+     },
+     {
+      "r": "23-29",
+      "v": 116.5
      }
     ],
     "match": {
@@ -176,14 +176,10 @@
     "name": "Schlotterbeck",
     "pos": "DEF",
     "club": "BVB",
-    "avg": 134.7,
-    "played": 3,
-    "max": 192,
+    "avg": 124.1,
+    "played": 4,
+    "max": 191.8,
     "form": [
-     {
-      "r": "7-13",
-      "v": 191.8
-     },
      {
       "r": "13-16C",
       "v": "DNP"
@@ -195,6 +191,10 @@
      {
       "r": "20-23C",
       "v": 86.3
+     },
+     {
+      "r": "23-29",
+      "v": 92.3
      }
     ],
     "match": {
@@ -212,14 +212,10 @@
     "name": "Mittelstädt",
     "pos": "DEF",
     "club": "STU",
-    "avg": 130.3,
-    "played": 3,
-    "max": 170,
+    "avg": 125.3,
+    "played": 4,
+    "max": 170.5,
     "form": [
-     {
-      "r": "7-13",
-      "v": 170.5
-     },
      {
       "r": "13-16C",
       "v": "DNP"
@@ -231,6 +227,10 @@
      {
       "r": "20-23C",
       "v": 106.3
+     },
+     {
+      "r": "23-29",
+      "v": 110.5
      }
     ],
     "match": {
@@ -258,12 +258,8 @@
     "club": "PSG",
     "avg": 79.7,
     "played": 4,
-    "max": 154,
+    "max": 153.8,
     "form": [
-     {
-      "r": "7-13",
-      "v": 68
-     },
      {
       "r": "13-16C",
       "v": 73
@@ -275,6 +271,10 @@
      {
       "r": "20-23C",
       "v": 153.8
+     },
+     {
+      "r": "23-29",
+      "v": null
      }
     ],
     "match": {
@@ -292,14 +292,10 @@
     "name": "Huijsen",
     "pos": "DEF",
     "club": "RMD",
-    "avg": 99.7,
-    "played": 2,
-    "max": 108,
+    "avg": 94.6,
+    "played": 3,
+    "max": 107.5,
     "form": [
-     {
-      "r": "7-13",
-      "v": "DNP"
-     },
      {
       "r": "13-16C",
       "v": "DNP"
@@ -311,6 +307,10 @@
      {
       "r": "20-23C",
       "v": 107.5
+     },
+     {
+      "r": "23-29",
+      "v": 84.5
      }
     ],
     "match": {
@@ -336,14 +336,10 @@
     "name": "Rice",
     "pos": "MID",
     "club": "ARS",
-    "avg": 143.4,
-    "played": 4,
-    "max": 182,
+    "avg": 138.2,
+    "played": 5,
+    "max": 181.5,
     "form": [
-     {
-      "r": "7-13",
-      "v": 143.5
-     },
      {
       "r": "13-16C",
       "v": 103.3
@@ -355,6 +351,10 @@
      {
       "r": "20-23C",
       "v": 181.5
+     },
+     {
+      "r": "23-29",
+      "v": 117.5
      }
     ],
     "match": {
@@ -372,14 +372,10 @@
     "name": "De Bruyne",
     "pos": "MID",
     "club": "NAP",
-    "avg": 133.8,
-    "played": 5,
-    "max": 230,
+    "avg": 127.2,
+    "played": 6,
+    "max": 230.3,
     "form": [
-     {
-      "r": "7-13",
-      "v": 230.3
-     },
      {
       "r": "13-16C",
       "v": 22.8
@@ -391,6 +387,10 @@
      {
       "r": "20-23C",
       "v": 148.3
+     },
+     {
+      "r": "23-29",
+      "v": 94
      }
     ],
     "match": {
@@ -418,12 +418,8 @@
     "club": "PSG",
     "avg": 121.3,
     "played": 3,
-    "max": 186,
+    "max": 185.8,
     "form": [
-     {
-      "r": "7-13",
-      "v": 60.5
-     },
      {
       "r": "13-16C",
       "v": 117.5
@@ -435,6 +431,10 @@
      {
       "r": "20-23C",
       "v": 185.8
+     },
+     {
+      "r": "23-29",
+      "v": null
      }
     ],
     "match": {
@@ -452,14 +452,10 @@
     "name": "Güler",
     "pos": "MID",
     "club": "RMD",
-    "avg": 135.4,
-    "played": 5,
-    "max": 192,
+    "avg": 135.2,
+    "played": 6,
+    "max": 191.8,
     "form": [
-     {
-      "r": "7-13",
-      "v": 65.8
-     },
      {
       "r": "13-16C",
       "v": 133.3
@@ -471,6 +467,10 @@
      {
       "r": "20-23C",
       "v": 191.8
+     },
+     {
+      "r": "23-29",
+      "v": 134
      }
     ],
     "match": {
@@ -496,14 +496,10 @@
     "name": "Kane",
     "pos": "FWD",
     "club": "FCB",
-    "avg": 194.4,
-    "played": 6,
-    "max": 252,
+    "avg": 177.5,
+    "played": 7,
+    "max": 252.3,
     "form": [
-     {
-      "r": "7-13",
-      "v": 115.5
-     },
      {
       "r": "13-16C",
       "v": 206.3
@@ -515,6 +511,10 @@
      {
       "r": "20-23C",
       "v": 166.5
+     },
+     {
+      "r": "23-29",
+      "v": 76.3
      }
     ],
     "match": {
@@ -532,14 +532,10 @@
     "name": "Lamine Yamal",
     "pos": "FWD",
     "club": "BAR",
-    "avg": 145.2,
-    "played": 6,
-    "max": 228,
+    "avg": 131.6,
+    "played": 7,
+    "max": 227.5,
     "form": [
-     {
-      "r": "7-13",
-      "v": 105
-     },
      {
       "r": "13-16C",
       "v": 161.3
@@ -551,6 +547,10 @@
      {
       "r": "20-23C",
       "v": 185.8
+     },
+     {
+      "r": "23-29",
+      "v": 49.5
      }
     ],
     "match": {
@@ -578,12 +578,8 @@
     "club": "PSG",
     "avg": 136.7,
     "played": 6,
-    "max": 215,
+    "max": 214.8,
     "form": [
-     {
-      "r": "7-13",
-      "v": 30.5
-     },
      {
       "r": "13-16C",
       "v": 185
@@ -595,6 +591,10 @@
      {
       "r": "20-23C",
       "v": 214.8
+     },
+     {
+      "r": "23-29",
+      "v": null
      }
     ],
     "match": {
@@ -612,14 +612,10 @@
     "name": "Mbappé",
     "pos": "FWD",
     "club": "RMD",
-    "avg": 151.0,
-    "played": 4,
-    "max": 219,
+    "avg": 158.6,
+    "played": 5,
+    "max": 219.3,
     "form": [
-     {
-      "r": "7-13",
-      "v": 51
-     },
      {
       "r": "13-16C",
       "v": 175.5
@@ -631,6 +627,10 @@
      {
       "r": "20-23C",
       "v": 158.3
+     },
+     {
+      "r": "23-29",
+      "v": 188.8
      }
     ],
     "match": {
@@ -643,6 +643,649 @@
      "comp": "La Liga"
     }
    }
+  },
+  {
+   "id": "r3-5-gk1",
+   "month": "2026-11",
+   "round": "3-5 Nov",
+   "pos": "GK",
+   "lock": "2026-11-03T20:00:00Z",
+   "result": null,
+   "a": {
+    "id": 22,
+    "name": "Courtois",
+    "pos": "GK",
+    "club": "RMD",
+    "avg": 104.4,
+    "played": 4,
+    "max": 128,
+    "form": [
+     {
+      "r": "13-16C",
+      "v": 103.5
+     },
+     {
+      "r": "16-20",
+      "v": 81.5
+     },
+     {
+      "r": "20-23C",
+      "v": 104.5
+     },
+     {
+      "r": "23-29",
+      "v": "DNP"
+     }
+    ],
+    "match": {
+     "opp": "AEK",
+     "oppName": "AEK Athens",
+     "clubName": "Real Madrid",
+     "venue": "A",
+     "date": "2026-11-04",
+     "time": "18:45",
+     "comp": "Champions League"
+    }
+   },
+   "b": {
+    "id": 58,
+    "name": "Joan García",
+    "pos": "GK",
+    "club": "BAR",
+    "avg": 95.9,
+    "played": 5,
+    "max": 108,
+    "form": [
+     {
+      "r": "13-16C",
+      "v": 107.3
+     },
+     {
+      "r": "16-20",
+      "v": 101.5
+     },
+     {
+      "r": "20-23C",
+      "v": 105.5
+     },
+     {
+      "r": "23-29",
+      "v": 57
+     }
+    ],
+    "match": {
+     "opp": "AVL",
+     "oppName": "Aston Villa",
+     "clubName": "Barcelona",
+     "venue": "H",
+     "date": "2026-11-03",
+     "time": "21:00",
+     "comp": "Champions League"
+    }
+   }
+  },
+  {
+   "id": "r3-5-gk2",
+   "month": "2026-11",
+   "round": "3-5 Nov",
+   "pos": "GK",
+   "lock": "2026-11-03T20:00:00Z",
+   "result": null,
+   "a": {
+    "id": 102,
+    "name": "Raya",
+    "pos": "GK",
+    "club": "ARS",
+    "avg": 98.4,
+    "played": 6,
+    "max": 143.5,
+    "form": [
+     {
+      "r": "13-16C",
+      "v": 86.3
+     },
+     {
+      "r": "16-20",
+      "v": 143.5
+     },
+     {
+      "r": "20-23C",
+      "v": 81.3
+     },
+     {
+      "r": "23-29",
+      "v": 124
+     }
+    ],
+    "match": {
+     "opp": "SLA",
+     "oppName": "Slavia Praha",
+     "clubName": "Arsenal",
+     "venue": "A",
+     "date": "2026-11-04",
+     "time": "21:00",
+     "comp": "Champions League"
+    }
+   },
+   "b": {
+    "id": 85,
+    "name": "Oblak",
+    "pos": "GK",
+    "club": "ATM",
+    "avg": 91.9,
+    "played": 7,
+    "max": 145.5,
+    "form": [
+     {
+      "r": "13-16C",
+      "v": 145.5
+     },
+     {
+      "r": "16-20",
+      "v": 102.5
+     },
+     {
+      "r": "20-23C",
+      "v": 85.3
+     },
+     {
+      "r": "23-29",
+      "v": 116.5
+     }
+    ],
+    "match": {
+     "opp": "FCB",
+     "oppName": "Bayern",
+     "clubName": "Atlético",
+     "venue": "H",
+     "date": "2026-11-03",
+     "time": "21:00",
+     "comp": "Champions League"
+    }
+   }
+  },
+  {
+   "id": "r3-5-def1",
+   "month": "2026-11",
+   "round": "3-5 Nov",
+   "pos": "DEF",
+   "lock": "2026-11-03T17:45:00Z",
+   "result": null,
+   "a": {
+    "id": 106,
+    "name": "Romero",
+    "pos": "DEF",
+    "club": "ATM",
+    "avg": 135.1,
+    "played": 3,
+    "max": 179.8,
+    "form": [
+     {
+      "r": "13-16C",
+      "v": 121.8
+     },
+     {
+      "r": "16-20",
+      "v": 103.8
+     },
+     {
+      "r": "20-23C",
+      "v": "DNP"
+     },
+     {
+      "r": "23-29",
+      "v": "DNP"
+     }
+    ],
+    "match": {
+     "opp": "FCB",
+     "oppName": "Bayern",
+     "clubName": "Atlético",
+     "venue": "H",
+     "date": "2026-11-03",
+     "time": "21:00",
+     "comp": "Champions League"
+    }
+   },
+   "b": {
+    "id": 81,
+    "name": "Mittelstädt",
+    "pos": "DEF",
+    "club": "STU",
+    "avg": 125.3,
+    "played": 4,
+    "max": 170.5,
+    "form": [
+     {
+      "r": "13-16C",
+      "v": "DNP"
+     },
+     {
+      "r": "16-20",
+      "v": "DNP"
+     },
+     {
+      "r": "20-23C",
+      "v": 106.3
+     },
+     {
+      "r": "23-29",
+      "v": 110.5
+     }
+    ],
+    "match": {
+     "opp": "GAL",
+     "oppName": "Galatasaray",
+     "clubName": "Stuttgart",
+     "venue": "A",
+     "date": "2026-11-03",
+     "time": "18:45",
+     "comp": "Champions League"
+    }
+   }
+  },
+  {
+   "id": "r3-5-def2",
+   "month": "2026-11",
+   "round": "3-5 Nov",
+   "pos": "DEF",
+   "lock": "2026-11-03T20:00:00Z",
+   "result": null,
+   "a": {
+    "id": 42,
+    "name": "Gabriel Magalhães",
+    "pos": "DEF",
+    "club": "ARS",
+    "avg": 118.1,
+    "played": 5,
+    "max": 232,
+    "form": [
+     {
+      "r": "13-16C",
+      "v": 75.3
+     },
+     {
+      "r": "16-20",
+      "v": 157.8
+     },
+     {
+      "r": "20-23C",
+      "v": 66.8
+     },
+     {
+      "r": "23-29",
+      "v": 232
+     }
+    ],
+    "match": {
+     "opp": "SLA",
+     "oppName": "Slavia Praha",
+     "clubName": "Arsenal",
+     "venue": "A",
+     "date": "2026-11-04",
+     "time": "21:00",
+     "comp": "Champions League"
+    }
+   },
+   "b": {
+    "id": 68,
+    "name": "Koundé",
+    "pos": "DEF",
+    "club": "BAR",
+    "avg": 110.2,
+    "played": 4,
+    "max": 216.3,
+    "form": [
+     {
+      "r": "13-16C",
+      "v": 30.8
+     },
+     {
+      "r": "16-20",
+      "v": 105.3
+     },
+     {
+      "r": "20-23C",
+      "v": "DNP"
+     },
+     {
+      "r": "23-29",
+      "v": "DNP"
+     }
+    ],
+    "match": {
+     "opp": "AVL",
+     "oppName": "Aston Villa",
+     "clubName": "Barcelona",
+     "venue": "H",
+     "date": "2026-11-03",
+     "time": "21:00",
+     "comp": "Champions League"
+    }
+   }
+  },
+  {
+   "id": "r3-5-mid1",
+   "month": "2026-11",
+   "round": "3-5 Nov",
+   "pos": "MID",
+   "lock": "2026-11-03T20:00:00Z",
+   "result": null,
+   "a": {
+    "id": 87,
+    "name": "Olise",
+    "pos": "MID",
+    "club": "FCB",
+    "avg": 171.0,
+    "played": 6,
+    "max": 239.8,
+    "form": [
+     {
+      "r": "13-16C",
+      "v": 67
+     },
+     {
+      "r": "16-20",
+      "v": 208.3
+     },
+     {
+      "r": "20-23C",
+      "v": "DNP"
+     },
+     {
+      "r": "23-29",
+      "v": 239.8
+     }
+    ],
+    "match": {
+     "opp": "ATM",
+     "oppName": "Atlético",
+     "clubName": "Bayern",
+     "venue": "A",
+     "date": "2026-11-03",
+     "time": "21:00",
+     "comp": "Champions League"
+    }
+   },
+   "b": {
+    "id": 41,
+    "name": "Foden",
+    "pos": "MID",
+    "club": "MCI",
+    "avg": 169.7,
+    "played": 3,
+    "max": 324,
+    "form": [
+     {
+      "r": "13-16C",
+      "v": "DNP"
+     },
+     {
+      "r": "16-20",
+      "v": 154.3
+     },
+     {
+      "r": "20-23C",
+      "v": 324
+     },
+     {
+      "r": "23-29",
+      "v": 30.8
+     }
+    ],
+    "match": {
+     "opp": "RBL",
+     "oppName": "RB Leipzig",
+     "clubName": "Man City",
+     "venue": "A",
+     "date": "2026-11-04",
+     "time": "21:00",
+     "comp": "Champions League"
+    }
+   }
+  },
+  {
+   "id": "r3-5-mid2",
+   "month": "2026-11",
+   "round": "3-5 Nov",
+   "pos": "MID",
+   "lock": "2026-11-04T17:45:00Z",
+   "result": null,
+   "a": {
+    "id": 103,
+    "name": "Rice",
+    "pos": "MID",
+    "club": "ARS",
+    "avg": 138.2,
+    "played": 5,
+    "max": 181.5,
+    "form": [
+     {
+      "r": "13-16C",
+      "v": 103.3
+     },
+     {
+      "r": "16-20",
+      "v": 145.3
+     },
+     {
+      "r": "20-23C",
+      "v": 181.5
+     },
+     {
+      "r": "23-29",
+      "v": 117.5
+     }
+    ],
+    "match": {
+     "opp": "SLA",
+     "oppName": "Slavia Praha",
+     "clubName": "Arsenal",
+     "venue": "A",
+     "date": "2026-11-04",
+     "time": "21:00",
+     "comp": "Champions League"
+    }
+   },
+   "b": {
+    "id": 49,
+    "name": "Güler",
+    "pos": "MID",
+    "club": "RMD",
+    "avg": 135.2,
+    "played": 6,
+    "max": 191.8,
+    "form": [
+     {
+      "r": "13-16C",
+      "v": 133.3
+     },
+     {
+      "r": "16-20",
+      "v": 163.8
+     },
+     {
+      "r": "20-23C",
+      "v": 191.8
+     },
+     {
+      "r": "23-29",
+      "v": 134
+     }
+    ],
+    "match": {
+     "opp": "AEK",
+     "oppName": "AEK Athens",
+     "clubName": "Real Madrid",
+     "venue": "A",
+     "date": "2026-11-04",
+     "time": "18:45",
+     "comp": "Champions League"
+    }
+   }
+  },
+  {
+   "id": "r3-5-fwd1",
+   "month": "2026-11",
+   "round": "3-5 Nov",
+   "pos": "FWD",
+   "lock": "2026-11-03T20:00:00Z",
+   "result": null,
+   "a": {
+    "id": 63,
+    "name": "Kane",
+    "pos": "FWD",
+    "club": "FCB",
+    "avg": 177.5,
+    "played": 7,
+    "max": 252.3,
+    "form": [
+     {
+      "r": "13-16C",
+      "v": 206.3
+     },
+     {
+      "r": "16-20",
+      "v": 228.8
+     },
+     {
+      "r": "20-23C",
+      "v": 166.5
+     },
+     {
+      "r": "23-29",
+      "v": 76.3
+     }
+    ],
+    "match": {
+     "opp": "ATM",
+     "oppName": "Atlético",
+     "clubName": "Bayern",
+     "venue": "A",
+     "date": "2026-11-03",
+     "time": "21:00",
+     "comp": "Champions League"
+    }
+   },
+   "b": {
+    "id": 78,
+    "name": "Mbappé",
+    "pos": "FWD",
+    "club": "RMD",
+    "avg": 158.6,
+    "played": 5,
+    "max": 219.3,
+    "form": [
+     {
+      "r": "13-16C",
+      "v": 175.5
+     },
+     {
+      "r": "16-20",
+      "v": 219.3
+     },
+     {
+      "r": "20-23C",
+      "v": 158.3
+     },
+     {
+      "r": "23-29",
+      "v": 188.8
+     }
+    ],
+    "match": {
+     "opp": "AEK",
+     "oppName": "AEK Athens",
+     "clubName": "Real Madrid",
+     "venue": "A",
+     "date": "2026-11-04",
+     "time": "18:45",
+     "comp": "Champions League"
+    }
+   }
+  },
+  {
+   "id": "r3-5-fwd2",
+   "month": "2026-11",
+   "round": "3-5 Nov",
+   "pos": "FWD",
+   "lock": "2026-11-03T20:00:00Z",
+   "result": null,
+   "a": {
+    "id": 71,
+    "name": "Lamine Yamal",
+    "pos": "FWD",
+    "club": "BAR",
+    "avg": 131.6,
+    "played": 7,
+    "max": 227.5,
+    "form": [
+     {
+      "r": "13-16C",
+      "v": 161.3
+     },
+     {
+      "r": "16-20",
+      "v": 227.5
+     },
+     {
+      "r": "20-23C",
+      "v": 185.8
+     },
+     {
+      "r": "23-29",
+      "v": 49.5
+     }
+    ],
+    "match": {
+     "opp": "AVL",
+     "oppName": "Aston Villa",
+     "clubName": "Barcelona",
+     "venue": "H",
+     "date": "2026-11-03",
+     "time": "21:00",
+     "comp": "Champions League"
+    }
+   },
+   "b": {
+    "id": 34,
+    "name": "Doué",
+    "pos": "FWD",
+    "club": "PSG",
+    "avg": 136.7,
+    "played": 6,
+    "max": 214.8,
+    "form": [
+     {
+      "r": "13-16C",
+      "v": 185
+     },
+     {
+      "r": "16-20",
+      "v": 108
+     },
+     {
+      "r": "20-23C",
+      "v": 214.8
+     },
+     {
+      "r": "23-29",
+      "v": null
+     }
+    ],
+    "match": {
+     "opp": "VIL",
+     "oppName": "Villarreal",
+     "clubName": "PSG",
+     "venue": "A",
+     "date": "2026-11-03",
+     "time": "21:00",
+     "comp": "Champions League"
+    }
+   }
   }
+ ],
+ "soon": [
+  "3-5 Nov"
  ]
 }
