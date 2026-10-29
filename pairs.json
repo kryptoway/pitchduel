@@ -2,7 +2,7 @@
  "month": "2026-11",
  "round": "30-5 Nov",
  "tz": "CET",
- "generated": "2026-10-28",
+ "generated": "2026-10-29",
  "pairs": [
   {
    "id": "r30-5-gk1",
@@ -372,7 +372,7 @@
     "name": "De Bruyne",
     "pos": "MID",
     "club": "NAP",
-    "avg": 127.2,
+    "avg": 131.3,
     "played": 6,
     "max": 230.3,
     "form": [
@@ -390,7 +390,7 @@
      },
      {
       "r": "23-29",
-      "v": 94
+      "v": 118.5
      }
     ],
     "match": {
