@@ -211,7 +211,7 @@ if(r.ok){S.user={nick:r.nick,pin};r=await loadPicks()}
 S.busy=false;if(!r.ok){S.user=null;S.err=ERR[r.error]||ERR.default}else{stash();goOpen()}draw()}
 async function pick(side){side=side.toUpperCase();const p=S.pairs[S.cur];if(!S.user||locked(p))return;const prev=S.picks[p.id];S.picks[p.id]=side;S.msg='Saving…';draw();
 const r=await api({action:'pick',nick:S.user.nick,pin:S.user.pin,pair:p.id,choice:side});
-if(r.ok){S.msg='Pick saved';draw();setTimeout(()=>{S.msg='';const i=S.pairs.findIndex((q,k)=>k>S.cur&&!locked(q)&&!S.picks[q.id]);if(i>=0)S.cur=i;else if(!S.pairs.some(q=>!locked(q)&&!done(q)&&!S.picks[q.id]))S.sum=true;draw()},700)}
+if(r.ok){S.msg='Pick saved';draw()}
 else{if(prev)S.picks[p.id]=prev;else delete S.picks[p.id];S.msg='';if(r.error==='bad_credentials'){S.user=null;stash()}S.err=ERR[r.error]||ERR.default;if(S.user){S.msg=S.err;S.err=''}draw()}}
 const MN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const mlab=m=>{const a=String(m).split('-');return (MN[+a[1]-1]||a[1])+' '+a[0]};
