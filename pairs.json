@@ -650,7 +650,7 @@
    "round": "3-5 Nov",
    "pos": "GK",
    "lock": "2026-11-03T20:00:00Z",
-   "result": null,
+   "result": "B",
    "a": {
     "id": 22,
     "name": "Courtois",
@@ -730,7 +730,7 @@
    "round": "3-5 Nov",
    "pos": "GK",
    "lock": "2026-11-03T20:00:00Z",
-   "result": null,
+   "result": "A",
    "a": {
     "id": 102,
     "name": "Raya",
@@ -890,7 +890,7 @@
    "round": "3-5 Nov",
    "pos": "DEF",
    "lock": "2026-11-03T20:00:00Z",
-   "result": null,
+   "result": "void",
    "a": {
     "id": 42,
     "name": "Gabriel Magalhães",
@@ -970,7 +970,7 @@
    "round": "3-5 Nov",
    "pos": "MID",
    "lock": "2026-11-03T20:00:00Z",
-   "result": null,
+   "result": "A",
    "a": {
     "id": 87,
     "name": "Olise",
@@ -1050,7 +1050,7 @@
    "round": "3-5 Nov",
    "pos": "MID",
    "lock": "2026-11-04T17:45:00Z",
-   "result": null,
+   "result": "void",
    "a": {
     "id": 103,
     "name": "Rice",
@@ -1130,7 +1130,7 @@
    "round": "3-5 Nov",
    "pos": "FWD",
    "lock": "2026-11-03T20:00:00Z",
-   "result": null,
+   "result": "B",
    "a": {
     "id": 63,
     "name": "Kane",
