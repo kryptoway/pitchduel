@@ -74,6 +74,7 @@ tr.det td.dc{padding:12px 2px;text-align:center}tr.det .ds{display:block;margin-
 .pp{font-size:12px;border:1px solid var(--line);border-radius:4px;padding:1px 6px;color:var(--mut)}
 td.s{color:var(--acc)}
 button:disabled{opacity:.5;cursor:default}
+tr.det .ds .num.pk{color:var(--avg)}tr.det .ds .num.gr,tr.det .ds .num.tl{color:var(--acc)}tr.det .ds .num.tc{color:var(--tp)}tr.det .ds .num.tn{color:var(--tn)}
 
 :root{--tn:#3F6FD1;--tp:#C99700;--avg:#C2339B}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--tn:#7FA2F0;--tp:#F2C230;--avg:#FF7AD0}}
@@ -176,6 +177,7 @@ function fix(){
 }
 fix();migrate();fix();
 const cur=()=>S.comps.find(c=>c.id===S.view);
+const numCls=l=>l==='Average'?' pk':/^(Form|Best|Total)/.test(l)?' gr':/^League avg/.test(l)?' tl':/^Cups avg/.test(l)?' tc':/^National avg/.test(l)?' tn':AVRE.test(l)?' av':'',AVRE=/avg|Average|Form/;
 const rtype=n=>{const m=/[NPCL]\s*$/i.exec(String(n));if(!m)return'L';const t=m[0].trim().toUpperCase();return t==='P'?'C':t};
 const TF=new Set(['L','C','N']),TC={L:'var(--acc)',C:'var(--tp)',N:'var(--tn)'},TN={L:'League',C:'Cups',N:'National'};
 const badge=t=>`<span class="bd ${t}">${t}</span>`;
@@ -409,9 +411,9 @@ const nxk=Object.keys(S.fx||{}).find(k=>{const[ci,r]=k.split('|'),cc=S.comps.fin
 const per=all?S.comps.map(c=>esc(c.name)+' '+fmt(ST.avg(cs(p,c)))).join(' · '):'';
 if(span&&!all){const cell=i=>{const v=a[i],t=rtype(labs[i]),mm=mOf(i),gg=gOf(i),hh=isN(v)?Math.max(3,v/m*80):0,ic=gg&&(gg.g||gg.a)?'⚽'.repeat(gg.g||0)+'👟'.repeat(gg.a||0):'';const nic=gg?(gg.g||0)+(gg.a||0):0,ins=nic>0&&isN(v)&&hh>=nic*13+4;
 return`<td class="dc"><div class="dcb">${avg!==null?`<u style="bottom:${avg/m*80}px"></u>`:''}${ins?'':`<span class="dic">${ic}</span>`}${v==='DNP'?'<i class="dnp">✕</i>':`<i class="${ins?'wi':''}" style="height:${hh}px;background:${TC[t]}">${ins?ic.split(/(?=⚽|👟)/u).map(e=>`<span>${e}</span>`).join(''):''}</i>`}</div><div style="height:1px;background:var(--line);margin:0 -2px 4px"></div><div class="rl">${esc(String(labs[i]).trim().replace(/[NPCL]$/i,''))}</div>${mm?`<div class="mo"><span class="ha">${mm.h?'H':'A'}</span>${esc(mm.o)}</div>`:''}${mm&&mm.s?`<div class="ms">${esc(mm.s)}</div>`:''}</td>`};
-const box=(t,x)=>`<div class="dbx"><b>${t}</b>${row(x)}</div>`,AV=/avg|Average|Form/,row=x=>`<span class="dsr">${x.map(([l,v])=>`<div><span class="num${AV.test(l)?' av':''}">${fmt(v)}</span><small>${l}</small></div>`).join('')}</span>`;
+const box=(t,x)=>`<div class="dbx"><b>${t}</b>${row(x)}</div>`,AV=/avg|Average|Form/,row=x=>`<span class="dsr">${x.map(([l,v])=>`<div><span class="num${numCls(l)}">${fmt(v)}</span><small>${l}</small></div>`).join('')}</span>`;
 return`<td colspan="${span}" style="position:relative">${avg!==null?`<span class="avl" style="top:${12+112-avg/m*80-7}px">Avg ${fmt(avg)}</span>`:''}<strong class="nm">${esc(p.name)}</strong> <span class="hint">${esc(p.club||'')} · ${p.pos}</span><div class="ds">${box('Performance',it.slice(0,4))}${box('Season stats',it.slice(4,8))}${it.length>8?box('Averages',it.slice(8)):''}</div></td>`+a.map((_,i)=>i).reverse().map(cell).join('')}
-return`<strong class="nm">${esc(p.name)}</strong> <span class="hint">${esc(p.club||'')} · ${p.pos}</span>${s}<div class="ds">${(()=>{const AV=/avg|Average|Form/,row=x=>`<span class="dsr">${x.map(([l,v])=>`<div><span class="num${AV.test(l)?' av':''}">${fmt(v)}</span><small>${l}</small></div>`).join('')}</span>`,box=(t,x)=>x.length?`<div class="dbx"><b>${t}</b>${row(x)}</div>`:'';const k=all?3:4;return box('Performance',it.slice(0,k))+box('Season stats',it.slice(k,k+4))+box('Averages',it.slice(k+4))})()}</div>`}
+return`<strong class="nm">${esc(p.name)}</strong> <span class="hint">${esc(p.club||'')} · ${p.pos}</span>${s}<div class="ds">${(()=>{const AV=/avg|Average|Form/,row=x=>`<span class="dsr">${x.map(([l,v])=>`<div><span class="num${numCls(l)}">${fmt(v)}</span><small>${l}</small></div>`).join('')}</span>`,box=(t,x)=>x.length?`<div class="dbx"><b>${t}</b>${row(x)}</div>`:'';const k=all?3:4;return box('Performance',it.slice(0,k))+box('Season stats',it.slice(k,k+4))+box('Averages',it.slice(k+4))})()}</div>`}
 function render(){
 fix();const all=S.view==='all',c=cur(),ge=id=>document.getElementById(id);
 const ED=EDIT&&!all,DIRTY=EDIT&&snap()!==SNAP0;
