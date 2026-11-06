@@ -810,7 +810,7 @@
    "round": "3-5 Nov",
    "pos": "DEF",
    "lock": "2026-11-03T17:45:00Z",
-   "result": null,
+   "result": "void",
    "a": {
     "id": 106,
     "name": "Romero",
@@ -1210,7 +1210,7 @@
    "round": "3-5 Nov",
    "pos": "FWD",
    "lock": "2026-11-03T20:00:00Z",
-   "result": null,
+   "result": "B",
    "a": {
     "id": 71,
     "name": "Lamine Yamal",
