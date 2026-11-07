@@ -409,9 +409,10 @@ document.addEventListener('click',e=>{
       .catch(e=>{if(!e||e.code!=='declined')toast('Nie udało się zapisać pliku ('+((e&&(e.code||e.message))||'błąd')+'). Użyj kopii jako tekstu.')})}
 });
 
+const fxOf=(k,p)=>((S.fx||{})[k]||{})[/N$/i.test(k.split('|')[1])&&p.nat?p.nat:p.club];
 let SEL=null;
 function detail(p,span){const a=raw(p),fs=series(p),all=S.view==='all',labs=all?S.comps.flatMap(c=>c.rounds):cur().rounds,PAL=['var(--acc)','#E0A800','#6B8FD6','#C2763A','#9B6BD6','#3FA7A0'],CI=S.comps.flatMap((c,ci)=>c.rounds.map(()=>ci)),n=a.length,W=Math.max(300,n*60),m=Math.max(...a.filter(isN),1),bw=Math.min(44,W/n*.6),gap=(W-bw*n)/(n+1),avg=ST.avg(fs);
-const keyOf=i=>(all?S.comps[CI[i]].id:S.view)+'|'+labs[i],mOf=i=>((S.fxp||{})[keyOf(i)]||{})[p.id]||((S.fx||{})[keyOf(i)]||{})[p.club],gOf=i=>((S.gi||{})[keyOf(i)]||{})[p.id];
+const keyOf=i=>(all?S.comps[CI[i]].id:S.view)+'|'+labs[i],mOf=i=>((S.fxp||{})[keyOf(i)]||{})[p.id]||fxOf(keyOf(i),p),gOf=i=>((S.gi||{})[keyOf(i)]||{})[p.id];
 const HH=a.some((_,i)=>mOf(i)||(gOf(i)&&(gOf(i).g||gOf(i).a)))?209:169;
 let s=`<svg viewBox="0 ${all&&S.comps.length>1?-16:0} ${W+56} ${HH+(all&&S.comps.length>1?16:0)}" role="img" aria-label="Points: ${esc(p.name)}" style="width:100%;max-width:${(W+56)*1.4}px;height:auto;display:block;overflow:visible">`;
 a.forEach((v,i)=>{const x=gap+(n-1-i)*(bw+gap),cx=x+bw/2;
@@ -423,7 +424,7 @@ if(all&&S.comps.length>1){let off=0;S.comps.forEach((c,ci)=>{const iMax=off+c.ro
 if(avg!==null){const y=118-avg/m*90;s=s.replace(/^<svg[^>]*>/,mm=>mm+`<line x1="0" x2="${W}" y1="${y}" y2="${y}" stroke="var(--avg)" stroke-width="1" stroke-dasharray="5 4"/><text x="${W+6}" y="${y+4}" font-size="11" font-weight="700" fill="var(--avg)">Avg ${fmt(avg)}</text>`)}
 s+=`<line x1="0" x2="${W}" y1="118.5" y2="118.5" stroke="var(--line)"/></svg>`;
 const it=[['Average',avg],['Form (last 3)',ST.form(fs)],['Best',ST.best(fs)],...(all?[]:[['Total',ST.sum(fs)]]),['Played',ST.apps(fs)],['DNP',ST.dnp(fs)],['Goals',gTot(p,'g')],['Assists',gTot(p,'a')],...(tv=>tv.length>1?tv:[])(['L','C','N'].map(t=>[TN[t]+' avg',ST.avg(a.filter((_,i)=>rtype(labs[i])===t))]).filter(x=>x[1]!==null))];
-const nxk=Object.keys(S.fx||{}).find(k=>{const[ci,r]=k.split('|'),cc=S.comps.find(x=>x.id===ci);return cc&&!cc.rounds.includes(r)&&S.fx[k][p.club]}),nm=nxk&&S.fx[nxk][p.club],nxt=nm?`<p class="hint">Next match: <b>${esc(nm.o)}</b> (${nm.h?'home':'away'})${nm.d?' · '+new Date(nm.d+'T12:00:00Z').toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',timeZone:'UTC'}):''}${nm.t?' · '+nm.t+' CET':''}</p>`:'';
+const nxk=Object.keys(S.fx||{}).find(k=>{const[ci,r]=k.split('|'),cc=S.comps.find(x=>x.id===ci);return cc&&!cc.rounds.includes(r)&&fxOf(k,p)}),nm=nxk&&fxOf(nxk,p),nxt=nm?`<p class="hint">Next match: <b>${esc(nm.o)}</b> (${nm.h?'home':'away'})${nm.d?' · '+new Date(nm.d+'T12:00:00Z').toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',timeZone:'UTC'}):''}${nm.t?' · '+nm.t+' CET':''}</p>`:'';
 const per=all?S.comps.map(c=>esc(c.name)+' '+fmt(ST.avg(cs(p,c)))).join(' · '):'';
 if(span&&!all){const cell=i=>{const v=a[i],t=rtype(labs[i]),mm=mOf(i),gg=gOf(i),hh=isN(v)?Math.max(3,v/m*80):0,ic=gg&&(gg.g||gg.a)?'⚽'.repeat(gg.g||0)+'👟'.repeat(gg.a||0):'';const nic=gg?(gg.g||0)+(gg.a||0):0,ins=nic>0&&isN(v)&&hh>=nic*13+4;
 return`<td class="dc"><div class="dcb">${avg!==null?`<u style="bottom:${avg/m*80}px"></u>`:''}${ins?'':`<span class="dic">${ic}</span>`}${v==='DNP'?'<i class="dnp">✕</i>':`<i class="${ins?'wi':''}" style="height:${hh}px;background:${TC[t]}">${ins?ic.split(/(?=⚽|👟)/u).map(e=>`<span>${e}</span>`).join(''):''}</i>`}</div><div style="height:1px;background:var(--line);margin:0 -2px 4px"></div><div class="rl">${esc(String(labs[i]).trim().replace(/[NPCL]$/i,''))}</div>${mm?`<div class="mo"><span class="ha">${mm.h?'H':'A'}</span>${esc(mm.o)}</div>`:''}${mm&&mm.s?`<div class="ms">${esc(mm.s)}</div>`:''}</td>`};
