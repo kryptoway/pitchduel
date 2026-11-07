@@ -15,14 +15,21 @@ def val(p,ci,r):
     i=c['rounds'].index(r);return a[i] if i<len(a) else None
 has=[(ci,r) for ci,r in rounds if any(val(p,ci,r) is not None for p in D['players'])]
 last4=list(reversed(has[-4:]))                      # najnowsza pierwsza, jak w dashboardzie
-def fx(club,label):
+def fx(club,label,pid=None):
+    out={}
     for k,v in D['fx'].items():
         ci,r=k.split('|')
         if norm(r)==norm(label) and club in v:
             m=v[club];out={'o':m['o'],'h':1 if m.get('h') else 0}
             if m.get('s'):out['s']=m['s']
-            return out
-    return {}
+            if m.get('d'):out['d']=m['d']
+            break
+    for k,v in (D.get('gi') or {}).items():
+        if norm(k.split('|')[1])==norm(label):
+            gg=(v or {}).get(str(pid)) or (v or {}).get(pid) or {}
+            if gg.get('g'):out['g']=gg['g']
+            if gg.get('a'):out['a']=gg['a']
+    return out
 def stats(p):
     v=[x for ci,r in has for x in [val(p,ci,r)] if num(x)]
     return (round(sum(v)/len(v),1) if v else 0),len(v),(max(v) if v else 0)
@@ -34,7 +41,8 @@ for q in pj['pairs']:
             x['avg'],x['played'],x['max']=stats(p)
             x['form']=[{'r':r,'v':(lambda v:'DNP' if v=='DNP' else v if num(v) else None)(val(p,ci,r))} for ci,r in last4]
         for f in x['form']:
-            f.update(fx(x['club'],f['r']))
+            for k in('o','h','s','d','g','a'):f.pop(k,None)
+            f.update(fx(x['club'],f['r'],x['id']))
         order={norm(r):i for i,(ci,r) in enumerate(rounds)}
         x['form'].sort(key=lambda f:-order.get(norm(f['r']),-1))   # najnowsza pierwsza
 out=json.dumps(pj,ensure_ascii=False,indent=1)+'\n'
