@@ -14,7 +14,7 @@ def val(p,ci,r):
     c=next(c for c in D['comps'] if c['id']==ci);a=(p['pts'] or {}).get(ci) or []
     i=c['rounds'].index(r);return a[i] if i<len(a) else None
 has=[(ci,r) for ci,r in rounds if any(val(p,ci,r) is not None for p in D['players'])]
-last4=list(reversed(has[-4:]))                      # najnowsza pierwsza, jak w dashboardzie
+rev=list(reversed(has))                              # najnowsza pierwsza, jak w dashboardzie
 def fx(club,label,pid=None):
     out={}
     for k,v in D['fx'].items():
@@ -39,7 +39,8 @@ for q in pj['pairs']:
         x=q[s];p=P.get(x['id'])
         if not q.get('result') and p:
             x['avg'],x['played'],x['max']=stats(p)
-            x['form']=[{'r':r,'v':(lambda v:'DNP' if v=='DNP' else v if num(v) else None)(val(p,ci,r))} for ci,r in last4]
+            got=[(ci,r) for ci,r in rev if val(p,ci,r) is not None][:4]       # tylko rundy z wynikiem zawodnika
+            x['form']=[{'r':r,'v':'DNP' if val(p,ci,r)=='DNP' else val(p,ci,r)} for ci,r in got]
         for f in x['form']:
             for k in('o','h','s','d','g','a'):f.pop(k,None)
             f.update(fx(x['club'],f['r'],x['id']))
