@@ -30,6 +30,13 @@ def fx(club,label,pid=None):
             if gg.get('g'):out['g']=gg['g']
             if gg.get('a'):out['a']=gg['a']
     return out
+def no_match(club,ci,r):
+    """True gdy terminarz rundy jest znany, a klub w nim nie wystepuje (klub nie gral w tej rundzie)."""
+    m=D['fx'].get(ci+'|'+r)
+    if m: return club not in m
+    v=[val(p,ci,r) for p in D['players'] if p.get('club')==club]
+    v=[x for x in v if x is not None]
+    return True   # brak terminarza rundy: DNP bez danych meczu nie jest weryfikowalna nieobecnosc -> pomijamy
 def stats(p):
     v=[x for ci,r in has for x in [val(p,ci,r)] if num(x)]
     return (round(sum(v)/len(v),1) if v else 0),len(v),(max(v) if v else 0)
@@ -39,11 +46,13 @@ for q in pj['pairs']:
         x=q[s];p=P.get(x['id'])
         if not q.get('result') and p:
             x['avg'],x['played'],x['max']=stats(p)
-            got=[(ci,r) for ci,r in rev if val(p,ci,r) is not None][:4]       # tylko rundy z wynikiem zawodnika
+            got=[(ci,r) for ci,r in rev if val(p,ci,r) is not None and not (val(p,ci,r)=='DNP' and no_match(x['club'],ci,r))][:4]       # tylko rundy z wynikiem zawodnika
             x['form']=[{'r':r,'v':'DNP' if val(p,ci,r)=='DNP' else val(p,ci,r)} for ci,r in got]
         for f in x['form']:
             for k in('o','h','s','d','g','a'):f.pop(k,None)
             f.update(fx(x['club'],f['r'],x['id']))
+            f.pop('nm',None)
+            if f['v']=='DNP' and any(norm(k.split('|')[1])==norm(f['r']) and x['club'] not in v for k,v in D['fx'].items() if v):f['nm']=1   # klub nie gral
         order={norm(r):i for i,(ci,r) in enumerate(rounds)}
         x['form'].sort(key=lambda f:-order.get(norm(f['r']),-1))   # najnowsza pierwsza
 out=json.dumps(pj,ensure_ascii=False,indent=1)+'\n'
