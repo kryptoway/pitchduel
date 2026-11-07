@@ -205,7 +205,7 @@ const cs=(p,c)=>TF.size===3?p.pts[c.id]:p.pts[c.id].filter((_,i)=>TF.has(rtype(c
 const ST={sum:a=>r1(a.filter(isN).reduce((x,y)=>x+y,0)),apps:a=>a.filter(isN).length,
  avg:a=>{const n=a.filter(isN);return n.length?r1(n.reduce((x,y)=>x+y,0)/n.length):null},
  form:a=>ST.avg(a.filter(isN).slice(-3)),best:a=>{const n=a.filter(isN);return n.length?Math.max(...n):null},dnp:a=>a.filter(v=>v==='DNP').length};
-const SC=[['avg','Avg'],['apps','Played'],['goals','Goals'],['ass','Assists'],['best','Max'],['sum','Total']];
+const SC=[['avg','Avg'],['apps','Played'],['goals','Goals'],['ass','Assists'],['best','Best'],['sum','Total']];
 const gTot=(p,k)=>S.view==='all'?S.comps.reduce((x,c)=>x+(+((p[k]||{})[c.id])||0),0):(+((p[k]||{})[S.view])||0);
 const stat=(p,k)=>k==='goals'?gTot(p,'g'):k==='ass'?gTot(p,'a'):ST[k](series(p));
 const esc=s=>String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
