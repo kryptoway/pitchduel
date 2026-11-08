@@ -180,7 +180,7 @@ function fix(){
 fix();migrate();fix();
 const cur=()=>S.comps.find(c=>c.id===S.view);
 const SL={fit:'Fit',injured:'Injured',suspended:'Suspended',rest:'Rested',bench:'Bench option',unavailable:'Unavailable',unclear:'Unclear',played:'Already played',nomatch:'No match'},PLB={yes:'Will play',likely:'Likely to play','50-50':'50/50',unlikely:'Unlikely to play',no:'Will not play'};
-const stOf=p=>{const D=(DATA.status||{}).players,t=D?D[p.id]:null;if(!t)return null;if(t.s==='played')return null;if(t.next&&t.next!=='-'){const k=Date.parse(t.next.replace(' ','T')+':00+01:00');if(k&&Date.now()>k+2*3600e3)return null}return t};
+const stOf=p=>{const D=(DATA.status||{}).players,t=D?D[p.id]:null;if(!t)return null;if(t.s==='played')return null;if(t.next&&t.next!=='-'){const k=Date.parse(t.next.replace(' ','T')+':00+01:00');if(k&&Date.now()>=k)return null}return t};
 const stCls=t=>t.s==='played'||t.s==='nomatch'?'m':t.p==='yes'||t.p==='likely'?'g':t.p==='50-50'?'a':'r';
 const stLab=t=>t.s==='played'||t.s==='nomatch'?SL[t.s]:(SL[t.s]||t.s)+' · '+(PLB[t.p]||t.p);
 const stDot=p=>{const t=stOf(p);if(!t)return'';const c=stCls(t);return c==='a'||c==='r'?`<span class="sd ${c}" title="${esc(stLab(t))}"></span>`:''};
