@@ -479,7 +479,7 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-tf]');if(!
 
 function foot(){let last='';for(let i=S.comps.length-1;i>=0&&!last;i--){const c=S.comps[i];for(let r=c.rounds.length-1;r>=0;r--){if(S.players.some(p=>isN((p.pts[c.id]||[])[r]))){last=c.rounds[r]+' ('+c.name+')';break}}}
 const d=S.updated?new Date(S.updated+'T00:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}):'';
-return`<footer class="ft"><span>${d?'Data updated: '+d:''}${d&&last?' · ':''}${last?'Latest round with data: '+esc(last):''}</span><span>Created by <a href="https://x.com/kryptoway_ai" target="_blank" rel="noopener noreferrer">@kryptoway_ai</a></span></footer>`}
+return`<footer class="ft"><span>${d?'Data updated: '+d:''}${d&&last?' · ':''}${last?'Latest round with data: '+esc(last):''}</span><span>Follow <a href="https://x.com/pitch_duel" target="_blank" rel="noopener noreferrer">@pitch_duel</a> · Created by <a href="https://x.com/kryptoway_ai" target="_blank" rel="noopener noreferrer">@kryptoway_ai</a></span></footer>`}
 
 const PN={ALL:'All players',GK:'Goalkeepers',DEF:'Defenders',MID:'Midfielders',FWD:'Forwards'};
 render();
