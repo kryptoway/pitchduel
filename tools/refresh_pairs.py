@@ -46,8 +46,9 @@ for q in pj['pairs']:
         x=q[s];p=P.get(x['id'])
         if not q.get('result') and p:
             x['avg'],x['played'],x['max']=stats(p)
-            got=[(ci,r) for ci,r in rev if val(p,ci,r) is not None and not (val(p,ci,r)=='DNP' and no_match(x['club'],ci,r))][:4]       # tylko rundy z wynikiem zawodnika
-            x['form']=[{'r':r,'v':'DNP' if val(p,ci,r)=='DNP' else val(p,ci,r)} for ci,r in got]
+            got=[(ci,r) for ci,r in rev if num(val(p,ci,r))][:4]       # tylko rundy, w ktorych zawodnik zagral (liczba pkt); bez DNP i rund bez danych; 4 ostatnie
+            x['form']=[{'r':r,'v':val(p,ci,r)} for ci,r in got]
+        x['form']=[f for f in x['form'] if num(f['v'])]      # nigdy nie pokazuj DNP w formie
         for f in x['form']:
             for k in('o','h','s','d','g','a'):f.pop(k,None)
             f.update(fx(x['club'],f['r'],x['id']))
@@ -56,5 +57,8 @@ for q in pj['pairs']:
         order={norm(r):i for i,(ci,r) in enumerate(rounds)}
         x['form'].sort(key=lambda f:-order.get(norm(f['r']),-1))   # najnowsza pierwsza
 out=json.dumps(pj,ensure_ascii=False,indent=1)+'\n'
+if '--check' in sys.argv:
+    cur=open(os.path.join(ROOT,'pairs.json'),encoding='utf-8').read()
+    print('pairs.json AKTUALNY' if cur==out else 'pairs.json NIEAKTUALNY wzgledem dashboardu: uruchom python3 tools/refresh_pairs.py');sys.exit(0 if cur==out else 1)
 if '--dry' in sys.argv:print(out[:0]);print('ok (dry)')
 else:open(os.path.join(ROOT,'pairs.json'),'w',encoding='utf-8').write(out);print('pairs.json zapisany')

@@ -47,4 +47,6 @@ for q in pr['pairs']:
     for s in 'ab':
         if q[s]['id'] not in pl: warn(f"pairs {q['id']}: brak zawodnika {q[s]['id']} w dashboardzie")
     if q.get('result') not in (None, 'A', 'B', 'void'): warn(f"pairs {q['id']}: zły result {q.get('result')}")
+import subprocess,sys as _s,os
+if subprocess.run([_s.executable,os.path.join(os.path.dirname(os.path.abspath(__file__)),'refresh_pairs.py'),'--check'],capture_output=True).returncode: warn('pairs.json nieaktualny wzgledem dashboardu (avg/played/best/forma): uruchom python3 tools/refresh_pairs.py')
 print(f'\nSprawdzono. Uwag: {issues}')
