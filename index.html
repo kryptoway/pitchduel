@@ -184,7 +184,7 @@ ${S.err?`<p class="err">${esc(S.err)}</p>`:''}<button class="btn" type="submit"$
 <p class="hint">No email needed. Don’t reuse a PIN from anywhere important. A forgotten PIN can’t be recovered, so write it down.</p></form>`}
 function opn(){return S.pairs.filter(q=>!locked(q)&&!done(q))}
 function sumView(){const P=S.all,n=P.filter(q=>S.picks[q.id]).length,miss=P.filter(q=>!S.picks[q.id]&&!locked(q)).length;
-let prevR=null;const rows=P.map((q,i)=>{const rh=q.round!==prevR?(prevR=q.round,`<h3 class="rl">Round ${esc(q.round||'')}</h3>`):'';const s=S.picks[q.id],w=s?q[s.toLowerCase()]:null,o=s?q[s==='A'?'b':'a']:null,lk=locked(q)||done(q),m=w?w.match:q.a.match;
+let prevR=null;const rk=[...new Set(P.map(q=>q.round))].reverse(),ord=P.map((q,i)=>[q,i]).sort((a,b)=>rk.indexOf(a[0].round)-rk.indexOf(b[0].round)||a[1]-b[1]);const rows=ord.map(([q,i])=>{const rh=q.round!==prevR?(prevR=q.round,`<h3 class="rl">Round ${esc(q.round||'')}</h3>`):'';const s=S.picks[q.id],w=s?q[s.toLowerCase()]:null,o=s?q[s==='A'?'b':'a']:null,lk=locked(q)||done(q),m=w?w.match:q.a.match;
 const when=new Date(q.lock).toLocaleString('en-GB',{weekday:'short',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',timeZone:'Europe/Warsaw'});
 let st;if(done(q)){st=q.result==='void'?'Void':!s?'–':s===q.result?'<span class="ok">+1</span>':'0'}else st=soon(q)?'Coming soon':lk?'Locked':'Locks '+when;
 const fin=done(q),cls=fin?(q.result==='void'?' void':s&&s===q.result?' good':' bad'):(s?'':' no'),mid=fin?(q.result==='void'?'<b>–</b>Void':!s?'<b>0</b>No pick':s===q.result?'<b>✓</b>+1':'<b>✗</b>0'):'';
