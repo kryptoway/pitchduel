@@ -123,6 +123,11 @@ section.tl0{border-top-left-radius:0}
 </style>
 <style>@media(max-width:640px){.brand{flex-wrap:nowrap;justify-content:space-between;gap:0 6px;white-space:nowrap;margin:0 0 8px}.brand a{font-size:min(4vw,24px);border-bottom-width:2px;padding-bottom:2px}}</style>
 <style>.about-seo{max-width:760px;margin:28px auto 8px;color:var(--mut,#8fa59b);font-size:14px;line-height:1.55}.about-seo h2{font-size:20px;margin:0 0 6px;color:var(--ink,#eef3ef)}.about-seo a{color:var(--acc,#f4be34)}</style>
+<style>.lc{border-left:1px solid var(--line);border-top:4px solid var(--gold);padding:8px 12px 9px}.lc .lt{display:flex;justify-content:space-between;align-items:center;min-height:20px}
+.lc .pp{font-size:10px;font-weight:700;letter-spacing:.08em;padding:2px 6px;border-radius:5px;background:var(--line);color:var(--ink)}.lc .lr{display:flex;align-items:center;gap:6px}.lc .cl{font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--mut)}
+.lc .fl,.lc .fl1,.lc .fl0{width:20px;height:14px;border-radius:2px;flex:none}.lc .n{margin:5px 0 2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lc .vr{display:flex;align-items:flex-end;gap:6px}.lc .num{font-size:34px;line-height:.95;font-weight:700}.lc .ls{display:flex;flex-direction:column;font-size:11px;line-height:1.15;color:var(--mut);padding-bottom:2px}.lc .ls b{color:var(--ink);white-space:nowrap}
+@media(max-width:640px){.leaders{grid-template-columns:1fr 1fr;gap:8px}.lc .n{font-size:20px}.lc .num{font-size:29px}.lc .tot{display:none}}</style>
 </head><body><main>
 <style>.brand h1{display:contents}.brand{align-items:center!important;flex-wrap:nowrap!important;white-space:nowrap;gap:0 3vw}.brand a.lg{padding:0;border:0;flex:none;display:block;line-height:0}.brand .lg img{height:96px;width:96px;display:block}.brand a:not(.lg){line-height:1;padding-bottom:4px;font-size:clamp(22px,3.6vw,40px)}@media(max-width:640px){.brand{justify-content:space-between;gap:0 4px!important}.brand .lg img{height:44px;width:44px}.brand a:not(.lg){font-size:min(calc((100vw - 104px)/17.9),22px);border-bottom-width:2px;padding-bottom:3px}}</style>
 <nav class="brand" aria-label="Pages"><a class="lg" href="./"><img src="logo.png" alt="PitchDuel logo" width="96" height="96"></a><a href="./">PitchDuel</a><h1><a class="on" aria-current="page" href="dashboard.html">SDF Dashboard</a></h1><a href="about.html">About the Game</a></nav>
@@ -146,6 +151,8 @@ DEF|Zawodnik D3|KL3|||30|
 GK|Bramkarz 1|KL1|95|80.5|70|100.5
 GK|Bramkarz 2|KL2|DNP|55|65.5|
 GK|Bramkarz 3|KL3||||`;
+const leadCard=(pos,t,all)=>`<div class="lc" data-pv="${pos}" title="Show ${pos}"><div class="lt"><span class="pp">${pos}</span>${t?`<span class="lr">${flagOf(t)}<span class="cl">${esc(t.club||'')}</span></span>`:''}</div><div class="n">${t?esc(t.name):'none (min '+S.min+')'}</div>${t?`<div class="vr"><span class="num">${fmt(ST.avg(series(t)))}</span><span class="ls"><span>avg</span><b>${ST.apps(series(t))} played</b>${all?'':`<span class="tot">total ${fmt(ST.sum(series(t)))}</span>`}</span></div>`:''}</div>`;
+
 const POS=['FWD','MID','DEF','GK'],KEY='sdf_dashboard_v1';
 const SEED_VER=5,MIG=5,MOVES={};let uid=1;const nid=()=>uid++;
 const isN=v=>typeof v==='number';
@@ -234,7 +241,7 @@ function render(){
   POS.forEach(pos=>{
     const P=S.players.filter(p=>p.pos===pos),L=sorted(P);
     const E=P.filter(p=>ST.apps(series(p))>=S.min).sort((a,b)=>ST.avg(series(b))-ST.avg(series(a))),t=E[0];
-    lh+=`<div class="lc" data-pv="${pos}" title="Show ${pos}"><small>${pos} · average leader</small><div class="n">${t?esc(t.name):'none (min '+S.min+')'}</div>${t?`<span class="num">${fmt(ST.avg(series(t)))}</span> <small>avg · ${all?'':'total '+fmt(ST.sum(series(t)))+' · '}${ST.apps(series(t))} played</small>`:''}</div>`;
+    lh+=leadCard(pos,t,all);
     const SCV=SC.filter(([k])=>!(all&&k==='sum'));
     const cols=SCV.map(([k,l])=>`<th style="text-align:right">${sbtn(k,l)}</th>`).join('');
     const head=all?''
@@ -459,7 +466,7 @@ let lh='',sh='';
 POS.forEach(pos=>{
 const P=S.players.filter(p=>p.pos===pos),L=sorted(S.pv==='ALL'?S.players:P);const shown=L.filter(FM).length;
 const E=P.filter(p=>ST.apps(series(p))>=S.min).sort((a,b)=>ST.avg(series(b))-ST.avg(series(a))),t=E[0];
-lh+=`<div class="lc" data-pv="${pos}" title="Show ${pos}"><small>${pos} · average leader</small><div class="n">${t?esc(t.name):'none (min '+S.min+')'}</div>${t?`<span class="num">${fmt(ST.avg(series(t)))}</span> <small>avg · ${all?'':'total '+fmt(ST.sum(series(t)))+' · '}${ST.apps(series(t))} played</small>`:''}</div>`;
+lh+=leadCard(pos,t,all);
 const SCV=SC.filter(([k])=>!(all&&k==='sum')),MC=all&&S.comps.length>1?S.comps:[];
 const cols=SCV.map(([k,l])=>`<th style="text-align:right"><div class="hd">${sbtn(k,'')}</div><div class="dt">${l}</div></th>`).join('')+MC.map(c=>`<th style="text-align:right"><div class="hd">${sbtn('c:'+c.id,'')}</div><div class="dt">Avg ${esc(c.name)}</div></th>`).reverse().join('');
 const head=all?'':c.rounds.map((n,r)=>{const t=rtype(n);return`<th class="t${t}" style="text-align:right"><div class="hd">${badge(t)}${sbtn('r:'+r,'')}</div><div class="dt">${ED?`<input class="rn" data-k="r:${r}" data-r="${r}" data-f="rname" value="${esc(n)}" aria-label="Round name">`:esc(String(n).trim().replace(/[NPCL]$/i,''))}</div></th>`}).reverse().join('');
