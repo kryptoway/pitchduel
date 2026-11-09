@@ -197,7 +197,7 @@ function picksView(){if(!S.user)return loginPanel();if(S.sum)return sumView();co
 const n=Object.keys(S.picks).filter(k=>P.some(q=>q.id===k)).length;
 const chips=P.map((q,i)=>{const c=done(q)||locked(q)?'l':S.picks[q.id]?'p':'';return`<button class="chip${i===S.cur?' on':''}" data-act="pair" data-i="${i}"><span class="dot ${c}"></span>${i+1}</button>`}).join('');
 return`<div class="bar2"><span>Playing as <b>${esc(S.user.nick)}</b> · <button class="chip" style="padding:3px 10px;font-size:13px" data-act="logout">Log out</button></span><span class="${n===P.length?'ok':''}"><b>${n}</b> of ${P.length} pairs picked</span></div>
-${RS().length>1?`<div class="rtabs" role="group" aria-label="Rounds">${RS().map(r=>`<button class="chip${r===S.rd?' on':''}" data-act="rd" data-v="${esc(r)}">${esc(r)}${S.soon.includes(r)?'<small>SOON</small>':''}</button>`).join('')}</div>`:''}<div class="chips" role="group" aria-label="Pairs">${chips}</div>
+${RS().length>1?`<div class="rtabs" role="group" aria-label="Rounds">${RS().slice().reverse().map(r=>`<button class="chip${r===S.rd?' on':''}" data-act="rd" data-v="${esc(r)}">${esc(r)}${S.soon.includes(r)?'<small>SOON</small>':''}</button>`).join('')}</div>`:''}<div class="chips" role="group" aria-label="Pairs">${chips}</div>
 <div class="rh" style="text-align:center;margin-bottom:22px"><div class="eb">ROUND ${esc((p&&p.round)||S.round)}</div><div class="cn" style="font-size:clamp(30px,5vw,44px);font-weight:700">Who scores more?</div></div>
 ${soon(p)?'<p class="soonb">COMING SOON · the pairs are ready, voting opens later</p>':''}<div class="duel">${card(p,'a')}<div class="vs">VS</div>${card(p,'b')}</div>
 <div class="stat" role="status">${S.msg?`<span class="ok">${esc(S.msg)}</span>`:status(p)}</div>
