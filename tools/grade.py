@@ -40,6 +40,19 @@ for p in pr['pairs']:
     print(f"wynik   {p['id']:14} {p['a']['name']} {a} vs {p['b']['name']} {b} -> {res}")
     p['result'] = res
     changed += 1
+# punkty obu zawodników zapisujemy dla wszystkich ocenionych par (także wcześniej ocenionych)
+for p in pr['pairs']:
+    if p.get('result') not in ('A', 'B', 'void'):
+        continue
+    loc = find_round(p['round'])
+    if not loc:
+        continue
+    a, b = pts(p['a']['id'], *loc), pts(p['b']['id'], *loc)
+    if a in (None, '') or b in (None, ''):
+        continue
+    if p.get('pts') != [a, b]:
+        p['pts'] = [a, b]
+        changed += 1
 print(f"\nZmian: {changed}")
 if '--write' in sys.argv and changed:
     json.dump(pr, open('pairs.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
