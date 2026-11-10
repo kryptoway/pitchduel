@@ -169,7 +169,7 @@ function migrate(){
     else{const q={id:nid(),pos,name,club,pts:{}};S.players.push(q);used.add(q.id)}});
   S.mig=MIG;S.seedVer=SEED_VER;
 }
-let S=seed();const save=()=>{},stash=()=>{},PREV=KEY+'_prev';
+let S=seed();S.view='all';const save=()=>{},stash=()=>{},PREV=KEY+'_prev';
 let DL=null;
 function doImport(text){
   try{const o=JSON.parse(text);if(!o||!Array.isArray(o.comps)||!Array.isArray(o.players)||!o.comps.length)throw 0;
@@ -232,8 +232,8 @@ function toast(m,ms){const e=document.getElementById('msg');e.textContent=m;clea
 
 function render(){
   fix();const all=S.view==='all',c=cur();
-  document.getElementById('top').innerHTML=`<div class="row">${S.comps.map(x=>`<button class="tab${x.id===S.view?' on':''}" data-tab="${x.id}">${esc(x.name)}</button>`).join('')}
-<button class="tab${all?' on':''}" data-tab="all">Combined</button><button data-addc="1">+ Rozgrywki</button></div>
+  document.getElementById('top').innerHTML=`<div class="row"><button class="tab${all?' on':''}" data-tab="all">Combined</button>
+${S.comps.slice().reverse().map(x=>`<button class="tab${x.id===S.view?' on':''}" data-tab="${x.id}">${esc(x.name)}</button>`).join('')}<button data-addc="1">+ Rozgrywki</button></div>
 <div class="row">${all?'':`<label>Nazwa rozgrywek <input class="cn" data-f="cname" value="${esc(c.name)}"></label><button class="pri" id="addR">+ Kolejka</button>${c.rounds.length>1?`<button data-arm="delr" data-r="${c.rounds.length-1}">Usuń ostatnią kolejkę</button>`:''}${S.comps.length>1?`<button data-arm="delc">Usuń rozgrywki</button>`:''}`}
 <label>Min. matches played for leaders <input class="mn" type="number" min="1" data-f="min" value="${S.min}"></label></div>`;
   let lh='',sh='';
@@ -456,7 +456,7 @@ const flagOf=p=>{const c=natCode(p);if(!c)return'<span class="fl0" title="No nat
 function render(){
 fix();const all=S.view==='all',c=cur(),ge=id=>document.getElementById(id);
 const ED=EDIT&&!all,DIRTY=EDIT&&snap()!==SNAP0;
-ge('top').innerHTML=`<div class="row">${S.comps.map(x=>`<button class="tab${x.id===S.view?' on':''}" data-tab="${x.id}">${esc(x.name)}</button>`).join('')}<button class="tab${all?' on':''}" data-tab="all">Combined</button>${EDIT?'<button data-addc="1">+ Month</button>':''}</div><div class="row"><label>Min. matches played for leaders <input class="mn" type="number" min="1" data-f="min" value="${S.min}"></label>${CAN?`<button id="edt" class="${EDIT?'pri':''}">${EDIT?'Done editing':'Edit data'}</button>`:''}${CAN&&DLC?'<button id="dlj">Download data (JSON)</button>':''}</div>`
+ge('top').innerHTML=`<div class="row"><button class="tab${all?' on':''}" data-tab="all">Combined</button>${S.comps.slice().reverse().map(x=>`<button class="tab${x.id===S.view?' on':''}" data-tab="${x.id}">${esc(x.name)}</button>`).join('')}${EDIT?'<button data-addc="1">+ Month</button>':''}</div><div class="row"><label>Min. matches played for leaders <input class="mn" type="number" min="1" data-f="min" value="${S.min}"></label>${CAN?`<button id="edt" class="${EDIT?'pri':''}">${EDIT?'Done editing':'Edit data'}</button>`:''}${CAN&&DLC?'<button id="dlj">Download data (JSON)</button>':''}</div>`
 +`<div class="row"><span class="hint">Match types:</span>${['L','C','N'].map(t=>`<button class="tab${TF.has(t)?' on':''}" data-tf="${t}">${TN[t]}</button>`).join('')}${TF.size<3?'<span class="hint">Averages and appearances use only the selected types. Goals and assists are monthly totals and are not filtered.</span>':''}</div>`
 +(ED?`<div class="row"><label>Month name <input class="cn" data-f="cname" value="${esc(c.name)}"></label><button class="pri" id="addR">+ Round</button>${c.rounds.length>1?`<button data-arm="delr" data-r="${c.rounds.length-1}">Remove last round</button>`:''}</div>`:'')
 +(EDIT&&all?'<p class="hint">Select a month tab to edit its data.</p>':'')
