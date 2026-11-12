@@ -159,6 +159,7 @@
    "b": {
     "id": 85,
     "name": "Oblak",
+    "dob": "1993-01-07",
     "pos": "GK",
     "club": "ATM",
     "avg": 91.9,
@@ -1007,6 +1008,7 @@
    "b": {
     "id": 85,
     "name": "Oblak",
+    "dob": "1993-01-07",
     "pos": "GK",
     "club": "ATM",
     "avg": 91.9,
@@ -1832,6 +1834,7 @@
    "a": {
     "id": 85,
     "name": "Oblak",
+    "dob": "1993-01-07",
     "pos": "GK",
     "club": "ATM",
     "avg": 87.3,
@@ -2667,6 +2670,7 @@
    "a": {
     "id": 85,
     "name": "Oblak",
+    "dob": "1993-01-07",
     "pos": "GK",
     "club": "ATM",
     "nat": "SI",
