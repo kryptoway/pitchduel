@@ -299,5 +299,5 @@ else if(a==='xcancel'){S.xEdit=false;S.xErr='';draw()}
 else if(a==='refresh'){if(S.view==='trophies')loadTrophies();else loadBoard()}});
 (async function init(){try{const r=await fetch('pairs.json?'+Date.now());const d=await r.json();S.all=d.pairs||[];S.soon=d.soon||[];S.round=d.round||'';{const o=RS().filter(r=>!S.soon.includes(r));setRd(o.length?o[o.length-1]:(RS()[0]||''))}S.loaded=true}catch(e){S.failed=true}
 let sv=null;try{sv=JSON.parse(localStorage.getItem('sdfbattle')||'null')}catch(e){}
-draw();if(sv&&sv.n&&sv.p&&S.loaded){const r=await api({action:'login',nick:sv.n,pin:sv.p});if(r.ok){S.user={nick:r.nick,pin:sv.p,x:typeof r.x==='string'?r.x:(typeof sv.x==='string'?sv.x:undefined)};await loadPicks();goOpen();draw()}}})();
+if(location.hash==='#rules')S.view='rules';draw();if(sv&&sv.n&&sv.p&&S.loaded){const r=await api({action:'login',nick:sv.n,pin:sv.p});if(r.ok){S.user={nick:r.nick,pin:sv.p,x:typeof r.x==='string'?r.x:(typeof sv.x==='string'?sv.x:undefined)};await loadPicks();goOpen();draw()}}})();
 </script></body></html>
