@@ -44,7 +44,7 @@ h1{margin:8px 0 10px;font:700 clamp(44px,8vw,80px)/.95 "Barlow Condensed",Impact
 .bar2{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 16px;margin:0 0 14px}
 .chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:0 0 20px}
 .chip{display:flex;align-items:center;gap:7px;padding:6px 13px;font-size:14px}.chip.on{border-color:var(--gold);color:var(--gold)}
-.dot{width:10px;height:10px;border-radius:50%;border:2px solid var(--mut)}.dot.p{background:var(--acc);border-color:var(--acc)}.dot.l{background:#59685f;border-color:#59685f}
+.dot{width:10px;height:10px;border-radius:50%;border:2px solid var(--mut)}.dot.p{background:var(--acc);border-color:var(--acc)}.dot.w{background:transparent;border-color:var(--acc)}.dot.x{background:#e5534b;border-color:#e5534b}.dot.l{background:#59685f;border-color:#59685f}
 .duel{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:22px}
 .cd{position:relative;flex:1 1 340px;max-width:460px;text-align:left;border-radius:26px;padding:26px 26px 24px;background:linear-gradient(160deg,#173320 0%,#0f2118 55%,#0c1a13 100%);border:1.5px solid var(--line);box-shadow:0 24px 48px -24px #000}
 .cd:disabled{cursor:default}.cd.on{border-color:var(--gold);box-shadow:0 0 0 5px rgba(242,194,48,.16),0 34px 70px -24px rgba(242,194,48,.4)}
@@ -208,7 +208,7 @@ return`<div class="bar2"><span>Playing as <b>${esc(S.user.nick)}</b> · <button 
 <div class="sum"><h2>${miss?'Your picks so far':'All picks saved ✓'}</h2><p class="sub" style="text-align:center;margin:0 0 14px">${miss?miss+' pair'+(miss>1?'s':'')+' still open.':'You can change any pick until its pair locks.'}</p>${rs}${rows}<div class="nav2" style="margin-top:16px"><button data-act="back">Back to cards</button></div></div>`}
 function picksView(){if(!S.user)return loginPanel();if(S.sum)return sumView();const P=S.pairs,p=P[S.cur];if(!p)return'<p class="sub" style="text-align:center">No pairs are open right now. Check back soon.</p>';
 const n=Object.keys(S.picks).filter(k=>P.some(q=>q.id===k)).length;
-const chips=P.map((q,i)=>{const c=done(q)||locked(q)?'l':S.picks[q.id]?'p':'';return`<button class="chip${i===S.cur?' on':''}" data-act="pair" data-i="${i}"><span class="dot ${c}"></span>${i+1}</button>`}).join('');
+const chips=P.map((q,i)=>{const pk=S.picks[q.id],c=done(q)?(q.result==='void'||!pk?'l':pk===q.result?'p':'x'):pk?'w':locked(q)?'l':'';return`<button class="chip${i===S.cur?' on':''}" data-act="pair" data-i="${i}"><span class="dot ${c}"></span>${i+1}</button>`}).join('');
 return`<div class="bar2"><span>Playing as <b>${esc(S.user.nick)}</b> · <button class="chip" style="padding:3px 10px;font-size:13px" data-act="logout">Log out</button></span><span class="${n===P.length?'ok':''}"><b>${n}</b> of ${P.length} pairs picked</span></div>
 ${RS().length>1?`<div class="rtabs" role="group" aria-label="Rounds">${RS().slice().reverse().map(r=>`<button class="chip${r===S.rd?' on':''}" data-act="rd" data-v="${esc(r)}">${esc(r)}${S.soon.includes(r)?'<small>SOON</small>':''}</button>`).join('')}</div>`:''}<div class="chips" role="group" aria-label="Pairs">${chips}</div>
 <div class="rh" style="text-align:center;margin-bottom:22px"><div class="eb">ROUND ${esc((p&&p.round)||S.round)}</div><div class="cn" style="font-size:clamp(30px,5vw,44px);font-weight:700">Who scores more?</div></div>
