@@ -233,7 +233,7 @@ main{padding:12px 10px 30px}.hero{margin:12px 0 10px}h1{font-size:40px;margin:4p
 .cbi .it.off{filter:grayscale(1) brightness(.8) contrast(.8);opacity:.2}
 .cbi .gl{position:absolute;width:20cqw;height:20cqw;transform:translate(-50%,-12%);background:radial-gradient(circle,rgba(255,214,110,.38),transparent 65%);pointer-events:none}
 .cbi .hd{position:absolute;left:5.5%;right:5.5%;top:4.4%;transform:translateY(-50%);display:flex;justify-content:space-between;align-items:center;color:#d9bd77;text-shadow:0 1px 0 rgba(0,0,0,.85),0 -1px 0 rgba(255,235,190,.18);font:600 1.15cqw/1 "Barlow Condensed",sans-serif;letter-spacing:.22em}
-.cbi .hd b{font-size:2.5cqw;letter-spacing:.32em;color:#e8cf86}
+.cbi .hd>b{font-size:2.5cqw;letter-spacing:.32em;color:#e8cf86}
 .cbi .lb{position:absolute;color:#F3D77A;font:700 1.55cqw/1 "Barlow Condensed",sans-serif;letter-spacing:.16em;text-transform:uppercase;text-shadow:0 1px 3px #000}
 .cbi .lb small{margin-left:1.1cqw;font:500 1.1cqw/1 Inter,system-ui,sans-serif;letter-spacing:0;text-transform:none;color:#a9c0b3}
 .cbi .pt{position:absolute;transform:translateX(-50%);box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border-radius:.4cqw;padding:0 .4cqw}
@@ -273,6 +273,16 @@ linear-gradient(115deg,rgba(255,255,255,.06) 0 16%,transparent 16%),radial-gradi
 .cbi .pt.cnt span{font:700 2.1cqw/1 "Barlow Condensed",sans-serif;letter-spacing:.06em;margin-top:.15cqw}
 .cbi .it.md svg{display:block;width:100%;height:auto}
 @container (min-width:720px){.cbw .cbm{display:none}}
+.pq{display:block;position:relative;z-index:2;width:25cqw;aspect-ratio:900/274;background:url(assets/cab-sign.webp) center/100% 100% no-repeat;filter:drop-shadow(0 .5cqw .9cqw rgba(0,0,0,.7))}
+.pq .in{position:absolute;left:9.5%;right:10.5%;top:25%;bottom:28%;display:flex;align-items:center;justify-content:center;gap:1.2cqw;padding:0 .5cqw;box-sizing:border-box;min-width:0}
+.pq b{font:700 calc(var(--f,2.35)*1cqw)/1 "Barlow Condensed",sans-serif;letter-spacing:.16em;flex:0 1 auto;min-width:0;color:#e8cf86;text-shadow:0 1px 0 #000,0 0 .8cqw rgba(232,207,134,.25);max-width:12cqw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pq .sd{width:.15cqw;height:72%;flex:none;background:linear-gradient(transparent,#b8923f,transparent)}
+.pq .sn{display:flex;align-items:baseline;gap:.5cqw;flex:none;font:700 2.4cqw/1 "Barlow Condensed",sans-serif;color:#ffe08a;text-shadow:0 0 1cqw rgba(255,200,70,.5),0 1px 0 #000;letter-spacing:.04em}
+.pq .sn em{font-style:normal;font-size:2.05cqw;color:#f4c430;filter:drop-shadow(0 0 .4cqw rgba(255,190,50,.75))}
+.pq .sn small{font:600 .95cqw/1 Inter,system-ui,sans-serif;letter-spacing:.2em;color:#c9b374;margin-left:.4cqw}
+.cbi .hd .pq{letter-spacing:normal}.cbi .hd>span:not(.pq){transform:translateY(-.2cqw)}
+@container (max-width:719px){.mcab .mh{overflow:visible;z-index:3;align-items:flex-start;padding:0;height:46px}.mcab .mh .pq{width:206px;margin-top:-2px;filter:drop-shadow(0 3px 4px rgba(0,0,0,.7))}.mcab .mh .pq .in{gap:9px;padding:0 4px}.mcab .mh .pq b{font-size:calc(var(--m,13)*1px);letter-spacing:.14em;max-width:90px}.mcab .mh .pq .sd{width:1.5px}.mcab .mh .pq .sn{font-size:17px;gap:3px}.mcab .mh .pq .sn em{font-size:14px}.mcab .mh .pq .sn small{display:none}}
+
 </style>
 <style id="cx">
 .fn{margin-right:.28em;font-weight:600;opacity:.8}.fe{display:none}.nr{display:inline-flex;align-items:center;gap:8px}
@@ -488,11 +498,11 @@ const mineCab=()=>{const u=S.user,head='<div class="tcab cw">'+TDEFS+'<h2>Trophi
 if(!u)return head+'<p class="sub tn" style="text-align:center;margin:22px 0 12px">Log in to see your own trophy cabinet.</p><p style="text-align:center"><button class="btn" type="button" data-act="view" data-v="picks">Log in</button></p></div>';
 if(!S.tr||(S.user&&S.mt===null&&S.mtl))return head+'<p class="sub tn" style="margin:22px 0">Loading…</p></div>';
 const me=u.nick.toLowerCase(),aw=awardsFrom(S.tr),cnt=t=>aw.filter(a=>a.t===t&&String(a.nick).toLowerCase()===me).length,st=(S.mt&&S.mt.streak)||{cur:0,best:0,played:0},
-c1=cnt('m1'),c2=cnt('m2'),c3=cnt('m3'),cp=cnt('pr'),X=v=>(v/1992*100).toFixed(3)+'%',Y=v=>(v/1478*100).toFixed(3)+'%';
+sr=(S.mt&&S.mt.stars)||{total:0,month:0},plaque='<span class="pq"><span class="in"><b style="--f:'+Math.max(1.1,Math.min(1.95,10/(u.nick.length*.82))).toFixed(2)+';--m:'+Math.max(8,Math.min(13,83/(u.nick.length*.82))).toFixed(1)+'">'+esc(u.nick.toUpperCase())+'</b><i class="sd"></i><span class="sn" title="Duel Stars: '+sr.total+' in total, '+sr.month+' this month"><em>★</em>'+sr.total+'</span></span></span>',c1=cnt('m1'),c2=cnt('m2'),c3=cnt('m3'),cp=cnt('pr'),X=v=>(v/1992*100).toFixed(3)+'%',Y=v=>(v/1478*100).toFixed(3)+'%';
 const it=(f,cx,top,w,on)=>`<img class="it ${on?'on':'off'}" src="assets/t-${f}.webp" alt="" style="left:${X(cx)};top:${Y(top)};width:${X(w)}">`,
 pt=(cx,top,w,h,label,sub,on,cl)=>`<div class="pt ${on?'on':'off'} ${cl||''}" style="left:${X(cx)};top:${Y(top)};width:${X(w)};height:${Y(h)}"><b>${esc(label)}</b><span>${esc(sub)}</span></div>`,
 STR=[5,10,15],INV=[1,5,10],stOn=t=>st.best>=t;
-let im='<div class="hd"><span>PITCHDUEL</span><b>'+esc(u.nick.toUpperCase())+'</b><span>MY CABINET</span></div><div class="lb" style="left:'+X(80)+';top:'+Y(140)+'">Awards<small>your wins and medals</small></div><div class="lb" style="left:'+X(80)+';top:'+Y(978)+'">Round streak<small>best '+st.best+' · now '+st.cur+' · played '+st.played+'</small></div><div class="lb" style="left:'+X(1100)+';top:'+Y(978)+'">Invite a friend<small>coming soon</small></div>';
+let im='<div class="hd"><span>PITCHDUEL</span>'+plaque+'<span>MY CABINET</span></div><div class="lb" style="left:'+X(80)+';top:'+Y(140)+'">Awards<small>your wins and medals</small></div><div class="lb" style="left:'+X(80)+';top:'+Y(978)+'">Round streak<small>best '+st.best+' · now '+st.cur+' · played '+st.played+'</small></div><div class="lb" style="left:'+X(1100)+';top:'+Y(978)+'">Invite a friend<small>coming soon</small></div>';
 im+=it('cup',386,330,300,c1>0)+pt(386,712,300,84,'Month winner','×'+c1,c1>0,'cnt');
 im+=it('medal2',900,450,130,c2>0)+pt(900,720,170,84,'2nd place','×'+c2,c2>0,'cnt')+it('medal3',1090,450,130,c3>0)+pt(1090,720,170,84,'3rd place','×'+c3,c3>0,'cnt');
 im+=(cp>0?'<div class="gl" style="left:'+X(1568)+';top:'+Y(380)+'"></div>':'')+it('shield',1568,380,250,cp>0)+pt(1568,712,300,84,'Perfect round','×'+cp,cp>0,'cnt');
@@ -500,7 +510,7 @@ const SX=[250,520,790],IX=[1190,1440,1690];
 STR.forEach((t,i)=>{im+=it('str'+t,SX[i],1030,200,stOn(t))+pt(SX[i],1280,230,84,t+' in a row',stOn(t)?'Earned':Math.min(st.best,t)+'/'+t,stOn(t),'cnt')});
 INV.forEach((t,i)=>{im+=it('inv'+t,IX[i],1040,190,false)+pt(IX[i],1280,230,84,'Invite '+t,'Soon',false,'cnt')});
 const cell=(f,l,sv,on,h)=>`<div class="mcell ${on?'on':'off'}"><img src="assets/t-${f}.webp" alt="" style="height:${h}px"><div class="mpl"><b>${l}</b><span>${sv}</span></div></div>`,
-list='<div class="cbm mcab"><i class="mh">'+esc(u.nick.toUpperCase())+' · MY CABINET</i><div class="msh"><div class="mg">'+cell('cup','Month winner','×'+c1,c1>0,124)+cell('medal2','2nd place','×'+c2,c2>0,124)+cell('medal3','3rd place','×'+c3,c3>0,124)+cell('shield','Perfect round','×'+cp,cp>0,124)+'</div></div><div class="mbd"></div><div class="msh"><div class="mlb">Round streak<small>best '+st.best+' · now '+st.cur+'</small></div><div class="mr3">'+STR.map(t=>cell('str'+t,t+' in a row',stOn(t)?'Earned':Math.min(st.best,t)+'/'+t,stOn(t),84)).join('')+'</div><div class="mlb" style="margin-top:12px">Invite a friend<small>coming soon</small></div><div class="mr3">'+INV.map(t=>cell('inv'+t,'Invite '+t,'Soon',false,84)).join('')+'</div></div></div>';
+list='<div class="cbm mcab"><i class="mh">'+plaque+'</i><div class="msh"><div class="mg">'+cell('cup','Month winner','×'+c1,c1>0,124)+cell('medal2','2nd place','×'+c2,c2>0,124)+cell('medal3','3rd place','×'+c3,c3>0,124)+cell('shield','Perfect round','×'+cp,cp>0,124)+'</div></div><div class="mbd"></div><div class="msh"><div class="mlb">Round streak<small>best '+st.best+' · now '+st.cur+'</small></div><div class="mr3">'+STR.map(t=>cell('str'+t,t+' in a row',stOn(t)?'Earned':Math.min(st.best,t)+'/'+t,stOn(t),84)).join('')+'</div><div class="mlb" style="margin-top:12px">Invite a friend<small>coming soon</small></div><div class="mr3">'+INV.map(t=>cell('inv'+t,'Invite '+t,'Soon',false,84)).join('')+'</div></div></div>';
 return head+'<div class="cbw">'+list+'<div class="cbi">'+im+'</div></div>'+collectors(aw)+'</div>'};
 const cabDemo=()=>{const rd=[...new Set(S.all.slice().sort((a,b)=>Date.parse(a.lock)-Date.parse(b.lock)).map(p=>p.round))];
 const full=location.hash==='#cabinet-full',aw=[{t:'pr',k:'9-15 Nov',nick:'Kacper2158'}].concat(full?[{t:'m1',k:MONTH,nick:'Kisiel'},{t:'m2',k:MONTH,nick:'Czapla'},{t:'m3',k:MONTH,nick:'Tob'},{t:'pm',k:MONTH,nick:'Kacper2158'},{t:'pr',k:'6-9 Nov',nick:'Kisiel'}]:[]);return TDEFS+cabTabs()+cabHtml(aw,{me:S.user?S.user.nick:'Kacper2158',months:[addM(MONTH,-1),MONTH,addM(MONTH,1)],stats:full?{pr:5,m1:3,inv:1}:{pr:1,m1:0,inv:0},rounds:rd.slice(-4).concat(['Next round']),curRound:rd[rd.length-1]})+collectors(aw)};
