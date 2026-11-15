@@ -312,6 +312,7 @@
    "a": {
     "id": 53,
     "name": "Hakimi",
+    "dob": "1998-11-04",
     "pos": "DEF",
     "club": "PSG",
     "avg": 85.2,
@@ -360,6 +361,7 @@
    "b": {
     "id": 56,
     "name": "Huijsen",
+    "dob": "2005-04-14",
     "pos": "DEF",
     "club": "RMD",
     "avg": 94.6,
@@ -1251,6 +1253,7 @@
    "a": {
     "id": 87,
     "name": "Olise",
+    "dob": "2001-12-12",
     "pos": "MID",
     "club": "FCB",
     "avg": 171.0,
@@ -1956,6 +1959,7 @@
    "a": {
     "id": 53,
     "name": "Hakimi",
+    "dob": "1998-11-04",
     "pos": "DEF",
     "club": "PSG",
     "avg": 129.0,
@@ -2247,6 +2251,7 @@
    "b": {
     "id": 87,
     "name": "Olise",
+    "dob": "2001-12-12",
     "pos": "MID",
     "club": "FCB",
     "avg": 150.0,
@@ -2555,6 +2560,7 @@
    "a": {
     "id": 52,
     "name": "Haaland",
+    "dob": "2000-07-21",
     "pos": "FWD",
     "club": "MCI",
     "avg": 95.6,
@@ -3045,6 +3051,7 @@
    "a": {
     "id": 87,
     "name": "Olise",
+    "dob": "2001-12-12",
     "pos": "MID",
     "club": "FCB",
     "nat": "FR",
@@ -3293,6 +3300,7 @@
    "a": {
     "id": 52,
     "name": "Haaland",
+    "dob": "2000-07-21",
     "pos": "FWD",
     "club": "MCI",
     "nat": "NO",
@@ -3531,6 +3539,7 @@
    "a": {
     "id": 62,
     "name": "Jurriën Timber",
+    "dob": "2001-06-17",
     "pos": "DEF",
     "club": "ARS",
     "nat": "NL",
@@ -3707,6 +3716,7 @@
    "b": {
     "id": 87,
     "name": "Olise",
+    "dob": "2001-12-12",
     "pos": "MID",
     "club": "FCB",
     "nat": "FR",
@@ -3827,6 +3837,7 @@
    "b": {
     "id": 65,
     "name": "Kimmich",
+    "dob": "1995-02-08",
     "pos": "MID",
     "club": "FCB",
     "nat": "DE",
@@ -4071,6 +4082,7 @@
    "b": {
     "id": 52,
     "name": "Haaland",
+    "dob": "2000-07-21",
     "pos": "FWD",
     "club": "MCI",
     "nat": "NO",
