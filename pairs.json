@@ -14,6 +14,7 @@
    "a": {
     "id": 58,
     "name": "Joan García",
+    "dob": "2001-05-04",
     "pos": "GK",
     "club": "BAR",
     "avg": 95.9,
@@ -61,6 +62,7 @@
    "b": {
     "id": 102,
     "name": "Raya",
+    "dob": "1995-09-15",
     "pos": "GK",
     "club": "ARS",
     "avg": 98.4,
@@ -894,6 +896,7 @@
    "b": {
     "id": 58,
     "name": "Joan García",
+    "dob": "2001-05-04",
     "pos": "GK",
     "club": "BAR",
     "avg": 95.9,
@@ -957,6 +960,7 @@
    "a": {
     "id": 102,
     "name": "Raya",
+    "dob": "1995-09-15",
     "pos": "GK",
     "club": "ARS",
     "avg": 98.4,
@@ -1770,6 +1774,7 @@
    "b": {
     "id": 102,
     "name": "Raya",
+    "dob": "1995-09-15",
     "pos": "GK",
     "club": "ARS",
     "avg": 105.2,
@@ -1887,6 +1892,7 @@
    "b": {
     "id": 95,
     "name": "Pickford",
+    "dob": "1994-03-07",
     "pos": "GK",
     "club": "EVE",
     "avg": 91.1,
@@ -2725,6 +2731,7 @@
    "b": {
     "id": 75,
     "name": "Maignan",
+    "dob": "1995-07-03",
     "pos": "GK",
     "club": "ACM",
     "nat": "FR",
@@ -3407,6 +3414,7 @@
    "a": {
     "id": 95,
     "name": "Pickford",
+    "dob": "1994-03-07",
     "pos": "GK",
     "club": "EVE",
     "nat": "ENG",
