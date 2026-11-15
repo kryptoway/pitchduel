@@ -51,7 +51,7 @@ for q in pj['pairs']:
         x['form']=[f for f in x['form'] if num(f['v'])]      # nigdy nie pokazuj DNP w formie
         for f in x['form']:
             for k in('o','h','s','d','g','a'):f.pop(k,None)
-            f.update(fx(x['club'],f['r'],x['id']))
+            f.update(fx((x.get('nat') or x['club']) if str(f['r']).strip().upper().endswith('N') else x['club'],f['r'],x['id']))   # rundy reprezentacji (N): klucz = kraj
             f.pop('nm',None)
             if f['v']=='DNP' and any(norm(k.split('|')[1])==norm(f['r']) and x['club'] not in v for k,v in D['fx'].items() if v):f['nm']=1   # klub nie gral
         order={norm(r):i for i,(ci,r) in enumerate(rounds)}
