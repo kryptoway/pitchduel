@@ -1,6 +1,6 @@
 {
  "month": "2026-11",
- "round": "9-15 Nov",
+ "round": "15-18 Nov",
  "tz": "CET",
  "generated": "2026-11-08",
  "pairs": [
@@ -2666,7 +2666,7 @@
    "pos": "GK",
    "kind": "N",
    "lock": "2026-11-12T19:45:00Z",
-   "result": null,
+   "result": "A",
    "a": {
     "id": 85,
     "name": "Oblak",
@@ -2773,7 +2773,11 @@
      "time": "20:45",
      "comp": "International"
     }
-   }
+   },
+   "pts": [
+    96.5,
+    29.8
+   ]
   },
   {
    "id": "r9-15-def1",
@@ -2782,7 +2786,7 @@
    "pos": "DEF",
    "kind": "N",
    "lock": "2026-11-12T19:45:00Z",
-   "result": null,
+   "result": "void",
    "a": {
     "id": 46,
     "name": "Grimaldo",
@@ -2891,7 +2895,11 @@
      "time": "20:45",
      "comp": "International"
     }
-   }
+   },
+   "pts": [
+    "DNP",
+    "DNP"
+   ]
   },
   {
    "id": "r9-15-mid1",
@@ -2900,7 +2908,7 @@
    "pos": "MID",
    "kind": "N",
    "lock": "2026-11-12T17:00:00Z",
-   "result": null,
+   "result": "B",
    "a": {
     "id": 13,
     "name": "Bellingham",
@@ -3012,7 +3020,11 @@
      "time": "18:00",
      "comp": "International"
     }
-   }
+   },
+   "pts": [
+    120.3,
+    184.3
+   ]
   },
   {
    "id": "r9-15-mid2",
@@ -3021,7 +3033,7 @@
    "pos": "MID",
    "kind": "N",
    "lock": "2026-11-12T19:45:00Z",
-   "result": null,
+   "result": "A",
    "a": {
     "id": 87,
     "name": "Olise",
@@ -3131,7 +3143,11 @@
      "time": "20:45",
      "comp": "International"
     }
-   }
+   },
+   "pts": [
+    101.8,
+    63.3
+   ]
   },
   {
    "id": "r9-15-fwd1",
@@ -3140,7 +3156,7 @@
    "pos": "FWD",
    "kind": "N",
    "lock": "2026-11-12T19:45:00Z",
-   "result": null,
+   "result": "A",
    "a": {
     "id": 63,
     "name": "Kane",
@@ -3252,7 +3268,11 @@
      "time": "20:45",
      "comp": "International"
     }
-   }
+   },
+   "pts": [
+    100.8,
+    54.5
+   ]
   },
   {
    "id": "r9-15-fwd2",
@@ -3261,7 +3281,7 @@
    "pos": "FWD",
    "kind": "N",
    "lock": "2026-11-14T17:00:00Z",
-   "result": null,
+   "result": "A",
    "a": {
     "id": 52,
     "name": "Haaland",
@@ -3366,6 +3386,686 @@
      "clubName": "Portugal",
      "venue": "H",
      "date": "2026-11-14",
+     "time": "20:45",
+     "comp": "International"
+    }
+   },
+   "pts": [
+    136.8,
+    24.8
+   ]
+  },
+  {
+   "id": "r15-18-gk1",
+   "month": "2026-11",
+   "round": "15-18 Nov",
+   "pos": "GK",
+   "kind": "N",
+   "lock": "2026-11-15T19:45:00Z",
+   "result": null,
+   "a": {
+    "id": 95,
+    "name": "Pickford",
+    "pos": "GK",
+    "club": "EVE",
+    "nat": "ENG",
+    "avg": 88.4,
+    "played": 8,
+    "max": 144,
+    "form": [
+     {
+      "r": "9-15N",
+      "v": 69.3
+     },
+     {
+      "r": "6-9L",
+      "v": 103,
+      "o": "COV",
+      "h": 1,
+      "d": "2026-11-06"
+     },
+     {
+      "r": "30-3L",
+      "v": 144,
+      "o": "NEW",
+      "h": 0,
+      "s": "0:1",
+      "d": "2026-11-02"
+     },
+     {
+      "r": "23-29",
+      "v": 69,
+      "o": "ARS",
+      "h": 0,
+      "s": "2:0",
+      "d": "2026-10-24"
+     }
+    ],
+    "match": {
+     "opp": "ES",
+     "oppName": "Spain",
+     "clubName": "England",
+     "venue": "A",
+     "date": "2026-11-15",
+     "time": "20:45",
+     "comp": "International"
+    }
+   },
+   "b": {
+    "id": 85,
+    "name": "Oblak",
+    "dob": "1993-01-07",
+    "pos": "GK",
+    "club": "ATM",
+    "nat": "SI",
+    "avg": 88.2,
+    "played": 11,
+    "max": 145.5,
+    "form": [
+     {
+      "r": "9-15N",
+      "v": 96.5
+     },
+     {
+      "r": "6-9L",
+      "v": 49.5,
+      "o": "BAR",
+      "h": 1,
+      "s": "1:2",
+      "d": "2026-11-08"
+     },
+     {
+      "r": "3-5C",
+      "v": 58.8,
+      "o": "FCB",
+      "h": 1,
+      "s": "0:2",
+      "d": "2026-11-03"
+     },
+     {
+      "r": "30-3L",
+      "v": 121.3,
+      "o": "LEV",
+      "h": 0,
+      "s": "0:2",
+      "d": "2026-10-31"
+     }
+    ],
+    "match": {
+     "opp": "NM",
+     "oppName": "North Macedonia",
+     "clubName": "Slovenia",
+     "venue": "A",
+     "date": "2026-11-16",
+     "time": "20:45",
+     "comp": "International"
+    }
+   }
+  },
+  {
+   "id": "r15-18-def1",
+   "month": "2026-11",
+   "round": "15-18 Nov",
+   "pos": "DEF",
+   "kind": "N",
+   "lock": "2026-11-15T19:45:00Z",
+   "result": null,
+   "a": {
+    "id": 62,
+    "name": "Jurriën Timber",
+    "pos": "DEF",
+    "club": "ARS",
+    "nat": "NL",
+    "avg": 94.2,
+    "played": 9,
+    "max": 218.8,
+    "form": [
+     {
+      "r": "9-15N",
+      "v": 218.8,
+      "g": 2
+     },
+     {
+      "r": "6-9L",
+      "v": 116.3,
+      "o": "HUL",
+      "h": 1,
+      "s": "1:0",
+      "d": "2026-11-07"
+     },
+     {
+      "r": "3-5C",
+      "v": 23,
+      "o": "SLA",
+      "h": 0,
+      "s": "1:2",
+      "d": "2026-11-04"
+     },
+     {
+      "r": "30-3L",
+      "v": 97,
+      "o": "LIV",
+      "h": 0,
+      "s": "0:1",
+      "d": "2026-11-01"
+     }
+    ],
+    "match": {
+     "opp": "DE",
+     "oppName": "Germany",
+     "clubName": "Netherlands",
+     "venue": "A",
+     "date": "2026-11-16",
+     "time": "20:45",
+     "comp": "International"
+    }
+   },
+   "b": {
+    "id": 12,
+    "name": "Bastoni",
+    "dob": "1999-04-13",
+    "pos": "DEF",
+    "club": "INT",
+    "nat": "IT",
+    "avg": 91.2,
+    "played": 9,
+    "max": 129.3,
+    "form": [
+     {
+      "r": "9-15N",
+      "v": 64
+     },
+     {
+      "r": "6-9L",
+      "v": 100.5,
+      "o": "COM",
+      "h": 1,
+      "s": "2:0",
+      "d": "2026-11-08"
+     },
+     {
+      "r": "30-3L",
+      "v": 104.8,
+      "o": "ACM",
+      "h": 0,
+      "s": "3:1",
+      "d": "2026-10-31",
+      "g": 1
+     },
+     {
+      "r": "23-29",
+      "v": 128.5,
+      "o": "VEN",
+      "h": 0,
+      "s": "0:2",
+      "d": "2026-10-28"
+     }
+    ],
+    "match": {
+     "opp": "BE",
+     "oppName": "Belgium",
+     "clubName": "Italy",
+     "venue": "A",
+     "date": "2026-11-15",
+     "time": "20:45",
+     "comp": "International"
+    }
+   }
+  },
+  {
+   "id": "r15-18-mid1",
+   "month": "2026-11",
+   "round": "15-18 Nov",
+   "pos": "MID",
+   "kind": "N",
+   "lock": "2026-11-15T19:45:00Z",
+   "result": null,
+   "a": {
+    "id": 49,
+    "name": "Güler",
+    "dob": "2005-02-25",
+    "pos": "MID",
+    "club": "RMD",
+    "nat": "TR",
+    "avg": 151.4,
+    "played": 9,
+    "max": 224.5,
+    "form": [
+     {
+      "r": "9-15N",
+      "v": 184.3,
+      "g": 1
+     },
+     {
+      "r": "6-9L",
+      "v": 224.5,
+      "o": "VAL",
+      "h": 0,
+      "s": "0:3",
+      "d": "2026-11-07",
+      "g": 1,
+      "a": 1
+     },
+     {
+      "r": "30-3L",
+      "v": 142.3,
+      "o": "RAC",
+      "h": 0,
+      "s": "0:3",
+      "d": "2026-11-01",
+      "a": 1
+     },
+     {
+      "r": "23-29",
+      "v": 134,
+      "o": "BAR",
+      "h": 0,
+      "s": "1:2",
+      "d": "2026-10-25"
+     }
+    ],
+    "match": {
+     "opp": "FR",
+     "oppName": "France",
+     "clubName": "Türkiye",
+     "venue": "A",
+     "date": "2026-11-15",
+     "time": "20:45",
+     "comp": "International"
+    }
+   },
+   "b": {
+    "id": 87,
+    "name": "Olise",
+    "pos": "MID",
+    "club": "FCB",
+    "nat": "FR",
+    "avg": 145.2,
+    "played": 10,
+    "max": 239.8,
+    "form": [
+     {
+      "r": "9-15N",
+      "v": 101.8,
+      "g": 1
+     },
+     {
+      "r": "6-9L",
+      "v": 137.5,
+      "o": "M05",
+      "h": 0,
+      "s": "1:2",
+      "d": "2026-11-07"
+     },
+     {
+      "r": "3-5C",
+      "v": 152.3,
+      "o": "ATM",
+      "h": 0,
+      "s": "0:2",
+      "d": "2026-11-03"
+     },
+     {
+      "r": "30-3L",
+      "v": 34.5,
+      "o": "BVB",
+      "h": 1,
+      "s": "2:2",
+      "d": "2026-10-31"
+     }
+    ],
+    "match": {
+     "opp": "TR",
+     "oppName": "Türkiye",
+     "clubName": "France",
+     "venue": "H",
+     "date": "2026-11-15",
+     "time": "20:45",
+     "comp": "International"
+    }
+   }
+  },
+  {
+   "id": "r15-18-mid2",
+   "month": "2026-11",
+   "round": "15-18 Nov",
+   "pos": "MID",
+   "kind": "N",
+   "lock": "2026-11-15T19:45:00Z",
+   "result": null,
+   "a": {
+    "id": 13,
+    "name": "Bellingham",
+    "dob": "2003-06-29",
+    "pos": "MID",
+    "club": "RMD",
+    "nat": "ENG",
+    "avg": 132.9,
+    "played": 11,
+    "max": 311.3,
+    "form": [
+     {
+      "r": "9-15N",
+      "v": 120.3,
+      "a": 1
+     },
+     {
+      "r": "6-9L",
+      "v": 115.8,
+      "o": "VAL",
+      "h": 0,
+      "s": "0:3",
+      "d": "2026-11-07"
+     },
+     {
+      "r": "3-5C",
+      "v": 168.3,
+      "o": "AEK",
+      "h": 0,
+      "s": "2:3",
+      "d": "2026-11-04",
+      "g": 1
+     },
+     {
+      "r": "30-3L",
+      "v": 200.5,
+      "o": "RAC",
+      "h": 0,
+      "s": "0:3",
+      "d": "2026-11-01",
+      "g": 1
+     }
+    ],
+    "match": {
+     "opp": "ES",
+     "oppName": "Spain",
+     "clubName": "England",
+     "venue": "A",
+     "date": "2026-11-15",
+     "time": "20:45",
+     "comp": "International"
+    }
+   },
+   "b": {
+    "id": 65,
+    "name": "Kimmich",
+    "pos": "MID",
+    "club": "FCB",
+    "nat": "DE",
+    "avg": 140.1,
+    "played": 7,
+    "max": 204.5,
+    "form": [
+     {
+      "r": "9-15N",
+      "v": 136.3,
+      "a": 1
+     },
+     {
+      "r": "6-9L",
+      "v": 204.5,
+      "o": "M05",
+      "h": 0,
+      "s": "1:2",
+      "d": "2026-11-07",
+      "g": 1
+     },
+     {
+      "r": "3-5C",
+      "v": 145.8,
+      "o": "ATM",
+      "h": 0,
+      "s": "0:2",
+      "d": "2026-11-03"
+     },
+     {
+      "r": "30-3L",
+      "v": 98.3,
+      "o": "BVB",
+      "h": 1,
+      "s": "2:2",
+      "d": "2026-10-31"
+     }
+    ],
+    "match": {
+     "opp": "NL",
+     "oppName": "Netherlands",
+     "clubName": "Germany",
+     "venue": "H",
+     "date": "2026-11-16",
+     "time": "20:45",
+     "comp": "International"
+    }
+   }
+  },
+  {
+   "id": "r15-18-fwd1",
+   "month": "2026-11",
+   "round": "15-18 Nov",
+   "pos": "FWD",
+   "kind": "N",
+   "lock": "2026-11-15T19:45:00Z",
+   "result": null,
+   "a": {
+    "id": 63,
+    "name": "Kane",
+    "dob": "1993-07-28",
+    "pos": "FWD",
+    "club": "FCB",
+    "nat": "ENG",
+    "avg": 152.0,
+    "played": 11,
+    "max": 252.3,
+    "form": [
+     {
+      "r": "9-15N",
+      "v": 100.8,
+      "g": 1
+     },
+     {
+      "r": "6-9L",
+      "v": 163.3,
+      "o": "M05",
+      "h": 0,
+      "s": "1:2",
+      "d": "2026-11-07",
+      "a": 2
+     },
+     {
+      "r": "3-5C",
+      "v": 101.5,
+      "o": "ATM",
+      "h": 0,
+      "s": "0:2",
+      "d": "2026-11-03",
+      "a": 1
+     },
+     {
+      "r": "30-3L",
+      "v": 64.3,
+      "o": "BVB",
+      "h": 1,
+      "s": "2:2",
+      "d": "2026-10-31",
+      "a": 1
+     }
+    ],
+    "match": {
+     "opp": "ES",
+     "oppName": "Spain",
+     "clubName": "England",
+     "venue": "A",
+     "date": "2026-11-15",
+     "time": "20:45",
+     "comp": "International"
+    }
+   },
+   "b": {
+    "id": 71,
+    "name": "Lamine Yamal",
+    "dob": "2007-07-13",
+    "pos": "FWD",
+    "club": "BAR",
+    "nat": "ES",
+    "avg": 151.0,
+    "played": 10,
+    "max": 277.8,
+    "form": [
+     {
+      "r": "6-9L",
+      "v": 149.8,
+      "o": "ATM",
+      "h": 0,
+      "s": "1:2",
+      "d": "2026-11-08",
+      "a": 1
+     },
+     {
+      "r": "3-5C",
+      "v": 161.5,
+      "o": "AVL",
+      "h": 1,
+      "s": "3:0",
+      "d": "2026-11-03",
+      "g": 1
+     },
+     {
+      "r": "30-3L",
+      "v": 277.8,
+      "o": "ALA",
+      "h": 1,
+      "s": "6:1",
+      "d": "2026-10-31",
+      "g": 2,
+      "a": 1
+     },
+     {
+      "r": "23-29",
+      "v": 49.5,
+      "o": "RMD",
+      "h": 1,
+      "s": "1:2",
+      "d": "2026-10-25"
+     }
+    ],
+    "match": {
+     "opp": "ENG",
+     "oppName": "England",
+     "clubName": "Spain",
+     "venue": "H",
+     "date": "2026-11-15",
+     "time": "20:45",
+     "comp": "International"
+    }
+   }
+  },
+  {
+   "id": "r15-18-fwd2",
+   "month": "2026-11",
+   "round": "15-18 Nov",
+   "pos": "FWD",
+   "kind": "N",
+   "lock": "2026-11-15T19:45:00Z",
+   "result": null,
+   "a": {
+    "id": 32,
+    "name": "Doku",
+    "dob": "2002-05-27",
+    "pos": "FWD",
+    "club": "MCI",
+    "nat": "BE",
+    "avg": 110.1,
+    "played": 8,
+    "max": 177.3,
+    "form": [
+     {
+      "r": "9-15N",
+      "v": 163.8,
+      "a": 1
+     },
+     {
+      "r": "6-9L",
+      "v": 47.8,
+      "o": "NFO",
+      "h": 0,
+      "s": "3:1",
+      "d": "2026-11-07"
+     },
+     {
+      "r": "3-5C",
+      "v": 57.8,
+      "o": "RBL",
+      "h": 0,
+      "s": "2:3",
+      "d": "2026-11-04"
+     },
+     {
+      "r": "30-3L",
+      "v": 127.5,
+      "o": "BHA",
+      "h": 1,
+      "s": "0:1",
+      "d": "2026-10-31"
+     }
+    ],
+    "match": {
+     "opp": "IT",
+     "oppName": "Italy",
+     "clubName": "Belgium",
+     "venue": "H",
+     "date": "2026-11-15",
+     "time": "20:45",
+     "comp": "International"
+    }
+   },
+   "b": {
+    "id": 52,
+    "name": "Haaland",
+    "pos": "FWD",
+    "club": "MCI",
+    "nat": "NO",
+    "avg": 99.7,
+    "played": 10,
+    "max": 228.3,
+    "form": [
+     {
+      "r": "9-15N",
+      "v": 136.8,
+      "g": 1,
+      "a": 1
+     },
+     {
+      "r": "6-9L",
+      "v": 32.5,
+      "o": "NFO",
+      "h": 0,
+      "s": "3:1",
+      "d": "2026-11-07"
+     },
+     {
+      "r": "3-5C",
+      "v": 135,
+      "o": "RBL",
+      "h": 0,
+      "s": "2:3",
+      "d": "2026-11-04",
+      "g": 1
+     },
+     {
+      "r": "30-3L",
+      "v": 34.5,
+      "o": "BHA",
+      "h": 1,
+      "s": "0:1",
+      "d": "2026-10-31"
+     }
+    ],
+    "match": {
+     "opp": "DK",
+     "oppName": "Denmark",
+     "clubName": "Norway",
+     "venue": "A",
+     "date": "2026-11-17",
      "time": "20:45",
      "comp": "International"
     }
