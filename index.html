@@ -288,17 +288,17 @@ linear-gradient(115deg,rgba(255,255,255,.06) 0 16%,transparent 16%),radial-gradi
 .invbox input{flex:1 1 220px;min-width:0;padding:9px 12px;border-radius:8px;border:1px solid #2f4538;background:#0b1510;color:#dfe9e3;font:13px Inter,system-ui,sans-serif}
 .invbox .chip{cursor:pointer}
 
-.pq{display:block;position:absolute;z-index:4;left:50%;transform:translateX(-50%);width:24cqw;aspect-ratio:1100/300;background:url(assets/cab-sign3.webp) center/100% 100% no-repeat;filter:drop-shadow(0 .5cqw .9cqw rgba(0,0,0,.65));bottom:92.4%;letter-spacing:normal}
+.pq{display:block;position:absolute;z-index:4;left:50%;transform:translateX(-50%);width:24cqw;aspect-ratio:1100/300;background:url(assets/cab-sign3.webp) center/100% 100% no-repeat;filter:drop-shadow(0 .5cqw .9cqw rgba(0,0,0,.65));top:3.26cqw;transform:translate(-50%,-50%);letter-spacing:normal}
 .pq::before{content:"";position:absolute;left:50%;bottom:calc(100% - 2.7%);width:15.3%;aspect-ratio:84/44;transform:translateX(-50%);background:url(assets/cab-crown.webp) center/100% 100% no-repeat}
 .pq .in{position:absolute;left:8%;right:8%;top:20.5%;bottom:20%;display:flex;align-items:center;justify-content:center;gap:1.2cqw;box-sizing:border-box;min-width:0}
-.pq b{font:700 calc(var(--f,2)*1cqw)/1 "Barlow Condensed",sans-serif;letter-spacing:.1em;flex:0 1 auto;min-width:0;color:#f0d68c;text-shadow:0 1px 0 #000,0 0 .8cqw rgba(232,207,134,.25);max-width:11cqw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pq b{font:700 calc(var(--f,2)*1cqw)/1 "Barlow Condensed",sans-serif;letter-spacing:.1em;flex:0 1 auto;min-width:0;color:#f0d68c;text-shadow:0 1px 0 #000,0 0 .8cqw rgba(232,207,134,.25);max-width:12cqw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .pq.hf b{font-size:2.1cqw;letter-spacing:.2em;max-width:none;overflow:visible;text-overflow:clip}
 .pq .sd{width:.15cqw;height:70%;flex:none;background:linear-gradient(transparent,#b8923f,transparent)}
 .pq .sn{display:flex;align-items:center;gap:.5cqw;flex:none;font:700 calc(var(--f,2)*1cqw)/1 "Barlow Condensed",sans-serif;color:#ffe08a;text-shadow:0 0 1cqw rgba(255,200,70,.4),0 1px 0 #000;letter-spacing:.04em}
-.pq .sn .st1{width:1.55em;height:1.55em;flex:none;margin:0;max-width:none;vertical-align:baseline;align-self:center;filter:drop-shadow(0 0 .3cqw rgba(255,200,70,1)) drop-shadow(0 0 .8cqw rgba(255,170,20,.85))}
-.cbw:has(.pq){padding-top:2.8cqw}
+.pq .sn .st1{width:1.45em;height:1.45em;flex:none;margin:0;max-width:none;vertical-align:baseline;align-self:center;filter:drop-shadow(0 0 .3cqw rgba(255,200,70,1)) drop-shadow(0 0 .8cqw rgba(255,170,20,.85))}
+.cbw:has(.pq){padding-top:2cqw}
 @container (min-width:720px){.cbw .cbi:has(>.pq){overflow:visible}}
-@container (max-width:719px){.mcab:has(>.pq){overflow:visible;margin-top:30px}.mcab>.pq{width:175px;bottom:calc(100% - 46px);filter:drop-shadow(0 3px 4px rgba(0,0,0,.65))}.mcab>.pq::before{width:22%}.mcab>.pq .in{gap:6px}.mcab>.pq b{font-size:calc(var(--m,14)*1px);letter-spacing:.08em;max-width:80px}.mcab>.pq.hf b{font-size:14px;letter-spacing:.12em;max-width:none;overflow:visible}.mcab>.pq .sd{width:1.5px}.mcab>.pq .sn{font-size:calc(var(--m,14)*1px);gap:3px}.mcab>.pq .sn .st1{filter:drop-shadow(0 0 3px rgba(255,196,60,.95)) drop-shadow(0 0 7px rgba(255,176,30,.6))}}
+@container (max-width:719px){.mcab:has(>.pq){overflow:visible;margin-top:28px}.mcab>.pq{width:190px;top:23px;transform:translate(-50%,-50%);bottom:auto;filter:drop-shadow(0 3px 4px rgba(0,0,0,.65))}.mcab>.pq::before{width:22%}.mcab>.pq .in{gap:6px}.mcab>.pq b{font-size:calc(var(--m,14)*1px);letter-spacing:.08em;max-width:80px}.mcab>.pq.hf b{font-size:14px;letter-spacing:.12em;max-width:none;overflow:visible}.mcab>.pq .sd{width:1.5px}.mcab>.pq .sn{font-size:calc(var(--m,14)*1px);gap:3px}.mcab>.pq .sn .st1{filter:drop-shadow(0 0 3px rgba(255,196,60,.95)) drop-shadow(0 0 7px rgba(255,176,30,.6))}}
 
 </style>
 <style id="cx">
@@ -522,7 +522,7 @@ const mineCab=()=>{const u=S.user,head='<div class="tcab cw">'+TDEFS+'<h2>Trophi
 if(!u)return head+'<p class="sub tn" style="text-align:center;margin:22px 0 12px">Log in to see your own trophy cabinet.</p><p style="text-align:center"><button class="btn" type="button" data-act="view" data-v="picks">Log in</button></p></div>';
 if(!S.tr||(S.user&&S.mt===null&&S.mtl))return head+'<p class="sub tn" style="margin:22px 0">Loading…</p></div>';
 const me=u.nick.toLowerCase(),aw=awardsFrom(S.tr),cnt=t=>aw.filter(a=>a.t===t&&String(a.nick).toLowerCase()===me).length,st=(S.mt&&S.mt.streak)||{cur:0,best:0,played:0},
-sr=(S.mt&&S.mt.stars)||{total:0,month:0},plq=k=>'<span class="pq" style="--f:'+Math.max(1.1,Math.min(1.9,7.4/(u.nick.length*.95))).toFixed(2)+';--m:'+Math.max(8,Math.min(14,66/(u.nick.length*.85))).toFixed(1)+'"><span class="in"><b>'+esc(u.nick.toUpperCase())+'</b><i class="sd"></i><span class="sn" title="Duel Stars: '+sr.total+' in total, '+sr.month+' this month">'+STAR.replace(/sg([AB])/g,'sg$1'+k)+sr.total+'</span></span></span>',plaque=plq('d'),plaque2=plq('p'),iv=(S.mt&&S.mt.invites)||{total:0,active:0},ivOn=t=>iv.active>=t,ivSub=t=>ivOn(t)?'Earned':Math.min(iv.active,t)+'/'+t,c1=cnt('m1'),c2=cnt('m2'),c3=cnt('m3'),cp=cnt('pr'),X=v=>(v/1992*100).toFixed(3)+'%',Y=v=>(v/1478*100).toFixed(3)+'%';
+sr=(S.mt&&S.mt.stars)||{total:0,month:0},plq=k=>'<span class="pq" style="--f:'+Math.max(1.3,Math.min(2.4,9.6/(u.nick.length*.95))).toFixed(2)+';--m:'+Math.max(8,Math.min(15,72/(u.nick.length*.85))).toFixed(1)+'"><span class="in"><b>'+esc(u.nick.toUpperCase())+'</b><i class="sd"></i><span class="sn" title="Duel Stars: '+sr.total+' in total, '+sr.month+' this month">'+STAR.replace(/sg([AB])/g,'sg$1'+k)+sr.total+'</span></span></span>',plaque=plq('d'),plaque2=plq('p'),iv=(S.mt&&S.mt.invites)||{total:0,active:0},ivOn=t=>iv.active>=t,ivSub=t=>ivOn(t)?'Earned':Math.min(iv.active,t)+'/'+t,c1=cnt('m1'),c2=cnt('m2'),c3=cnt('m3'),cp=cnt('pr'),X=v=>(v/1992*100).toFixed(3)+'%',Y=v=>(v/1478*100).toFixed(3)+'%';
 const it=(f,cx,top,w,on)=>`<img class="it ${on?'on':'off'}" src="assets/t-${f}.webp" alt="" style="left:${X(cx)};top:${Y(top)};width:${X(w)}">`,
 pt=(cx,top,w,h,label,sub,on,cl)=>`<div class="pt ${on?'on':'off'} ${cl||''}" style="left:${X(cx)};top:${Y(top)};width:${X(w)};height:${Y(h)}"><b>${esc(label)}</b><span>${esc(sub)}</span></div>`,
 STR=[5,10,15],INV=[1,5,10],stOn=t=>st.best>=t;
