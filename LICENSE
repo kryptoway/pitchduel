@@ -1,0 +1,25 @@
+Copyright (c) 2026 Kryptoway (@kryptoway_ai). All rights reserved.
+
+This repository is public so that the website can be hosted on GitHub Pages.
+Public does not mean open source.
+
+You may view the website and use it for personal, non-commercial purposes.
+
+Without written permission from Kryptoway you may NOT copy, republish,
+redistribute, sell or reuse, in whole or in part:
+  - the source code (HTML, CSS, JavaScript, Python, Google Apps Script),
+  - the design, graphics, logos and images,
+  - the texts, rules and player status notes,
+  - the compiled data files and databases (for example dashboard data,
+    status.json, pairs*.json), including by scraping or automated downloading.
+
+Player points and statistics originate from Sport.fun and remain the property
+of their respective owners. PitchDuel and the SDF Dashboard are unofficial fan
+projects and are not affiliated with Sport.fun or any club. This notice covers
+Kryptoway's own work: the selection, arrangement and processing of that data,
+the notes, the code and the design.
+
+Third-party parts keep their own licences:
+  - flags/ (flag-icons, MIT licence, see flags/LICENSE-flag-icons.txt).
+
+Permission requests: https://x.com/kryptoway_ai
