@@ -273,6 +273,21 @@ linear-gradient(115deg,rgba(255,255,255,.06) 0 16%,transparent 16%),radial-gradi
 .cbi .pt.cnt span{font:700 2.1cqw/1 "Barlow Condensed",sans-serif;letter-spacing:.06em;margin-top:.15cqw}
 .cbi .it.md svg{display:block;width:100%;height:auto}
 @container (min-width:720px){.cbw .cbm{display:none}}
+.mhof .mr3 .mpl b{font-size:11px;letter-spacing:.05em}
+.mhof .mr3 .mpl span{font-size:14px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block}
+.mhof .mcell{min-width:0}.mhof .mr3 .mpl{max-width:96%}
+.mhof .mdv{height:1.5px;margin:2px 6px;background:linear-gradient(90deg,transparent,rgba(150,205,175,.4),transparent)}
+.mhof .msh.now .mlb{color:#fff3c4}.mhof .msh.now .mlb::before{content:"★ ";color:#F3D77A}
+.mhof .mr3.c5{display:flex;flex-wrap:wrap;justify-content:center}.mhof .mr3.c5 .mcell{width:32%}
+.mcab .mcell.me .mpl{outline:2px solid #fff;outline-offset:1px}
+
+.invbox{margin:16px 0 6px;padding:16px 18px;border-radius:12px;background:radial-gradient(ellipse 60% 120% at 0 0,rgba(243,215,122,.1),transparent 60%),linear-gradient(#17261e,#101c16);border:1px solid #2f4538;border-left:3px solid #F3D77A;display:grid;gap:12px}
+.invbox .it1 b{display:block;font:700 15px/1.1 "Barlow Condensed",sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#F3D77A}
+.invbox .it1 .lead{margin:6px 0 0;color:#eaf1ec;font-size:15px;line-height:1.45;font-weight:500}.invbox .it1 span{display:block;margin-top:6px;color:#9db4a7;font-size:12.5px;line-height:1.4}
+.invbox .ir{display:flex;gap:8px;flex-wrap:wrap}
+.invbox input{flex:1 1 220px;min-width:0;padding:9px 12px;border-radius:8px;border:1px solid #2f4538;background:#0b1510;color:#dfe9e3;font:13px Inter,system-ui,sans-serif}
+.invbox .chip{cursor:pointer}
+
 .pq{display:block;position:relative;z-index:2;width:25cqw;aspect-ratio:900/274;background:url(assets/cab-sign.webp) center/100% 100% no-repeat;filter:drop-shadow(0 .5cqw .9cqw rgba(0,0,0,.7))}
 .pq .in{position:absolute;left:9.5%;right:10.5%;top:25%;bottom:28%;display:flex;align-items:center;justify-content:center;gap:1.2cqw;padding:0 .5cqw;box-sizing:border-box;min-width:0}
 .pq b{font:700 calc(var(--f,2.35)*1cqw)/1 "Barlow Condensed",sans-serif;letter-spacing:.16em;flex:0 1 auto;min-width:0;color:#e8cf86;text-shadow:0 1px 0 #000,0 0 .8cqw rgba(232,207,134,.25);max-width:12cqw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -340,6 +355,10 @@ function setRd(r){S.rd=r;S.pairs=S.all.filter(q=>q.round===r)}
 function goOpen(){const q=S.all.find(q=>!locked(q)&&!S.picks[q.id]);if(q)setRd(q.round);S.cur=Math.max(0,S.pairs.findIndex(x=>!locked(x)&&!S.picks[x.id]))}
 const done=p=>p.result==='A'||p.result==='B'||p.result==='void';
 async function api(b){try{const r=await fetch(API,{method:'POST',body:JSON.stringify(b)});return await r.json()}catch(e){return{ok:false,error:'network'}}}
+const REFRE=/^[A-Za-z0-9_.\- ]{2,20}$/;
+function refGet(){try{return localStorage.getItem('pd_ref')||''}catch(e){return''}}
+(function(){try{const r=new URLSearchParams(location.search).get('ref');if(r&&REFRE.test(r)&&!localStorage.getItem('pd_ref'))localStorage.setItem('pd_ref',r.trim())}catch(e){}})();
+function invLink(){return location.origin+location.pathname.replace(/index\.html$/,'')+'?ref='+encodeURIComponent(S.user.nick)}
 function stash(){try{if(S.remember&&S.user)localStorage.setItem('sdfbattle',JSON.stringify({n:S.user.nick,p:S.user.pin,x:S.user.x}));else localStorage.removeItem('sdfbattle')}catch(e){}}
 function dateBlock(d){const t=new Date(d+'T12:00:00Z'),o={timeZone:'UTC'};return`<div class="dt">${t.toLocaleDateString('en-GB',{...o,weekday:'short'}).toUpperCase()}<b>${t.getUTCDate()}</b>${t.toLocaleDateString('en-GB',{...o,month:'short'}).toUpperCase()}</div>`}
 const CLUBN={ACM:'AC Milan',ARS:'Arsenal',ATM:'Atlético Madrid',BAR:'FC Barcelona',BVB:'Borussia Dortmund',CHE:'Chelsea',EVE:'Everton',FCB:'Bayern Munich',MCI:'Manchester City',NAP:'Napoli',PSG:'Paris Saint-Germain',RMD:'Real Madrid',ROM:'AS Roma',STU:'VfB Stuttgart',LIV:'Liverpool',MUN:'Manchester United',TOT:'Tottenham',INT:'Inter',JUV:'Juventus',B04:'Bayer Leverkusen',AVL:'Aston Villa',NEW:'Newcastle'};
@@ -436,7 +455,8 @@ function tick(){const e=$('cd');if(e){const p=S.pairs[S.cur];e.textContent=p?lef
 setInterval(()=>{tick();const p=S.pairs[S.cur];if(S.view==='picks'&&p&&$('cd')&&locked(p))draw()},1000);
 async function loadPicks(){const r=await api({action:'mypicks',nick:S.user.nick,pin:S.user.pin});if(r.ok){S.picks={};r.picks.forEach(x=>S.picks[x.pair]=x.choice)}return r}
 async function submit(e){e.preventDefault();const nick=$('nick').value.trim(),pin=$('pin').value.trim(),x=$('xh').value.trim().replace(/^https?:\/\//i,'').replace(/^(www\.)?(x|twitter)\.com\//i,'').replace(/^@/,'').replace(/[\/?#].*$/,'');S.xDraft=x;S.remember=$('rem').checked;S.nickDraft=nick;S.busy=true;S.err='';draw();
-let r=await api({action:S.mode==='new'?'register':'login',nick,pin,x});
+let r=await api(S.mode==='new'?{action:'register',nick,pin,x,ref:refGet()}:{action:'login',nick,pin,x});
+if(r.ok&&S.mode==='new'){try{localStorage.removeItem('pd_ref')}catch(e){}}
 if(r.ok){S.user={nick:r.nick,pin,x:typeof r.x==='string'?r.x:(x||undefined)};r=await loadPicks()}
 S.busy=false;if(!r.ok){S.user=null;S.err=ERR[r.error]||ERR.default}else{stash();goOpen()}draw()}
 async function pick(side){side=side.toUpperCase();const p=S.pairs[S.cur];if(!S.user||locked(p))return;const prev=S.picks[p.id];S.picks[p.id]=side;S.msg='Saving…';draw();
@@ -479,9 +499,11 @@ const SX=[380,685,990,1295,1600];
 rd.forEach((r,i)=>{const a=get('pr',r),cx=SX[i];if(cx==null)return;
  im+=(a?'<div class="gl" style="left:'+X(cx)+';top:'+Y(1010)+'"></div>':'')+it('shield',cx,1010,200,!!a)+pt(cx,1292,270,78,r,a?a.nick:(r===cur?'Round open':r==='Next round'?'Upcoming':'Not yet awarded'),!!a,mineOf(a),1,r===cur&&!a?'cur':'')});
 const imgCab='<div class="cbi">'+im+'</div>';
+const mcell=(f,l,sv,on,h,mine)=>`<div class="mcell ${on?'on':'off'}${mine?' me':''}"><img src="assets/t-${f}.webp" alt="" style="height:${h}px"><div class="mpl"><b>${esc(l)}</b><span>${esc(sv)}</span></div></div>`;
+const mHof='<div class="cbm mcab mhof"><i class="mh">HALL OF FAME</i>'+mo.map(m=>{const a1=get('m1',m),a2=get('m2',m),a3=get('m3',m);return'<div class="msh'+(m===MONTH?' now':'')+'"><div class="mlb">'+esc(mlab(m))+'<small>'+(m===MONTH?'current month':m>MONTH?'upcoming':'finished')+'</small></div><div class="mr3">'+mcell('cup','Winner',a1?a1.nick:mhint(m),!!a1,104,mineOf(a1))+mcell('medal2','2nd',a2?a2.nick:mhint(m),!!a2,104,mineOf(a2))+mcell('medal3','3rd',a3?a3.nick:mhint(m),!!a3,104,mineOf(a3))+'</div></div>'}).join('<div class="mdv"></div>')+'<div class="mbd"></div><div class="msh"><div class="mlb">Perfect rounds<small>every scored pair correct</small></div><div class="mr3 c5">'+rd.map(r=>{const a=get('pr',r);return mcell('shield',r,a?a.nick:(r===cur?'Round open':r==='Next round'?'Upcoming':'None yet'),!!a,84,mineOf(a))}).join('')+'</div></div></div>';
 const st=o.stats||{};const ms=`<section class="sh"><header><b>Milestones</b><small>Collect the same trophy again and again</small></header><div class="ms">${mil('perfect','Perfect Rounds',[3,5,10],st.pr||0)}${mil('rookie','Month Winner',[2,3,5],st.m1||0)}${mil('invite','Invite a Friend',[1,5,10],st.inv||0)}</div><div class="board"></div></section>`;
 const oldCab=`<div class="cb2"><i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i><div class="top"><span>PITCHDUEL</span><b>HALL OF FAME</b><span>${A.length} awarded</span></div>${shelf('Month Winner','Cup for 1st place, medals for 2nd and 3rd',cups)}${shelf('Perfect Rounds','every scored pair of a round correct',prs,'pf')}${o.personal?ms:''}</div>`;
-return'<div class="cbw">'+oldCab+imgCab+'</div>'}
+return'<div class="cbw">'+mHof+imgCab+'</div>'}
 const ACHS=[['invite','Invite a Friend','A friend you invite plays a round'],['hattrick','Hat-trick','Play 3 rounds in a row'],['onfire','On Fire','Play 5 rounds in a row'],['unstop','Unstoppable','Play 8 rounds in a row']];
 const LOCK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
 const achSoon=()=>'<h2>Achievements <span class="soon">COMING SOON</span></h2><p class="hint" style="margin:0 0 10px;color:var(--mut)">Badges for inviting friends and for streaks of rounds played are on the way.</p><div class="ag">'+ACHS.map(([i,n,d])=>`<div class="ab off"><div class="ic">${LOCK}</div><div><b>${n}</b><small>${d}</small></div></div>`).join('')+'</div>';
@@ -498,20 +520,21 @@ const mineCab=()=>{const u=S.user,head='<div class="tcab cw">'+TDEFS+'<h2>Trophi
 if(!u)return head+'<p class="sub tn" style="text-align:center;margin:22px 0 12px">Log in to see your own trophy cabinet.</p><p style="text-align:center"><button class="btn" type="button" data-act="view" data-v="picks">Log in</button></p></div>';
 if(!S.tr||(S.user&&S.mt===null&&S.mtl))return head+'<p class="sub tn" style="margin:22px 0">Loading…</p></div>';
 const me=u.nick.toLowerCase(),aw=awardsFrom(S.tr),cnt=t=>aw.filter(a=>a.t===t&&String(a.nick).toLowerCase()===me).length,st=(S.mt&&S.mt.streak)||{cur:0,best:0,played:0},
-sr=(S.mt&&S.mt.stars)||{total:0,month:0},plaque='<span class="pq"><span class="in"><b style="--f:'+Math.max(1.1,Math.min(1.95,10/(u.nick.length*.82))).toFixed(2)+';--m:'+Math.max(8,Math.min(13,83/(u.nick.length*.82))).toFixed(1)+'">'+esc(u.nick.toUpperCase())+'</b><i class="sd"></i><span class="sn" title="Duel Stars: '+sr.total+' in total, '+sr.month+' this month"><em>★</em>'+sr.total+'</span></span></span>',c1=cnt('m1'),c2=cnt('m2'),c3=cnt('m3'),cp=cnt('pr'),X=v=>(v/1992*100).toFixed(3)+'%',Y=v=>(v/1478*100).toFixed(3)+'%';
+sr=(S.mt&&S.mt.stars)||{total:0,month:0},plaque='<span class="pq"><span class="in"><b style="--f:'+Math.max(1.1,Math.min(1.95,10/(u.nick.length*.82))).toFixed(2)+';--m:'+Math.max(8,Math.min(13,83/(u.nick.length*.82))).toFixed(1)+'">'+esc(u.nick.toUpperCase())+'</b><i class="sd"></i><span class="sn" title="Duel Stars: '+sr.total+' in total, '+sr.month+' this month"><em>★</em>'+sr.total+'</span></span></span>',iv=(S.mt&&S.mt.invites)||{total:0,active:0},ivOn=t=>iv.active>=t,ivSub=t=>ivOn(t)?'Earned':Math.min(iv.active,t)+'/'+t,c1=cnt('m1'),c2=cnt('m2'),c3=cnt('m3'),cp=cnt('pr'),X=v=>(v/1992*100).toFixed(3)+'%',Y=v=>(v/1478*100).toFixed(3)+'%';
 const it=(f,cx,top,w,on)=>`<img class="it ${on?'on':'off'}" src="assets/t-${f}.webp" alt="" style="left:${X(cx)};top:${Y(top)};width:${X(w)}">`,
 pt=(cx,top,w,h,label,sub,on,cl)=>`<div class="pt ${on?'on':'off'} ${cl||''}" style="left:${X(cx)};top:${Y(top)};width:${X(w)};height:${Y(h)}"><b>${esc(label)}</b><span>${esc(sub)}</span></div>`,
 STR=[5,10,15],INV=[1,5,10],stOn=t=>st.best>=t;
-let im='<div class="hd"><span>PITCHDUEL</span>'+plaque+'<span>MY CABINET</span></div><div class="lb" style="left:'+X(80)+';top:'+Y(140)+'">Awards<small>your wins and medals</small></div><div class="lb" style="left:'+X(80)+';top:'+Y(978)+'">Round streak<small>best '+st.best+' · now '+st.cur+' · played '+st.played+'</small></div><div class="lb" style="left:'+X(1100)+';top:'+Y(978)+'">Invite a friend<small>coming soon</small></div>';
+let im='<div class="hd"><span>PITCHDUEL</span>'+plaque+'<span>MY CABINET</span></div><div class="lb" style="left:'+X(80)+';top:'+Y(140)+'">Awards<small>your wins and medals</small></div><div class="lb" style="left:'+X(80)+';top:'+Y(978)+'">Round streak<small>best '+st.best+' · now '+st.cur+' · played '+st.played+'</small></div><div class="lb" style="left:'+X(1100)+';top:'+Y(978)+'">Invite a friend<small>'+iv.active+' playing · '+iv.total+' invited</small></div>';
 im+=it('cup',386,330,300,c1>0)+pt(386,712,300,84,'Month winner','×'+c1,c1>0,'cnt');
 im+=it('medal2',900,450,130,c2>0)+pt(900,720,170,84,'2nd place','×'+c2,c2>0,'cnt')+it('medal3',1090,450,130,c3>0)+pt(1090,720,170,84,'3rd place','×'+c3,c3>0,'cnt');
 im+=(cp>0?'<div class="gl" style="left:'+X(1568)+';top:'+Y(380)+'"></div>':'')+it('shield',1568,380,250,cp>0)+pt(1568,712,300,84,'Perfect round','×'+cp,cp>0,'cnt');
 const SX=[250,520,790],IX=[1190,1440,1690];
 STR.forEach((t,i)=>{im+=it('str'+t,SX[i],1030,200,stOn(t))+pt(SX[i],1280,230,84,t+' in a row',stOn(t)?'Earned':Math.min(st.best,t)+'/'+t,stOn(t),'cnt')});
-INV.forEach((t,i)=>{im+=it('inv'+t,IX[i],1040,190,false)+pt(IX[i],1280,230,84,'Invite '+t,'Soon',false,'cnt')});
+INV.forEach((t,i)=>{im+=it('inv'+t,IX[i],1040,190,ivOn(t))+pt(IX[i],1280,230,84,'Invite '+t,ivSub(t),ivOn(t),'cnt')});
 const cell=(f,l,sv,on,h)=>`<div class="mcell ${on?'on':'off'}"><img src="assets/t-${f}.webp" alt="" style="height:${h}px"><div class="mpl"><b>${l}</b><span>${sv}</span></div></div>`,
-list='<div class="cbm mcab"><i class="mh">'+plaque+'</i><div class="msh"><div class="mg">'+cell('cup','Month winner','×'+c1,c1>0,124)+cell('medal2','2nd place','×'+c2,c2>0,124)+cell('medal3','3rd place','×'+c3,c3>0,124)+cell('shield','Perfect round','×'+cp,cp>0,124)+'</div></div><div class="mbd"></div><div class="msh"><div class="mlb">Round streak<small>best '+st.best+' · now '+st.cur+'</small></div><div class="mr3">'+STR.map(t=>cell('str'+t,t+' in a row',stOn(t)?'Earned':Math.min(st.best,t)+'/'+t,stOn(t),84)).join('')+'</div><div class="mlb" style="margin-top:12px">Invite a friend<small>coming soon</small></div><div class="mr3">'+INV.map(t=>cell('inv'+t,'Invite '+t,'Soon',false,84)).join('')+'</div></div></div>';
-return head+'<div class="cbw">'+list+'<div class="cbi">'+im+'</div></div>'+collectors(aw)+'</div>'};
+list='<div class="cbm mcab"><i class="mh">'+plaque+'</i><div class="msh"><div class="mg">'+cell('cup','Month winner','×'+c1,c1>0,124)+cell('medal2','2nd place','×'+c2,c2>0,124)+cell('medal3','3rd place','×'+c3,c3>0,124)+cell('shield','Perfect round','×'+cp,cp>0,124)+'</div></div><div class="mbd"></div><div class="msh"><div class="mlb">Round streak<small>best '+st.best+' · now '+st.cur+'</small></div><div class="mr3">'+STR.map(t=>cell('str'+t,t+' in a row',stOn(t)?'Earned':Math.min(st.best,t)+'/'+t,stOn(t),84)).join('')+'</div><div class="mlb" style="margin-top:12px">Invite a friend<small>'+iv.active+' playing · '+iv.total+' invited</small></div><div class="mr3">'+INV.map(t=>cell('inv'+t,'Invite '+t,ivSub(t),ivOn(t),84)).join('')+'</div></div></div>';
+const invbox='<div class="invbox"><div class="it1"><b>Invite a friend</b><p class="lead">Every duel is better with friends, and the rivalry gets even sweeter. Bring your mates to the pitch and earn a badge for every milestone.</p><span>Badges for 1, 5 and 10 friends. A friend counts once they have played one round (picks on at least half of the pairs).</span></div><div class="ir"><input id="invl" readonly value="'+esc(invLink())+'" aria-label="Your invite link"><button class="chip on" type="button" data-act="copyinv">'+(S.invMsg||'Copy link')+'</button>'+(navigator.share?'<button class="chip" type="button" data-act="shareinv">Share</button>':'')+'</div></div>';
+return head+'<div class="cbw">'+list+'<div class="cbi">'+im+'</div></div>'+invbox+collectors(aw)+'</div>'};
 const cabDemo=()=>{const rd=[...new Set(S.all.slice().sort((a,b)=>Date.parse(a.lock)-Date.parse(b.lock)).map(p=>p.round))];
 const full=location.hash==='#cabinet-full',aw=[{t:'pr',k:'9-15 Nov',nick:'Kacper2158'}].concat(full?[{t:'m1',k:MONTH,nick:'Kisiel'},{t:'m2',k:MONTH,nick:'Czapla'},{t:'m3',k:MONTH,nick:'Tob'},{t:'pm',k:MONTH,nick:'Kacper2158'},{t:'pr',k:'6-9 Nov',nick:'Kisiel'}]:[]);return TDEFS+cabTabs()+cabHtml(aw,{me:S.user?S.user.nick:'Kacper2158',months:[addM(MONTH,-1),MONTH,addM(MONTH,1)],stats:full?{pr:5,m1:3,inv:1}:{pr:1,m1:0,inv:0},rounds:rd.slice(-4).concat(['Next round']),curRound:rd[rd.length-1]})+collectors(aw)};
 const awardsFrom=t=>{const A=[],seen={},add=a=>{const k=a.t+'|'+a.k+'|'+String(a.nick).toLowerCase();if(!seen[k]){seen[k]=1;A.push(a)}};if(!t||!t.ok)return A;(t.months||[]).forEach(x=>{if(x.final&&x.podium)x.podium.slice(0,3).forEach((r,i)=>add({t:'m'+(i+1),k:x.month,nick:r.nick}))});(t.awards||[]).forEach(a=>{if(a&&a.t&&a.nick)add(a)});return A};
@@ -536,9 +559,11 @@ return h+'<p><button class="chip" data-act="refresh" style="margin-top:14px">Ref
 async function loadTrophies(){S.tr=null;S.mt=null;S.mtl=!!S.user;draw();const a=api({action:'trophies'}),b=S.user?api({action:'mytrophies',nick:S.user.nick,pin:S.user.pin}):null;S.tr=await a;const r=b?await b:null;S.mt=r&&r.ok?r:null;S.mtl=false;draw()}
 async function loadBoard(){S.board=null;draw();S.board=await api({action:'board',month:S.bm||MONTH});draw()}
 document.addEventListener('submit',e=>{if(e.target&&e.target.id==='f')submit(e);else if(e.target&&e.target.id==='xf')saveX(e)});
-document.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b)return;const a=b.dataset.act;
+document.addEventListener('click',async e=>{const b=e.target.closest('[data-act]');if(!b)return;const a=b.dataset.act;
 if(a==='view'){const v=b.dataset.v;S.msg='';if(v==='mine'){S.view='picks';S.sum=true;draw()}else{S.view=v;if(v==='picks')S.sum=false;if(v==='board')loadBoard();else if(v==='trophies')loadTrophies();else draw()}}
 else if(a==='cab'){S.cab=b.dataset.v;draw()}
+else if(a==='copyinv'){const l=invLink();try{await navigator.clipboard.writeText(l)}catch(e){const i=$('invl');if(i){i.select();try{document.execCommand('copy')}catch(_){}}}S.invMsg='Copied ✓';draw();setTimeout(()=>{S.invMsg='';draw()},2500)}
+else if(a==='shareinv'){try{await navigator.share({title:'PitchDuel',text:'Pick the better player in each battle. Join me on PitchDuel!',url:invLink()})}catch(e){}}
 else if(a==='bm'){S.bm=b.dataset.v;loadBoard()}
 else if(a==='mode'){S.mode=b.dataset.v;S.err='';draw()}
 else if(a==='pair'){S.cur=+b.dataset.i;S.msg='';S.sum=false;draw()}
