@@ -289,6 +289,11 @@ linear-gradient(115deg,rgba(255,255,255,.06) 0 16%,transparent 16%),radial-gradi
 .invbox .ir{display:flex;gap:8px;flex-wrap:wrap}
 .invbox input{flex:1 1 220px;min-width:0;padding:9px 12px;border-radius:8px;border:1px solid #2f4538;background:#0b1510;color:#dfe9e3;font:13px Inter,system-ui,sans-serif}
 .invbox .chip{cursor:pointer}
+.invbox .shx{display:grid;gap:8px;padding-top:12px;border-top:1px solid #2a3d32}
+.invbox .shx label{font:700 13px/1 "Barlow Condensed",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#F3D77A}
+.invbox .shx textarea{width:100%;box-sizing:border-box;min-height:132px;resize:vertical;padding:10px 12px;border-radius:10px;border:1px solid #2f4538;background:#0b1510;color:#eaf1ec;font:14px/1.45 Inter,system-ui,sans-serif}
+.invbox .shx .sr2{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.invbox .shx small{color:#9db4a7;font-size:12px;flex:1 1 180px}
+.invbox .xb{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;border:0;background:#fff;color:#000;font:700 14px Inter,system-ui,sans-serif;cursor:pointer}.invbox .xb svg{width:15px;height:15px}
 
 .pq{display:block;position:absolute;z-index:4;left:50%;transform:translateX(-50%);width:24cqw;aspect-ratio:1100/300;background:url(assets/cab-sign3.webp) center/100% 100% no-repeat;filter:drop-shadow(0 .5cqw .9cqw rgba(0,0,0,.65));top:3.26cqw;transform:translate(-50%,-50%);letter-spacing:normal}
 .pq::before{content:"";position:absolute;left:50%;bottom:calc(100% - 2.7%);width:15.3%;aspect-ratio:84/44;transform:translateX(-50%);background:url(assets/cab-crown.webp) center/100% 100% no-repeat}
@@ -539,7 +544,7 @@ INV.forEach((t,i)=>{im+=it('inv'+t,IX[i],1040,190,ivOn(t))+pt(IX[i],1280,230,84,
 const mtnote=S.mterr?'<p class="sub tn" style="margin:6px 0 10px;color:#f2c230">'+(S.mt?'Showing your last saved stats, the server is busy. ':'Could not load your stats, the server is busy. ')+'<button class="chip" data-act="refresh">Retry</button></p>':'';
 const cell=(f,l,sv,on,h)=>`<div class="mcell ${on?'on':'off'}"><img src="assets/t-${f}.webp" alt="" style="height:${h}px"><div class="mpl"><b>${l}</b><span>${sv}</span></div></div>`,
 list='<div class="cbm mcab"><i class="mh"></i>'+plaque2+'<div class="msh"><div class="mg">'+cell('cup','Month winner','×'+c1,c1>0,124)+cell('medal2','2nd place','×'+c2,c2>0,124)+cell('medal3','3rd place','×'+c3,c3>0,124)+cell('shield','Perfect round','×'+cp,cp>0,124)+'</div></div><div class="mbd"></div><div class="msh"><div class="mlb">Round streak<small>best '+st.best+' · now '+st.cur+'</small></div><div class="mr3">'+STR.map(t=>cell('str'+t,t+' in a row',stOn(t)?'Earned':Math.min(st.best,t)+'/'+t,stOn(t),84)).join('')+'</div><div class="mlb" style="margin-top:12px">Invite a friend<small>'+iv.active+' playing · '+iv.total+' invited</small></div><div class="mr3">'+INV.map(t=>cell('inv'+t,'Invite '+t,ivSub(t),ivOn(t),84)).join('')+'</div></div></div>';
-const invbox='<div class="invbox"><div class="it1"><b>Invite a friend</b><p class="lead">Every duel is better with friends, and the rivalry gets even sweeter. Bring your mates to the pitch and earn a badge for every milestone.</p><span>Badges for 1, 5 and 10 friends. A friend counts once they have played one round (picks on at least half of the pairs).</span></div><div class="ir"><input id="invl" readonly value="'+esc(invLink())+'" aria-label="Your invite link"><button class="chip on" type="button" data-act="copyinv">'+(S.invMsg||'Copy link')+'</button>'+(navigator.share?'<button class="chip" type="button" data-act="shareinv">Share</button>':'')+'</div></div>';
+const invbox='<div class="invbox"><div class="it1"><b>Invite a friend</b><p class="lead">Every duel is better with friends, and the rivalry gets even sweeter. Bring your mates to the pitch and earn a badge for every milestone.</p><span>Badges for 1, 5 and 10 friends. A friend counts once they have played one round (picks on at least half of the pairs).</span></div><div class="ir"><input id="invl" readonly value="'+esc(invLink())+'" aria-label="Your invite link"><button class="chip on" type="button" data-act="copyinv">'+(S.invMsg||'Copy link')+'</button>'+(navigator.share?'<button class="chip" type="button" data-act="shareinv">Share</button>':'')+'</div><div class="shx"><label for="shx">Share your cabinet on X</label><textarea id="shx" maxlength="230">'+esc(S.shText!=null?S.shText:shareText())+'</textarea><div class="sr2"><button class="xb" type="button" data-act="sharex"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Post on X</button><button class="chip" type="button" data-act="saveimg">Save image</button><small>'+(S.shMsg||'Posts your cabinet picture and the invite link. You can edit the text first.')+'</small></div></div></div>';
 return head+mtnote+'<div class="cbw">'+list+'<div class="cbi">'+im+'</div></div>'+invbox+collectors(aw)+'</div>'};
 const cabDemo=()=>{const rd=[...new Set(S.all.slice().sort((a,b)=>Date.parse(a.lock)-Date.parse(b.lock)).map(p=>p.round))];
 const full=location.hash==='#cabinet-full',aw=[{t:'pr',k:'9-15 Nov',nick:'Kacper2158'}].concat(full?[{t:'m1',k:MONTH,nick:'Kisiel'},{t:'m2',k:MONTH,nick:'Czapla'},{t:'m3',k:MONTH,nick:'Tob'},{t:'pm',k:MONTH,nick:'Kacper2158'},{t:'pr',k:'6-9 Nov',nick:'Kisiel'}]:[]);return TDEFS+cabTabs()+cabHtml(aw,{me:S.user?S.user.nick:'Kacper2158',months:[addM(MONTH,-1),MONTH,addM(MONTH,1)],stats:full?{pr:5,m1:3,inv:1}:{pr:1,m1:0,inv:0},rounds:rd.slice(-4).concat(['Next round']),curRound:rd[rd.length-1]})+collectors(aw)};
@@ -566,6 +571,52 @@ const MTK=n=>'pd_mt_'+String(n).toLowerCase();
 function mtLoad(n){try{const c=JSON.parse(localStorage.getItem(MTK(n))||'null');return c&&c.ok?c:null}catch(e){return null}}
 function mtSave(n,d){try{localStorage.setItem(MTK(n),JSON.stringify(d))}catch(e){}}
 async function apiRetry(b,tries){let r;for(let i=0;i<tries;i++){r=await api(b);if(r&&r.ok)return r;if(r&&r.error&&!['network','bad_request','server_error'].includes(r.error))return r;await new Promise(z=>setTimeout(z,700*(i+1)))}return r}
+function shareText(){const m=S.mt||{},st=m.streak||{},sr=m.stars||{},iv=m.invites||{},me=S.user.nick.toLowerCase(),aw=awardsFrom(S.tr||{}),cnt=t=>aw.filter(a=>a.t===t&&String(a.nick).toLowerCase()===me).length,c1=cnt('m1'),cp=cnt('pr'),p=[];
+if(sr.total>0)p.push('⭐ '+sr.total+' Duel Stars');if(c1>0)p.push('🥇 '+c1+'× month winner');if(cp>0)p.push('🛡️ '+cp+'× perfect round');if((st.best||0)>=3)p.push('🔥 best streak: '+st.best+' rounds');if((iv.active||0)>0)p.push('👥 '+iv.active+' friend'+(iv.active>1?'s':'')+' in my league');
+const body=p.length?p.slice(0,3).join(' · '):"I just joined and I'm collecting Duel Stars.";
+return'My PitchDuel cabinet 🏆\n'+body+'\n#PitchDuel #FantasyFootball\nThink you can beat me? 👇'}
+
+const SHI={};function shLoad(f){return SHI[f]||(SHI[f]=new Promise((ok,no)=>{const i=new Image();i.onload=()=>ok(i);i.onerror=no;i.src='assets/'+f}))}
+async function makeShareImage(){
+const W=1200,k=W/1992,M=40,CH=955,H=Math.round(M+CH*k),cv=document.createElement('canvas');cv.width=W;cv.height=H;const g=cv.getContext('2d');
+try{await Promise.all([document.fonts.load('700 20px "Barlow Condensed"'),document.fonts.load('600 14px Barlow')])}catch(e){}
+const FB='"Barlow Condensed",Impact,sans-serif',m=S.mt||{},st=m.streak||{},sr=m.stars||{},me=S.user.nick.toLowerCase(),aw=awardsFrom(S.tr||{}),cnt=t=>aw.filter(a=>a.t===t&&String(a.nick).toLowerCase()===me).length,c1=cnt('m1'),c2=cnt('m2'),c3=cnt('m3'),cp=cnt('pr');
+const [bg,cup,m2,m3,sh,sg]=await Promise.all(['cab-bg.webp','t-cup.webp','t-medal2.webp','t-medal3.webp','t-shield.webp','cab-sign3.webp'].map(shLoad)),crown=await shLoad('cab-crown.webp');
+g.fillStyle='#0b1510';g.fillRect(0,0,W,H);
+g.drawImage(bg,0,0,bg.width,bg.height*(CH/1478),0,M,W,CH*k);
+const sp=(t,x,y,ls,al)=>{g.textAlign=al||'left';if('letterSpacing'in g)g.letterSpacing=ls+'px';g.fillText(t,x,y);if('letterSpacing'in g)g.letterSpacing='0px'};
+// header labels
+g.textBaseline='middle';g.fillStyle='#d9bd77';g.font='600 14px '+FB;g.shadowColor='rgba(0,0,0,.85)';g.shadowBlur=2;g.shadowOffsetY=1;
+const hy=M+.044*(W*1478/1992);sp('PITCHDUEL',.055*W,hy,3);g.textAlign='right';sp('MY CABINET',W-.055*W+3,hy,3,'right');g.shadowBlur=0;g.shadowOffsetY=0;
+// section label
+g.textBaseline='alphabetic';g.fillStyle='#F3D77A';g.font='700 18.6px '+FB;g.shadowColor='#000';g.shadowBlur=3;sp('AWARDS',80*k,140*k+M+16,3);const aw1=g.measureText('AWARDS').width+6*3+13;g.shadowBlur=0;g.fillStyle='#a9c0b3';g.font='500 13px Barlow,Inter,sans-serif';sp('your wins and medals',80*k+aw1,140*k+M+16,0);
+// items
+const item=(img,cx,top,w,on)=>{const dw=w*k,dh=dw*img.height/img.width,x=cx*k-dw/2,y=top*k+M;g.save();if(on){g.shadowColor='rgba(0,0,0,.6)';g.shadowBlur=14;g.shadowOffsetY=6}else{g.filter='grayscale(1) brightness(.8) contrast(.8)';g.globalAlpha=.2}g.drawImage(img,x,y,dw,dh);g.restore()};
+const plate=(cx,top,w,h,label,val,on)=>{const x=(cx-w/2)*k,y=top*k+M,pw=w*k,ph=h*k,gr=g.createLinearGradient(0,y,0,y+ph);if(on){gr.addColorStop(0,'#e8cc7a');gr.addColorStop(1,'#a98239')}else{gr.addColorStop(0,'#4b4026');gr.addColorStop(1,'#2d2719')}
+g.save();g.shadowColor='rgba(0,0,0,.6)';g.shadowBlur=8;g.shadowOffsetY=4;g.fillStyle=gr;g.beginPath();g.roundRect?g.roundRect(x,y,pw,ph,5):g.rect(x,y,pw,ph);g.fill();g.restore();
+g.textAlign='center';g.fillStyle=on?'#2c1d08':'#bfae78';g.font='700 15px '+FB;sp(label.toUpperCase(),x+pw/2,y+ph*.38,1,'center');g.font='700 25px '+FB;sp(val,x+pw/2,y+ph*.82,1.5,'center')};
+if(cp>0){const gl=g.createRadialGradient(1568*k,380*k+M+120,0,1568*k,380*k+M+120,120);gl.addColorStop(0,'rgba(255,214,110,.38)');gl.addColorStop(1,'rgba(255,214,110,0)');g.fillStyle=gl;g.fillRect(1568*k-130,380*k+M-20,260,300)}
+item(cup,386,330,300,c1>0);plate(386,712,300,84,'Month winner','×'+c1,c1>0);
+item(m2,900,450,130,c2>0);plate(900,720,170,84,'2nd place','×'+c2,c2>0);item(m3,1090,450,130,c3>0);plate(1090,720,170,84,'3rd place','×'+c3,c3>0);
+item(sh,1568,380,250,cp>0);plate(1568,712,300,84,'Perfect round','×'+cp,cp>0);
+// plaque
+const pw=.24*W,ph=pw*sg.height/sg.width,px=W/2-pw/2,py=M+.0326*W-ph/2;
+g.save();g.shadowColor='rgba(0,0,0,.65)';g.shadowBlur=14;g.shadowOffsetY=6;g.drawImage(sg,px,py,pw,ph);const cw=.153*pw,chh=cw*crown.height/crown.width;g.drawImage(crown,W/2-cw/2,py+.027*ph-chh,cw,chh);g.restore();
+const nick=S.user.nick.toUpperCase(),fs=Math.max(1.3,Math.min(2.4,9.6/(nick.length*.95)))*12,cy=py+ph*.5025;
+g.textBaseline='middle';g.font='700 '+fs+'px '+FB;const ls=fs*.1,nw=g.measureText(nick).width+ls*nick.length,num=String(sr.total||0),nmw=g.measureText(num).width+fs*.04*num.length,ss=fs*1.45,gap=fs*.6,tot=nw+gap+1.5+gap+ss+fs*.3+nmw;
+let x=W/2-tot/2;g.fillStyle='#f0d68c';g.shadowColor='#000';g.shadowBlur=1;g.shadowOffsetY=1;sp(nick,x,cy,ls);x+=nw+gap;g.shadowBlur=0;g.shadowOffsetY=0;
+const dg=g.createLinearGradient(0,cy-fs*.8,0,cy+fs*.8);dg.addColorStop(0,'rgba(184,146,63,0)');dg.addColorStop(.5,'#b8923f');dg.addColorStop(1,'rgba(184,146,63,0)');g.fillStyle=dg;g.fillRect(x,cy-fs*.8,1.5,fs*1.6);x+=1.5+gap;
+g.save();g.translate(x,cy-ss/2);g.scale(ss/24,ss/24);const sgd=g.createLinearGradient(0,0,0,24);sgd.addColorStop(0,'#FFE68A');sgd.addColorStop(.55,'#E7B422');sgd.addColorStop(1,'#B98308');const P=new Path2D('M12 2.2l2.9 6.2 6.7.8-5 4.6 1.4 6.7L12 17l-6 3.5 1.4-6.7-5-4.6 6.7-.8z');g.shadowColor='rgba(255,190,50,.95)';g.shadowBlur=10/(ss/24);g.fillStyle=sgd;g.fill(P);g.shadowBlur=0;g.lineWidth=.9;g.strokeStyle='#8A5F06';g.lineJoin='round';g.stroke(P);g.save();g.translate(12,12.1);g.scale(.56,.56);g.translate(-12,-12.1);g.fillStyle='#F8D45A';g.fill(P);g.lineWidth=1.1;g.strokeStyle='#D69E0A';g.stroke(P);g.restore();g.restore();
+x+=ss+fs*.3;g.fillStyle='#ffe08a';g.shadowColor='rgba(255,200,70,.4)';g.shadowBlur=6;sp(num,x,cy,fs*.04);g.shadowBlur=0;
+return new Promise(ok=>cv.toBlob(ok,'image/png'))}
+async function shareX(save){const t=($('shx')?$('shx').value:shareText()).trim(),link=invLink(),intent='https://twitter.com/intent/tweet?text='+encodeURIComponent(t)+'&url='+encodeURIComponent(link);
+let blob=null;try{blob=await makeShareImage()}catch(e){}
+const note=m=>{S.shMsg=m;draw();setTimeout(()=>{S.shMsg='';draw()},5000)};
+if(save){if(!blob)return note('Could not make the image');const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='my-pitchduel-cabinet.png';document.body.appendChild(a);a.click();a.remove();return note('Image saved ✓')}
+const file=blob?new File([blob],'my-pitchduel-cabinet.png',{type:'image/png'}):null;
+if(file&&navigator.canShare&&navigator.canShare({files:[file]})){try{await navigator.share({files:[file],text:t,url:link});return}catch(e){if(e&&e.name==='AbortError')return}}
+let copied=false;if(blob&&navigator.clipboard&&window.ClipboardItem){try{await navigator.clipboard.write([new ClipboardItem({'image/png':blob})]);copied=true}catch(e){}}
+window.open(intent,'_blank','noopener');note(copied?'Image copied ✓ Click in the post and press Ctrl+V to attach it':'Post opened. Use "Save image" to attach the picture')}
 async function loadTrophies(){S.tr=null;S.mterr=false;const cached=S.user?mtLoad(S.user.nick):null;S.mt=cached;S.mtl=!!S.user&&!cached;draw();const a=apiRetry({action:'trophies'},2),b=S.user?apiRetry({action:'mytrophies',nick:S.user.nick,pin:S.user.pin},3):null;S.tr=await a;const r=b?await b:null;if(r&&r.ok){S.mt=r;mtSave(S.user.nick,r)}else if(S.user){S.mterr=true;if(!cached)S.mt=null}S.mtl=false;draw()}
 async function loadBoard(){S.board=null;draw();S.board=await api({action:'board',month:S.bm||MONTH});draw()}
 document.addEventListener('submit',e=>{if(e.target&&e.target.id==='f')submit(e);else if(e.target&&e.target.id==='xf')saveX(e)});
@@ -573,6 +624,8 @@ document.addEventListener('click',async e=>{const b=e.target.closest('[data-act]
 if(a==='view'){const v=b.dataset.v;S.msg='';if(v==='mine'){S.view='picks';S.sum=true;draw()}else{S.view=v;if(v==='picks')S.sum=false;if(v==='board')loadBoard();else if(v==='trophies')loadTrophies();else draw()}}
 else if(a==='cab'){S.cab=b.dataset.v;draw()}
 else if(a==='copyinv'){const l=invLink();try{await navigator.clipboard.writeText(l)}catch(e){const i=$('invl');if(i){i.select();try{document.execCommand('copy')}catch(_){}}}S.invMsg='Copied ✓';draw();setTimeout(()=>{S.invMsg='';draw()},2500)}
+else if(a==='sharex'){shareX(false)}
+else if(a==='saveimg'){shareX(true)}
 else if(a==='shareinv'){try{await navigator.share({title:'PitchDuel',text:'Pick the better player in each battle. Join me on PitchDuel!',url:invLink()})}catch(e){}}
 else if(a==='bm'){S.bm=b.dataset.v;loadBoard()}
 else if(a==='mode'){S.mode=b.dataset.v;S.err='';draw()}
@@ -589,6 +642,7 @@ else if(a==='logout'){S.sum=false;S.user=null;S.picks={};S.remember=false;stash(
 else if(a==='xedit'){S.xEdit=true;S.xErr='';S.xMsg='';draw();const f=$('xf');if(f){f.scrollIntoView({block:'center'});$('xi').focus()}}
 else if(a==='xcancel'){S.xEdit=false;S.xErr='';draw()}
 else if(a==='refresh'){if(S.view==='trophies')loadTrophies();else loadBoard()}});
+document.addEventListener('input',e=>{if(e.target&&e.target.id==='shx')S.shText=e.target.value});
 (async function init(){try{const r=await fetch('pairs.json?'+Date.now());const d=await r.json();S.all=d.pairs||[];S.soon=d.soon||[];S.round=d.round||'';{const o=RS().filter(r=>!S.soon.includes(r));setRd(o.length?o[o.length-1]:(RS()[0]||''))}S.loaded=true}catch(e){S.failed=true}
 let sv=null;try{sv=JSON.parse(localStorage.getItem('sdfbattle')||'null')}catch(e){}
 if(location.hash==='#rules')S.view='rules';draw();if(sv&&sv.n&&sv.p&&S.loaded){const r=await api({action:'login',nick:sv.n,pin:sv.p});if(r.ok){S.user={nick:r.nick,pin:sv.p,x:typeof r.x==='string'?r.x:(typeof sv.x==='string'?sv.x:undefined)};await loadPicks();goOpen();draw()}}})();
