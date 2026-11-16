@@ -288,16 +288,16 @@ linear-gradient(115deg,rgba(255,255,255,.06) 0 16%,transparent 16%),radial-gradi
 .invbox input{flex:1 1 220px;min-width:0;padding:9px 12px;border-radius:8px;border:1px solid #2f4538;background:#0b1510;color:#dfe9e3;font:13px Inter,system-ui,sans-serif}
 .invbox .chip{cursor:pointer}
 
-.pq{display:block;position:absolute;z-index:4;left:50%;transform:translateX(-50%);width:27cqw;aspect-ratio:1100/454;background:url(assets/cab-sign2.webp) center/100% 100% no-repeat;filter:drop-shadow(0 .6cqw 1cqw rgba(0,0,0,.65));bottom:92.4%;letter-spacing:normal}
-.pq .in{position:absolute;left:17.5%;right:17.5%;top:37%;bottom:23%;display:flex;align-items:center;justify-content:center;gap:1cqw;box-sizing:border-box;min-width:0}
-.pq b{font:700 calc(var(--f,2.2)*1cqw)/1 "Barlow Condensed",sans-serif;letter-spacing:.14em;flex:0 1 auto;min-width:0;color:#2b1a06;text-shadow:0 1px 0 rgba(255,238,175,.55),0 -1px 0 rgba(60,35,5,.25);max-width:13cqw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.pq.hf b{font-size:1.85cqw;letter-spacing:.16em;max-width:none;overflow:visible;text-overflow:clip}
-.pq .sd{width:.15cqw;height:70%;flex:none;background:linear-gradient(transparent,#5a3a0c,transparent)}
-.pq .sn{display:flex;align-items:baseline;gap:.4cqw;flex:none;font:700 2cqw/1 "Barlow Condensed",sans-serif;color:#2b1a06;text-shadow:0 1px 0 rgba(255,238,175,.55);letter-spacing:.04em}
-.pq .sn em{font-style:normal;font-size:1.9cqw;color:#6b4208}
-.cbw:has(.pq){padding-top:6.4cqw}
+.pq{display:block;position:absolute;z-index:4;left:50%;transform:translateX(-50%);width:24cqw;aspect-ratio:1100/336;background:url(assets/cab-sign3.webp) center/100% 100% no-repeat;filter:drop-shadow(0 .5cqw .9cqw rgba(0,0,0,.65));bottom:92.4%;letter-spacing:normal}
+.pq .in{position:absolute;left:8%;right:8%;top:29%;bottom:18%;display:flex;align-items:center;justify-content:center;gap:1.2cqw;box-sizing:border-box;min-width:0}
+.pq b{font:700 calc(var(--f,2.6)*1cqw)/1 "Barlow Condensed",sans-serif;letter-spacing:.1em;flex:0 1 auto;min-width:0;color:#f0d68c;text-shadow:0 1px 0 #000,0 0 .8cqw rgba(232,207,134,.25);max-width:14cqw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pq.hf b{font-size:2.7cqw;letter-spacing:.2em;max-width:none;overflow:visible;text-overflow:clip}
+.pq .sd{width:.15cqw;height:70%;flex:none;background:linear-gradient(transparent,#b8923f,transparent)}
+.pq .sn{display:flex;align-items:baseline;gap:.5cqw;flex:none;font:700 2.7cqw/1 "Barlow Condensed",sans-serif;color:#ffe08a;text-shadow:0 0 1cqw rgba(255,200,70,.4),0 1px 0 #000;letter-spacing:.04em}
+.pq .sn em{font-style:normal;font-size:2.3cqw;color:#f4c430}
+.cbw:has(.pq){padding-top:2.8cqw}
 @container (min-width:720px){.cbw .cbi:has(>.pq){overflow:visible}}
-@container (max-width:719px){.mcab:has(>.pq){overflow:visible;margin-top:58px}.mcab>.pq{width:230px;bottom:calc(100% - 46px);filter:drop-shadow(0 3px 4px rgba(0,0,0,.65))}.mcab>.pq .in{gap:8px}.mcab>.pq b{font-size:calc(var(--m,13)*1px);letter-spacing:.12em;max-width:84px}.mcab>.pq.hf b{font-size:13px;letter-spacing:.12em;max-width:none;overflow:visible}.mcab>.pq .sd{width:1.5px}.mcab>.pq .sn{font-size:17px;gap:3px}.mcab>.pq .sn em{font-size:14px}}
+@container (max-width:719px){.mcab:has(>.pq){overflow:visible;margin-top:36px}.mcab>.pq{width:250px;bottom:calc(100% - 46px);filter:drop-shadow(0 3px 4px rgba(0,0,0,.65))}.mcab>.pq .in{gap:8px}.mcab>.pq b{font-size:calc(var(--m,15)*1px);letter-spacing:.1em;max-width:110px}.mcab>.pq.hf b{font-size:17px;letter-spacing:.14em;max-width:none;overflow:visible}.mcab>.pq .sd{width:1.5px}.mcab>.pq .sn{font-size:19px;gap:3px}.mcab>.pq .sn em{font-size:15px}}
 
 </style>
 <style id="cx">
@@ -521,7 +521,7 @@ const mineCab=()=>{const u=S.user,head='<div class="tcab cw">'+TDEFS+'<h2>Trophi
 if(!u)return head+'<p class="sub tn" style="text-align:center;margin:22px 0 12px">Log in to see your own trophy cabinet.</p><p style="text-align:center"><button class="btn" type="button" data-act="view" data-v="picks">Log in</button></p></div>';
 if(!S.tr||(S.user&&S.mt===null&&S.mtl))return head+'<p class="sub tn" style="margin:22px 0">Loading…</p></div>';
 const me=u.nick.toLowerCase(),aw=awardsFrom(S.tr),cnt=t=>aw.filter(a=>a.t===t&&String(a.nick).toLowerCase()===me).length,st=(S.mt&&S.mt.streak)||{cur:0,best:0,played:0},
-sr=(S.mt&&S.mt.stars)||{total:0,month:0},plaque='<span class="pq"><span class="in"><b style="--f:'+Math.max(.95,Math.min(1.9,8.6/(u.nick.length*.9))).toFixed(2)+';--m:'+Math.max(8,Math.min(14,78/(u.nick.length*.82))).toFixed(1)+'">'+esc(u.nick.toUpperCase())+'</b><i class="sd"></i><span class="sn" title="Duel Stars: '+sr.total+' in total, '+sr.month+' this month"><em>★</em>'+sr.total+'</span></span></span>',iv=(S.mt&&S.mt.invites)||{total:0,active:0},ivOn=t=>iv.active>=t,ivSub=t=>ivOn(t)?'Earned':Math.min(iv.active,t)+'/'+t,c1=cnt('m1'),c2=cnt('m2'),c3=cnt('m3'),cp=cnt('pr'),X=v=>(v/1992*100).toFixed(3)+'%',Y=v=>(v/1478*100).toFixed(3)+'%';
+sr=(S.mt&&S.mt.stars)||{total:0,month:0},plaque='<span class="pq"><span class="in"><b style="--f:'+Math.max(1.1,Math.min(2.4,9/(u.nick.length*.95))).toFixed(2)+';--m:'+Math.max(8,Math.min(16,92/(u.nick.length*.82))).toFixed(1)+'">'+esc(u.nick.toUpperCase())+'</b><i class="sd"></i><span class="sn" title="Duel Stars: '+sr.total+' in total, '+sr.month+' this month"><em>★</em>'+sr.total+'</span></span></span>',iv=(S.mt&&S.mt.invites)||{total:0,active:0},ivOn=t=>iv.active>=t,ivSub=t=>ivOn(t)?'Earned':Math.min(iv.active,t)+'/'+t,c1=cnt('m1'),c2=cnt('m2'),c3=cnt('m3'),cp=cnt('pr'),X=v=>(v/1992*100).toFixed(3)+'%',Y=v=>(v/1478*100).toFixed(3)+'%';
 const it=(f,cx,top,w,on)=>`<img class="it ${on?'on':'off'}" src="assets/t-${f}.webp" alt="" style="left:${X(cx)};top:${Y(top)};width:${X(w)}">`,
 pt=(cx,top,w,h,label,sub,on,cl)=>`<div class="pt ${on?'on':'off'} ${cl||''}" style="left:${X(cx)};top:${Y(top)};width:${X(w)};height:${Y(h)}"><b>${esc(label)}</b><span>${esc(sub)}</span></div>`,
 STR=[5,10,15],INV=[1,5,10],stOn=t=>st.best>=t;
