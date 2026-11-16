@@ -289,12 +289,13 @@ linear-gradient(115deg,rgba(255,255,255,.06) 0 16%,transparent 16%),radial-gradi
 .invbox .ir{display:flex;gap:8px;flex-wrap:wrap}
 .invbox input{flex:1 1 220px;min-width:0;padding:9px 12px;border-radius:8px;border:1px solid #2f4538;background:#0b1510;color:#dfe9e3;font:13px Inter,system-ui,sans-serif}
 .invbox .chip{cursor:pointer}
-.invbox .shx{display:grid;gap:8px;padding-top:12px;border-top:1px solid #2a3d32}
-.invbox .shx label{font:700 13px/1 "Barlow Condensed",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#F3D77A}
-.invbox .shx .shc{font:600 12px Inter,system-ui,sans-serif;letter-spacing:0;text-transform:none;color:#9db4a7;font-style:normal;margin-left:8px}.invbox .shx .shc.hi{color:#f2c230}
-.invbox .shx textarea{width:100%;box-sizing:border-box;min-height:132px;resize:vertical;padding:10px 12px;border-radius:10px;border:1px solid #2f4538;background:#0b1510;color:#eaf1ec;font:14px/1.45 Inter,system-ui,sans-serif}
-.invbox .shx .sr2{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.invbox .shx small{color:#9db4a7;font-size:12px;flex:1 1 180px}
-.invbox .xb{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;border:0;background:#fff;color:#000;font:700 14px Inter,system-ui,sans-serif;cursor:pointer}.invbox .xb svg{width:15px;height:15px}
+.shd{margin:14px auto 0;max-width:560px;text-align:center}.shd .shx{text-align:left;padding:12px;border:1px solid #2f4538;border-radius:12px;background:linear-gradient(#142319,#0f1b14)}
+.invbox .shx,.shd .shx{display:grid;gap:8px;padding-top:12px;border-top:1px solid #2a3d32}
+.invbox .shx label,.shd .shx label{font:700 13px/1 "Barlow Condensed",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#F3D77A}
+.invbox .shx .shc,.shd .shx .shc{font:600 12px Inter,system-ui,sans-serif;letter-spacing:0;text-transform:none;color:#9db4a7;font-style:normal;margin-left:8px}.invbox .shx .shc.hi,.shd .shx .shc.hi{color:#f2c230}
+.invbox .shx textarea,.shd .shx textarea{width:100%;box-sizing:border-box;min-height:132px;resize:vertical;padding:10px 12px;border-radius:10px;border:1px solid #2f4538;background:#0b1510;color:#eaf1ec;font:14px/1.45 Inter,system-ui,sans-serif}
+.invbox .shx .sr2,.shd .shx .sr2{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.invbox .shx small,.shd .shx small{color:#9db4a7;font-size:12px;flex:1 1 180px}
+.invbox .xb,.shd .xb{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;border:0;background:#fff;color:#000;font:700 14px Inter,system-ui,sans-serif;cursor:pointer}.invbox .xb svg,.shd .xb svg{width:15px;height:15px}
 
 .pq{display:block;position:absolute;z-index:4;left:50%;transform:translateX(-50%);width:24cqw;aspect-ratio:1100/300;background:url(assets/cab-sign3.webp) center/100% 100% no-repeat;filter:drop-shadow(0 .5cqw .9cqw rgba(0,0,0,.65));top:3.26cqw;transform:translate(-50%,-50%);letter-spacing:normal}
 .pq::before{content:"";position:absolute;left:50%;bottom:calc(100% - 2.7%);width:15.3%;aspect-ratio:84/44;transform:translateX(-50%);background:url(assets/cab-crown.webp) center/100% 100% no-repeat}
@@ -440,9 +441,9 @@ const n=Object.keys(S.picks).filter(k=>P.some(q=>q.id===k)).length;
 const chips=P.map((q,i)=>{const pk=S.picks[q.id],c=done(q)?(q.result==='void'||!pk?'l':pk===q.result?'p':'x'):pk?'w':locked(q)?'l':'';return`<button class="chip${i===S.cur?' on':''}" data-act="pair" data-i="${i}"><span class="dot ${c}"></span>${i+1}</button>`}).join('');
 return`
 ${RS().length>1?`<div class="rtabs" role="group" aria-label="Rounds">${RS().slice().reverse().map(r=>`<button class="chip${r===S.rd?' on':''}" data-act="rd" data-v="${esc(r)}">${esc(r)}${S.soon.includes(r)?'<small>SOON</small>':''}</button>`).join('')}</div>`:''}<div class="chips" role="group" aria-label="Pairs">${chips}</div>
-<div class="rh" style="text-align:center;margin-bottom:22px"><div class="eb">ROUND ${esc((p&&p.round)||S.round)}</div><div class="cn" style="font-size:clamp(30px,5vw,44px);font-weight:700">Who scores more?</div></div>
-${soon(p)?'<p class="soonb">COMING SOON · the pairs are ready, voting opens later</p>':''}<div class="duel">${card(p,'a')}<div class="vs">VS</div>${card(p,'b')}</div>
-<div class="stat" role="status">${S.msg?`<span class="ok">${esc(S.msg)}</span>`:status(p)}</div>
+<div id="duelcap"><div class="rh" style="text-align:center;margin-bottom:22px"><div class="eb">ROUND ${esc((p&&p.round)||S.round)}</div><div class="cn" style="font-size:clamp(30px,5vw,44px);font-weight:700">Who scores more?</div></div>
+${soon(p)?'<p class="soonb">COMING SOON · the pairs are ready, voting opens later</p>':''}<div class="duel">${card(p,'a')}<div class="vs">VS</div>${card(p,'b')}</div></div>
+<div class="stat" role="status">${S.msg?`<span class="ok">${esc(S.msg)}</span>`:status(p)}</div>${duelBox(p)}
 <div class="nav2"><button data-act="prev"${S.cur===0?' disabled':''}>Previous pair</button><button data-act="next"${S.cur>=P.length-1?' disabled':''}>Next pair</button>${P.some(q=>!locked(q)&&!done(q)&&!S.picks[q.id])?'':'<button class="mp" data-act="sum">My picks</button>'}</div>`}
 const STAR='<svg class="st1" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="sgA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE68A"/><stop offset=".55" stop-color="#E7B422"/><stop offset="1" stop-color="#B98308"/></linearGradient><linearGradient id="sgB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF4B8"/><stop offset="1" stop-color="#F2C230"/></linearGradient></defs><path d="M12 2.2l2.9 6.2 6.7.8-5 4.6 1.4 6.7L12 17l-6 3.5 1.4-6.7-5-4.6 6.7-.8z" fill="url(#sgA)" stroke="#8A5F06" stroke-width=".9" stroke-linejoin="round"/><path d="M12 2.2l2.9 6.2 6.7.8-5 4.6 1.4 6.7L12 17l-6 3.5 1.4-6.7-5-4.6 6.7-.8z" transform="translate(12 12.1) scale(.56) translate(-12 -12.1)" fill="url(#sgB)" stroke="#D69E0A" stroke-width="1.1" stroke-linejoin="round"/><path d="M12 4.6l1.5 3.3-1.5.9-1.5-.9z" fill="#fff" opacity=".55"/></svg>';
 function boardView(){const b=S.board;const bm=S.bm||MONTH,ml=(b&&b.months&&b.months.length?b.months:[MONTH]).slice().reverse();let h='<div class="txt"><h2>Leaderboard · '+(bm==='all'?'All time':mlab(bm))+'</h2><div class="chips" style="justify-content:flex-start;margin:0 0 12px">'+ml.concat(['all']).map(m=>`<button class="chip${bm===m?' on':''}" data-act="bm" data-v="${m}">${m==='all'?'All time':mlab(m)}</button>`).join('')+'</div>';if(!b)return h+'<p>Loading…</p></div>';if(!b.ok)return h+`<p class="err">${esc(ERR[b.error]||ERR.default)}</p></div>`;
@@ -614,17 +615,66 @@ g.save();g.translate(x,cy-ss/2);g.scale(ss/24,ss/24);const sgd=g.createLinearGra
 x+=ss+fs*.3;g.fillStyle='#ffe08a';g.shadowColor='rgba(255,200,70,.4)';g.shadowBlur=6;sp(num,x,cy,fs*.04);g.shadowBlur=0;
 return new Promise(ok=>cv.toBlob(ok,'image/png'))}
 async function prepShare(){if(!S.user||!S.tr)return;try{S.shBlob=await makeShareImage()}catch(e){S.shBlob=null}}
-async function shareX(mode){const t=($('shx')?$('shx').value:shareText()).trim(),link=invLink(),intent='https://twitter.com/intent/tweet?text='+encodeURIComponent(t)+'&url='+encodeURIComponent(link);
-const note=m=>{S.shMsg=m;draw();setTimeout(()=>{S.shMsg='';draw()},6000)};
-if(mode==='post'){// open X straight away (no share sheet); copy the picture to the clipboard so it can be pasted
- let cp=null;const bp=S.shBlob?Promise.resolve(S.shBlob):makeShareImage().catch(()=>null);
+async function postX(mode,c){const t=(c.ta&&$(c.ta)?$(c.ta).value:c.text()).trim(),link=invLink(),intent='https://twitter.com/intent/tweet?text='+encodeURIComponent(t)+'&url='+encodeURIComponent(link);
+const note=m=>{S[c.msg]=m;draw();setTimeout(()=>{S[c.msg]='';draw()},6000)},cached=()=>c.cached?c.cached():null;
+if(mode==='post'){let cp=null;const bp=cached()?Promise.resolve(cached()):c.make().catch(()=>null);
  if(navigator.clipboard&&window.ClipboardItem){try{cp=navigator.clipboard.write([new ClipboardItem({'image/png':bp.then(b=>{if(!b)throw 0;return b})})]).then(()=>true,()=>false)}catch(e){cp=null}}
  window.open(intent,'_blank','noopener');
  const ok=cp?await cp:false;return note(ok?'Image copied ✓ In the post paste it (long-press → Paste, or Ctrl+V)':'Post opened. Use "Save image" to get the picture and attach it')}
-let blob=S.shBlob||await makeShareImage().catch(()=>null);
-if(mode==='save'){if(!blob)return note('Could not make the image');const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='my-pitchduel-cabinet.png';document.body.appendChild(a);a.click();a.remove();return note('Image saved ✓')}
-const file=blob?new File([blob],'my-pitchduel-cabinet.png',{type:'image/png'}):null;
+const blob=cached()||await c.make().catch(()=>null);
+if(mode==='save'){if(!blob)return note('Could not make the image');const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=c.fname;document.body.appendChild(a);a.click();a.remove();return note('Image saved ✓')}
+const file=blob?new File([blob],c.fname,{type:'image/png'}):null;
 if(file&&navigator.canShare&&navigator.canShare({files:[file]})){try{await navigator.share({files:[file],text:t,url:link})}catch(e){}}else if(navigator.share){try{await navigator.share({text:t,url:link})}catch(e){}}}
+const CABX={ta:'shx',msg:'shMsg',fname:'my-pitchduel-cabinet.png',text:()=>shareText(),make:()=>makeShareImage(),cached:()=>S.shBlob};
+function shareX(mode){return postX(mode,CABX)}
+// ---- share a single duel (Pick tab)
+const dkey=p=>p.id+':'+(S.picks[p.id]||'-');
+function duelText(p){const pk=S.picks[p.id],a=p.a,b=p.b,cn=x=>CLUBN[x.club]||x.club,w=pk?p[pk.toLowerCase()]:null,o=pk?p[pk==='A'?'b':'a']:null;
+const t=pk?'Duel time ⚔️\nWho scores more points next match: '+a.name+' ('+cn(a)+') or '+b.name+' ('+cn(b)+')?\nI am backing '+w.name+' over '+o.name+' 💪\nThink you know better? Make your pick 👇\n#PitchDuel #FantasyFootball':'Duel time ⚔️\n'+a.name+' ('+cn(a)+') or '+b.name+' ('+cn(b)+'): who scores more points next match?\nI cannot decide. What is your pick? 👇\n#PitchDuel #FantasyFootball';return xtrim(t)}
+function duelDefault(p){const k=dkey(p);S.shdT=S.shdT||{};if(S.shdT[k]==null)S.shdT[k]=duelText(p);return S.shdT[k]}
+async function makeDuelImage(p){const W=1200,H=630,cv=document.createElement('canvas');cv.width=W;cv.height=H;const g=cv.getContext('2d'),FB='"Barlow Condensed",Impact,sans-serif',pk=S.picks[p.id];
+try{await Promise.all([document.fonts.load('700 20px "Barlow Condensed"'),document.fonts.load('600 14px Barlow')])}catch(e){}
+const sp=(t,x,y,ls,al)=>{g.textAlign=al||'left';if('letterSpacing'in g)g.letterSpacing=ls+'px';g.fillText(t,x,y);if('letterSpacing'in g)g.letterSpacing='0px'};
+const bgd=g.createLinearGradient(0,0,0,H);bgd.addColorStop(0,'#10241a');bgd.addColorStop(1,'#08120d');g.fillStyle=bgd;g.fillRect(0,0,W,H);
+const gl=g.createRadialGradient(W/2,H*.45,0,W/2,H*.45,520);gl.addColorStop(0,'rgba(243,215,122,.14)');gl.addColorStop(1,'rgba(243,215,122,0)');g.fillStyle=gl;g.fillRect(0,0,W,H);
+g.textBaseline='alphabetic';g.fillStyle='#F3D77A';g.font='700 26px '+FB;sp('ROUND '+String(p.round||'').toUpperCase()+' · '+p.pos,W/2,52,5,'center');
+g.fillStyle='#fff';g.font='700 56px '+FB;sp('WHO SCORES MORE?',W/2,112,2,'center');
+const rr=(x,y,w,h,r)=>{g.beginPath();g.roundRect?g.roundRect(x,y,w,h,r):g.rect(x,y,w,h)};
+['a','b'].forEach((sd,i)=>{const x=p[sd],on=pk===sd.toUpperCase(),px=i?W/2+54:60,pw=W/2-114,py=150,ph=400;
+ g.save();g.shadowColor='rgba(0,0,0,.55)';g.shadowBlur=24;g.shadowOffsetY=10;const fg=g.createLinearGradient(0,py,0,py+ph);fg.addColorStop(0,'#17301f');fg.addColorStop(1,'#0e1f16');g.fillStyle=fg;rr(px,py,pw,ph,22);g.fill();g.restore();
+ g.lineWidth=on?4:2;g.strokeStyle=on?'#F3D77A':'#2f4538';rr(px,py,pw,ph,22);g.stroke();
+ const cx=px+pw/2,cy=py+110,mono=x.name.replace(/[^A-Za-zÀ-ž]/g,'').slice(0,3).toUpperCase(),cg=g.createLinearGradient(cx,cy-70,cx,cy+70);cg.addColorStop(0,'#2f6b4a');cg.addColorStop(1,'#16352a');
+ g.beginPath();g.arc(cx,cy,68,0,7);g.fillStyle=cg;g.fill();g.lineWidth=3;g.strokeStyle=on?'#F3D77A':'#4a7a60';g.stroke();g.fillStyle='#E7F0EA';g.textAlign='center';g.textBaseline='middle';g.font='700 50px '+FB;sp(mono,cx,cy+3,3,'center');
+ g.textBaseline='alphabetic';g.fillStyle='#fff';let fs=50;g.font='700 '+fs+'px '+FB;while(g.measureText(x.name.toUpperCase()).width>pw-40&&fs>26){fs-=2;g.font='700 '+fs+'px '+FB}sp(x.name.toUpperCase(),cx,py+225,1,'center');
+ g.fillStyle='#9db4a7';g.font='600 22px Barlow,Inter,sans-serif';sp((CLUBN[x.club]||x.club)+' · '+x.pos+(age(x.dob)?' · '+age(x.dob):''),cx,py+262,0,'center');
+ const st=[[x.avg.toFixed(1),'AVG'],[String(x.max),'BEST'],[String(x.played),'PLAYED']],sw=(pw-60)/3;st.forEach(([v,l],k)=>{const sx=px+30+sw*k+sw/2;g.fillStyle='#FF7AD0';g.font='700 40px '+FB;sp(v,sx,py+330,0,'center');g.fillStyle='#7d9a8a';g.font='600 15px Barlow,Inter,sans-serif';sp(l,sx,py+356,2,'center')});
+ if(on){g.fillStyle='#F3D77A';rr(cx-78,py-16,156,34,17);g.fill();g.fillStyle='#2c1d08';g.font='700 20px '+FB;g.textBaseline='middle';sp('MY PICK',cx,py+2,3,'center');g.textBaseline='alphabetic'}});
+g.beginPath();g.arc(W/2,350,40,0,7);g.fillStyle='#0b1510';g.fill();g.lineWidth=3;g.strokeStyle='#F3D77A';g.stroke();g.fillStyle='#F3D77A';g.textAlign='center';g.textBaseline='middle';g.font='700 34px '+FB;sp('VS',W/2,352,2,'center');
+g.textBaseline='alphabetic';g.fillStyle='#d9bd77';g.font='700 24px '+FB;sp('PITCHDUEL',W/2,598,6,'center');
+return new Promise(ok=>cv.toBlob(ok,'image/png'))}
+
+
+// ---- exact picture of a page element (no library): DOM -> SVG foreignObject -> canvas
+const CAPP=['display','position','top','left','right','bottom','float','width','height','min-width','min-height','max-width','max-height','margin-top','margin-right','margin-bottom','margin-left','padding-top','padding-right','padding-bottom','padding-left','box-sizing','border-top-width','border-right-width','border-bottom-width','border-left-width','border-top-style','border-right-style','border-bottom-style','border-left-style','border-top-color','border-right-color','border-bottom-color','border-left-color','border-top-left-radius','border-top-right-radius','border-bottom-left-radius','border-bottom-right-radius','outline-width','outline-style','outline-color','outline-offset','background-color','background-image','background-size','background-position','background-repeat','color','font-family','font-size','font-weight','font-style','line-height','letter-spacing','text-align','text-transform','text-decoration-line','text-overflow','white-space','word-break','overflow-wrap','overflow-x','overflow-y','opacity','transform','transform-origin','flex-direction','flex-wrap','flex-grow','flex-shrink','flex-basis','align-items','align-self','align-content','justify-content','justify-items','gap','row-gap','column-gap','grid-template-columns','grid-template-rows','grid-column','grid-row','z-index','box-shadow','text-shadow','filter','object-fit','object-position','vertical-align','fill','stroke','stroke-width','stroke-linejoin','stroke-linecap','stop-color','stop-opacity','clip-path','mask','visibility','list-style-type','font-variant-numeric','text-indent'];
+const b64=b=>new Promise(ok=>{const f=new FileReader();f.onload=()=>ok(f.result);f.readAsDataURL(b)});
+async function toData(u){try{const r=await fetch(u,{mode:'cors'});if(!r.ok)return null;return await b64(await r.blob())}catch(e){return null}}
+let _fcss=null;async function fontCss(){if(_fcss!==null)return _fcss;let out='';try{const ls=[...document.querySelectorAll('link[rel=stylesheet][href*="fonts.googleapis"]')];for(const l of ls){let css=await (await fetch(l.href,{mode:'cors'})).text();const us=[...new Set([...css.matchAll(/url\((https:[^)]+)\)/g)].map(m=>m[1]))];for(const u of us){const d=await toData(u);if(d)css=css.split(u).join(d)}out+=css}}catch(e){}_fcss=out;return out}
+async function captureEl(el,scale,bg,pad){pad=pad||0;const root=el.getBoundingClientRect(),W=Math.ceil(root.width)+2*pad,H=Math.ceil(root.height)+2*pad;
+const oEls=[el,...el.querySelectorAll('*')],clone=el.cloneNode(true),cEls=[clone,...clone.querySelectorAll('*')];
+const jobs=[];oEls.forEach((o,i)=>{const c=cEls[i],cs=getComputedStyle(o);if(o instanceof SVGElement&&o.tagName.toLowerCase()!=='svg'){c.removeAttribute('class');return}let t='';for(const p of CAPP){const v=cs.getPropertyValue(p);if(v)t+=p+':'+v+';'}c.setAttribute('style',t);
+ if(o.tagName==='IMG'&&o.src&&!o.src.startsWith('data:'))jobs.push(toData(o.src).then(d=>{if(d)c.setAttribute('src',d)}));
+ const bi=cs.backgroundImage;if(bi&&bi.includes('url(')){const m=bi.match(/url\("?([^")]+)"?\)/);if(m&&!m[1].startsWith('data:'))jobs.push(toData(m[1]).then(d=>{if(d)c.style.backgroundImage='url("'+d+'")'}))}
+ if(i&&(cs.animationName&&cs.animationName!=='none'))c.style.animation='none';c.removeAttribute('class');c.removeAttribute('onerror');c.removeAttribute('loading')});
+clone.style.margin='0';clone.style.boxSizing='border-box';clone.style.padding=pad+'px';clone.style.width=W+'px';clone.style.height=H+'px';clone.style.position='relative';clone.style.left='0';clone.style.top='0';
+jobs.push(fontCss());await Promise.all(jobs);const fc=await fontCss();
+const html=new XMLSerializer().serializeToString(clone),svg='<svg xmlns="http://www.w3.org/2000/svg" width="'+W*scale+'" height="'+H*scale+'" viewBox="0 0 '+W+' '+H+'"><foreignObject width="'+W+'" height="'+H+'"><div xmlns="http://www.w3.org/1999/xhtml" style="width:'+W+'px;height:'+H+'px;background:'+bg+'"><style>'+fc.replace(/</g,'')+'</style>'+html+'</div></foreignObject></svg>';
+const img=new Image();await new Promise((ok,no)=>{img.onload=ok;img.onerror=no;img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg)});
+const cv=document.createElement('canvas');cv.width=W*scale;cv.height=H*scale;const g=cv.getContext('2d');g.fillStyle=bg;g.fillRect(0,0,cv.width,cv.height);g.drawImage(img,0,0,cv.width,cv.height);
+return new Promise((ok,no)=>{try{cv.toBlob(b=>b?ok(b):no(),'image/png')}catch(e){no(e)}})}
+const captureDuel=()=>{const el=$('duelcap');if(!el)return Promise.reject();return captureEl(el,2,'#0b1510',14)};
+const DUELX=()=>{const p=S.pairs[S.cur];return{ta:'shd',msg:'shdMsg',fname:'my-pitchduel-pick.png',text:()=>duelDefault(p),make:()=>captureDuel().catch(()=>makeDuelImage(p))}};
+function duelBox(p){if(!p||done(p)||soon(p)||p.result==='void')return'';const t=duelDefault(p),open=S.shdOpen;
+return'<div class="shd"><button class="chip" type="button" data-act="shdtoggle">'+(open?'Hide':'Share this duel on X')+'</button>'+(open?'<div class="shx" style="margin-top:10px"><label for="shd">Your post <em class="shc" id="shdc">'+xlen(t)+'/'+XMAX+'</em></label><textarea id="shd">'+esc(t)+'</textarea><div class="sr2"><button class="xb" type="button" data-act="shdpost"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Post on X</button><button class="chip" type="button" data-act="shdsave">Save image</button><small>'+(S.shdMsg||'Your invite link is added to the post (it takes 23 of the 280 characters).')+'</small></div></div>':'')+'</div>'}
 async function loadTrophies(){S.tr=null;S.mterr=false;const cached=S.user?mtLoad(S.user.nick):null;S.mt=cached;S.mtl=!!S.user&&!cached;draw();const a=apiRetry({action:'trophies'},2),b=S.user?apiRetry({action:'mytrophies',nick:S.user.nick,pin:S.user.pin},3):null;S.tr=await a;const r=b?await b:null;if(r&&r.ok){S.mt=r;mtSave(S.user.nick,r)}else if(S.user){S.mterr=true;if(!cached)S.mt=null}S.mtl=false;draw();prepShare()}
 async function loadBoard(){S.board=null;draw();S.board=await api({action:'board',month:S.bm||MONTH});draw()}
 document.addEventListener('submit',e=>{if(e.target&&e.target.id==='f')submit(e);else if(e.target&&e.target.id==='xf')saveX(e)});
@@ -632,6 +682,9 @@ document.addEventListener('click',async e=>{const b=e.target.closest('[data-act]
 if(a==='view'){const v=b.dataset.v;S.msg='';if(v==='mine'){S.view='picks';S.sum=true;draw()}else{S.view=v;if(v==='picks')S.sum=false;if(v==='board')loadBoard();else if(v==='trophies')loadTrophies();else draw()}}
 else if(a==='cab'){S.cab=b.dataset.v;draw()}
 else if(a==='copyinv'){const l=invLink();try{await navigator.clipboard.writeText(l)}catch(e){const i=$('invl');if(i){i.select();try{document.execCommand('copy')}catch(_){}}}S.invMsg='Copied ✓';draw();setTimeout(()=>{S.invMsg='';draw()},2500)}
+else if(a==='shdtoggle'){S.shdOpen=!S.shdOpen;draw()}
+else if(a==='shdpost'){postX('post',DUELX())}
+else if(a==='shdsave'){postX('save',DUELX())}
 else if(a==='sharex'){shareX('post')}
 else if(a==='saveimg'){shareX('save')}
 else if(a==='shareimg'){shareX('sheet')}
@@ -651,7 +704,7 @@ else if(a==='logout'){S.sum=false;S.user=null;S.picks={};S.remember=false;stash(
 else if(a==='xedit'){S.xEdit=true;S.xErr='';S.xMsg='';draw();const f=$('xf');if(f){f.scrollIntoView({block:'center'});$('xi').focus()}}
 else if(a==='xcancel'){S.xEdit=false;S.xErr='';draw()}
 else if(a==='refresh'){if(S.view==='trophies')loadTrophies();else loadBoard()}});
-document.addEventListener('input',e=>{if(e.target&&e.target.id==='shx'){let v=e.target.value;if(xlen(v)>XMAX){v=xtrim(v);e.target.value=v}S.shText=v;const c=$('shc');if(c){c.textContent=xlen(v)+'/'+XMAX;c.className='shc'+(xlen(v)>XMAX-10?' hi':'')}}});
+document.addEventListener('input',e=>{if(e.target&&e.target.id==='shd'){let v=e.target.value;if(xlen(v)>XMAX){v=xtrim(v);e.target.value=v}const p=S.pairs[S.cur];if(p){S.shdT=S.shdT||{};S.shdT[dkey(p)]=v}const c=$('shdc');if(c){c.textContent=xlen(v)+'/'+XMAX;c.className='shc'+(xlen(v)>XMAX-10?' hi':'')}}if(e.target&&e.target.id==='shx'){let v=e.target.value;if(xlen(v)>XMAX){v=xtrim(v);e.target.value=v}S.shText=v;const c=$('shc');if(c){c.textContent=xlen(v)+'/'+XMAX;c.className='shc'+(xlen(v)>XMAX-10?' hi':'')}}});
 (async function init(){try{const r=await fetch('pairs.json?'+Date.now());const d=await r.json();S.all=d.pairs||[];S.soon=d.soon||[];S.round=d.round||'';{const o=RS().filter(r=>!S.soon.includes(r));setRd(o.length?o[o.length-1]:(RS()[0]||''))}S.loaded=true}catch(e){S.failed=true}
 let sv=null;try{sv=JSON.parse(localStorage.getItem('sdfbattle')||'null')}catch(e){}
 if(location.hash==='#rules')S.view='rules';draw();if(sv&&sv.n&&sv.p&&S.loaded){const r=await api({action:'login',nick:sv.n,pin:sv.p});if(r.ok){S.user={nick:r.nick,pin:sv.p,x:typeof r.x==='string'?r.x:(typeof sv.x==='string'?sv.x:undefined)};await loadPicks();goOpen();draw()}}})();
