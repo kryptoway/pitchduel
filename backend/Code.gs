@@ -12,6 +12,11 @@ const SITE = 'https://kryptoway.github.io/pitchduel/';
 const MONTHS_START = '2026-11';
 const MIN_ANSWERED = 5;    // minimum scored picks to win a monthly medal
 
+// Wallet bonuses (stars that go to the wallet only, never to the leaderboard)
+const BONUS_INVITE = 1;                     // inviter AND invited player, once the invited player has played a round
+const BONUS_MEDAL = { 1: 3, 2: 2, 3: 1 };   // monthly podium: gold / silver / bronze
+const BONUS_PERFECT = 2;                    // every Perfect Round (all scored pairs of a round picked and correct)
+
 const MAX_FAILS = 5;       // wrong PIN attempts before a temporary block
 const BLOCK_MIN = 15;      // block length in minutes
 
@@ -19,7 +24,8 @@ const BLOCK_MIN = 15;      // block length in minutes
 function setup() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   [['Players', ['nick_lower', 'nick', 'pin_hash', 'created_at', 'x_handle', 'invited_by']],
-   ['Picks', ['key', 'updated_at', 'nick_lower', 'nick', 'pair_id', 'pick']]].forEach(function (t) {
+   ['Picks', ['key', 'updated_at', 'nick_lower', 'nick', 'pair_id', 'pick']],
+   ['Wallet', ['key', 'created_at', 'nick_lower', 'delta', 'reason']]].forEach(function (t) {
     let s = ss.getSheetByName(t[0]);
     if (!s) { s = ss.insertSheet(t[0]); s.appendRow(t[1]); s.setFrozenRows(1); }
   });
@@ -311,7 +317,7 @@ function compute_() {
       });
       // Perfect round = every scored pair of the round picked AND correct (void pairs do not count).
       Object.keys(ok).forEach(function (nl) {
-        if (ok[nl] === g.length) { P(nl).e.perfect = 1; awards.push({ t: 'pr', k: r, nick: nicks[nl] }); }
+        if (ok[nl] === g.length) { P(nl).e.perfect = 1; P(nl).pr = (P(nl).pr || 0) + 1; awards.push({ t: 'pr', k: r, nick: nicks[nl] }); }
       });
     });
     Object.keys(st).forEach(function (nl) {   // Duel Stars: 1 per correct pick, void pairs give nothing
@@ -375,6 +381,19 @@ function compute_() {
     if (best[nl] >= 5) P(nl).e.onfire = 1;
     if (best[nl] >= 8) P(nl).e.unstop = 1;
   });
+  // wallet bonuses (derived, so they can never get out of sync with the game data)
+  Object.keys(players).forEach(function (nl) {
+    const pl = players[nl], w = { inv: 0, med: 0, prf: 0 };
+    pl.m.forEach(function (x) { w.med += BONUS_MEDAL[x[1]] || 0; });
+    w.prf = (pl.pr || 0) * BONUS_PERFECT;
+    pl.w = w;
+  });
+  rows_('Players', 6).forEach(function (r) {
+    const by = String(r[5] || '').toLowerCase(), me = players[r[0]];
+    if (!by || by === r[0] || !me || !me.s || me.s.played < 1 || !players[by]) return;
+    players[by].w.inv += BONUS_INVITE;   // the inviter
+    me.w.inv += BONUS_INVITE;            // the invited player
+  });
   const out = { months: outMonths, players: players, awards: awards };
   const txt = JSON.stringify(out);
   cachePutBig_(cache, 'tcalc', txt, 180);
@@ -392,12 +411,24 @@ function trophies_() {
   return { ok: true, minAnswered: MIN_ANSWERED, months: c.months, awards: c.awards || [], ach: ach, players: total, updated: new Date().toISOString() };
 }
 
+/** Sum of manual wallet entries (spending on Pro etc. is negative). The sheet is optional. */
+function walletSheet_(nl) {
+  const s = sheet_('Wallet');
+  if (!s) return 0;
+  let t = 0;
+  rows_('Wallet', 5).forEach(function (r) { if (r[2] === nl) t += Number(r[3]) || 0; });
+  return t;
+}
+
 /** Private: the trophies of one logged-in player. */
 function mytrophies_(nick, pin) {
   const u = auth_(nick, pin);
   if (!u.ok) return u;
   const p = compute_().players[u.nl] || { e: {}, m: [] };
-  return { ok: true, nick: u.nick, streak: p.s || { cur: 0, best: 0, played: 0 }, stars: { total: p.stt || 0, month: p.stm || 0 }, invites: p.inv || { total: 0, active: 0 }, earned: Object.keys(p.e),
+  const w = p.w || { inv: 0, med: 0, prf: 0 }, spent = walletSheet_(u.nl), earned = p.stt || 0;
+  const wallet = { stars: earned, invites: w.inv, medals: w.med, perfect: w.prf, other: spent,
+                   balance: earned + w.inv + w.med + w.prf + spent };
+  return { ok: true, nick: u.nick, wallet: wallet, streak: p.s || { cur: 0, best: 0, played: 0 }, stars: { total: p.stt || 0, month: p.stm || 0 }, invites: p.inv || { total: 0, active: 0 }, earned: Object.keys(p.e),
            medals: p.m.map(function (x) { return { month: x[0], place: x[1] }; }) };
 }
 
