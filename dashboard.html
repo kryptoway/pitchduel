@@ -106,6 +106,11 @@ main{max-width:1680px}
 th{vertical-align:bottom}
 @media (min-width:1100px){table th,table td{padding-left:11px;padding-right:11px}}
 @media (min-width:1500px){table{font-size:16px}th{font-size:14px}}
+@media (max-width:900px){table{font-size:13px}th{font-size:11.5px}th,td{padding:4px 3px}.rk{width:21px;height:21px;font-size:11px}
+.wrapo{position:relative}.sch{display:none;position:absolute;right:0;top:0;bottom:0;width:30px;pointer-events:none;font-style:normal;background:linear-gradient(to right,transparent,var(--card) 75%)}.sch b{position:sticky;top:42vh;display:block;text-align:right;padding-right:4px;font-size:32px;line-height:1;font-weight:700;color:var(--acc);animation:schp 1.4s ease-in-out infinite}
+.wrapo.more .sch{display:block}
+@keyframes schp{0%,100%{opacity:.45;transform:translateX(0)}50%{opacity:1;transform:translateX(-3px)}}}
+@media (max-width:640px){th.bc,td.bc{display:none}table{min-width:0}}
 @media (max-width:900px){
 table tr:not(.det)>:nth-child(1),table tr:not(.det)>:nth-child(2){position:sticky;background:var(--card);z-index:2}
 table tr:not(.det)>:nth-child(1){left:0;min-width:36px;width:36px;max-width:36px;padding-left:4px;padding-right:2px}
@@ -498,10 +503,12 @@ const st=SCV.map(([k])=>{const v=stat(p,k);return(ED&&(k==='goals'||k==='ass'))?
 return`<tr class="pl${i?'':' lead'}${low?' low':''}" tabindex="0" data-pl="${p.id}" aria-expanded="${o}"><td><span class="rk r${i+1}">${i+1}</span></td><td><span class="nm">${o?'▾':'▸'} ${esc(p.name)}${stDot(p)}${lvTag(p)}</span></td><td class="fg">${ED?`<input class="cl" data-id="${p.id}" data-f="nat" value="${esc(p.nat||'')}" maxlength="3" aria-label="Nationality code" style="width:52px;text-transform:uppercase">`:flagOf(p)}</td><td>${esc(p.club||'')}</td>${S.pv==='ALL'?`<td><span class="pp">${p.pos}</span></td>`:''}<td class="bc">${(av=>isN(av)&&mx>0?`<i class="pb"><b style="width:${Math.max(0,Math.min(100,av/mx*100)).toFixed(1)}%"></b></i>`:'')(ST.avg(a))}</td>${st}${MC.map((c,ci)=>{const v=ST.avg(cs(p,c)),pv=ci?ST.avg(cs(p,MC[ci-1])):null,d=isN(v)&&isN(pv)?v-pv:0,big=Math.abs(d)>=1;return`<td class="a">${fmt(v)}<span class="tr ${d>0?'up':'tdn'}"${big?` title="${d>0?'+':''}${Math.round(d*10)/10} vs ${esc(MC[ci-1].name)}"`:''}>${big?(d>0?'▲':'▼'):''}</span></td>`}).reverse().join('')}${mid}</tr>`+(o?`<tr class="det"><td colspan="30">${detail(p)}</td></tr>`:'')}).join('');
 if(!rows)rows=`<tr><td colspan="30" style="color:var(--mut)">${(FQ||FC)?'No matching players.':'No players.'}</td></tr>`;
 if(S.pv==='ALL'?pos!==POS[0]:S.pv!==pos)return;
-sh+=`<section${S.pv==='ALL'?' class="tl0"':''}><div class="sh"><h2>${PN[S.pv]}</h2><div class="flt"><input id="fq" type="search" placeholder="Search player, club or country…" aria-label="Search by player, club or country" size="28" value="${esc(FQ)}" autocomplete="off">${(FQ||FC)?`<span class="hint">${shown} of ${L.length}</span>`:''}</div></div><div class="wrap"><table><thead><tr><th></th><th>Player</th><th class="fg">Nat.</th><th>Club</th>${S.pv==='ALL'?'<th>Pos.</th>':''}<th class="bc"></th>${cols}${head}</tr></thead><tbody>${rows}</tbody></table></div></section>`});
+sh+=`<section${S.pv==='ALL'?' class="tl0"':''}><div class="sh"><h2>${PN[S.pv]}</h2><div class="flt"><input id="fq" type="search" placeholder="Search player, club or country…" aria-label="Search by player, club or country" size="28" value="${esc(FQ)}" autocomplete="off">${(FQ||FC)?`<span class="hint">${shown} of ${L.length}</span>`:''}</div></div><div class="wrapo"><div class="wrap"><table><thead><tr><th></th><th>Player</th><th class="fg">Nat.</th><th>Club</th>${S.pv==='ALL'?'<th>Pos.</th>':''}<th class="bc"></th>${cols}${head}</tr></thead><tbody>${rows}</tbody></table></div><i class="sch" aria-hidden="true"><b>›</b></i></div></section>`});
 ge('lead').innerHTML=lh;ge('secs').innerHTML=`<div class="allbar">${ptabs}</div>`+sh+foot()}
 document.addEventListener('click',e=>{const tr=e.target.closest('tr[data-pl]');if(!tr||e.target.closest('input,button'))return;const id=tr.dataset.pl;SEL=SEL==id?null:id;render();const r=document.querySelector(`tr[data-pl="${id}"]`);if(r)r.focus({preventScroll:true})});
 document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches&&e.target.matches('tr[data-pl]')){e.preventDefault();e.target.click()}});
+(function(){const upd=()=>document.querySelectorAll('.wrap').forEach(w=>{const o=w.parentElement;if(o)o.classList.toggle('more',w.scrollLeft+w.clientWidth<w.scrollWidth-4)});
+document.addEventListener('scroll',upd,true);addEventListener('resize',upd);new MutationObserver(upd).observe(document.body,{childList:true,subtree:true});upd()})();
 let ART=null,CAN=false,EDIT=false,DLC=null;
 let FQ='',FC='';const HAY=p=>nrm([p.name,p.full,p.club,CLUBF[p.club],natCode(p),FLN[natCode(p)],p.pos].filter(Boolean).join(' '));
 const FM=p=>{const t=nrm(FQ).split(/\s+/).filter(Boolean);if(!t.length)return true;const h=HAY(p);return t.every(w=>h.includes(w))};
