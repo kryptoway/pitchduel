@@ -95,7 +95,6 @@ tr.det .ds .num.pk{color:var(--avg)}tr.det .ds .num.gr,tr.det .ds .num.tl{color:
 .bd.N{background:var(--tn)}.bd.C{background:var(--tp);color:#10251B}
 th.tN,td.tN{background:color-mix(in srgb,var(--tn) 10%,transparent)}th.tC,td.tC{background:color-mix(in srgb,var(--tp) 12%,transparent)}
 .lg{display:flex;flex-wrap:wrap;gap:6px 18px;margin:4px 0 16px;font-size:13px;color:var(--mut)}
-.tfr{align-items:flex-start!important}.tfg{display:inline-flex;flex-direction:column;align-items:flex-start;gap:5px;max-width:210px}.tfd{font-size:12px;line-height:1.3;color:var(--mut);padding-left:2px}
 button.tab.tf.C.on{background:var(--tp);border-color:var(--tp);color:#10251B}button.tab.tf.N.on{background:var(--tn);border-color:var(--tn);color:#fff}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) button.tab.tf.N.on{color:#0F1B15}}:root[data-theme="dark"] button.tab.tf.N.on{color:#0F1B15}
 
@@ -469,7 +468,7 @@ function render(){
 fix();const all=S.view==='all',c=cur(),ge=id=>document.getElementById(id);
 const ED=EDIT&&!all,DIRTY=EDIT&&snap()!==SNAP0;
 ge('top').innerHTML=`<div class="row"><button class="tab${all?' on':''}" data-tab="all">Combined</button>${S.comps.slice().reverse().map(x=>`<button class="tab${x.id===S.view?' on':''}" data-tab="${x.id}">${esc(x.name)}</button>`).join('')}${EDIT?'<button data-addc="1">+ Month</button>':''}</div><div class="row"><label>Min. matches played for leaders <input class="mn" type="number" min="1" data-f="min" value="${S.min}"></label>${CAN?`<button id="edt" class="${EDIT?'pri':''}">${EDIT?'Done editing':'Edit data'}</button>`:''}${CAN&&DLC?'<button id="dlj">Download data (JSON)</button>':''}</div>`
-+`<div class="row tfr"><span class="hint">Match types:</span>${['L','C','N'].map(t=>`<span class="tfg"><button class="tab tf ${t}${TF.has(t)?' on':''}" data-tf="${t}">${TN[t]}</button><span class="tfd">${TD[t]}</span></span>`).join('')}${TF.size<3?'<span class="hint">Averages and appearances use only the selected types. Goals and assists are monthly totals and are not filtered.</span>':''}</div>`
++`<div class="row"><span class="hint">Match types:</span>${['L','C','N'].map(t=>`<button class="tab tf ${t}${TF.has(t)?' on':''}" data-tf="${t}" title="${esc(TD[t])}">${TN[t]}</button>`).join('')}${TF.size<3?'<span class="hint">Averages and appearances use only the selected types. Goals and assists are monthly totals and are not filtered.</span>':''}</div>`
 +(ED?`<div class="row"><label>Month name <input class="cn" data-f="cname" value="${esc(c.name)}"></label><button class="pri" id="addR">+ Round</button>${c.rounds.length>1?`<button data-arm="delr" data-r="${c.rounds.length-1}">Remove last round</button>`:''}</div>`:'')
 +(EDIT&&all?'<p class="hint">Select a month tab to edit its data.</p>':'')
 +(EDIT?`<div class="row"><button class="pri" id="pub"${DIRTY?'':' disabled'}>Publish changes</button><button id="disc"${DIRTY?'':' disabled'}>Discard changes</button><span class="hint">${DIRTY?'Unpublished changes. Visitors see them only after you publish.':'No unpublished changes.'}</span></div>`:'');
