@@ -187,7 +187,7 @@ function fix(){
   if(S.pv!=='ALL'&&!POS.includes(S.pv))S.pv='FWD';
   const k=(S.sort||{}).k||'';const cv=S.comps.find(c=>c.id===S.view);
   const rk=/^r:\d+$/.test(k)&&S.view!=='all'&&cv&&+k.slice(2)<cv.rounds.length;
-  if(!S.sort||!(['sum','avg','apps','goals','ass','best'].includes(k)||rk||(S.view==='all'&&/^c:/.test(k)))||(S.view==='all'&&k==='sum'))S.sort={k:'avg',d:'desc'};
+  if(!S.sort||!(['sum','avg','apps','goals','ass','best','nat','club'].includes(k)||rk||(S.view==='all'&&/^c:/.test(k)))||(S.view==='all'&&k==='sum'))S.sort={k:'avg',d:'desc'};
 }
 fix();migrate();fix();
 const cur=()=>S.comps.find(c=>c.id===S.view);
@@ -229,11 +229,13 @@ const stat=(p,k)=>k==='goals'?gTot(p,'g'):k==='ass'?gTot(p,'a'):ST[k](series(p))
 const esc=s=>String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
 const fmt=n=>n===null||n===undefined?'–':String(n);
 const byId=id=>S.players.find(p=>p.id==id);
-function valOf(p,k){if(k.startsWith('r:'))return S.view==='all'?null:p.pts[S.view][+k.slice(2)];
+function valOf(p,k){if(k==='nat')return String(p.nat||'').trim().toUpperCase()||null;if(k==='club')return String(p.club||'').trim()||null;if(k.startsWith('r:'))return S.view==='all'?null:p.pts[S.view][+k.slice(2)];
   if(k.startsWith('c:'))return ST.avg(cs(p,S.comps.find(x=>x.id===k.slice(2))));return stat(p,k)}
 function sorted(list){const desc=S.sort.d==='desc';
-  return list.slice().sort((a,b)=>{const x=valOf(a,S.sort.k),y=valOf(b,S.sort.k),mx=!isN(x),my=!isN(y);
-    if(mx||my)return mx&&my?0:mx?1:-1;return(x===y?0:desc?y-x:x-y)||ST.sum(series(b))-ST.sum(series(a))})}
+  return list.slice().sort((a,b)=>{const x=valOf(a,S.sort.k),y=valOf(b,S.sort.k),mx=!isN(x)&&typeof x!=='string',my=!isN(y)&&typeof y!=='string';
+    if(mx||my)return mx&&my?0:mx?1:-1;
+    if(typeof x==='string'||typeof y==='string'){const c=String(x).localeCompare(String(y),'en',{sensitivity:'base'});return(desc?-c:c)||ST.avg(series(b))-ST.avg(series(a))||ST.sum(series(b))-ST.sum(series(a))}
+    return(x===y?0:desc?y-x:x-y)||ST.sum(series(b))-ST.sum(series(a))})}
 const arrow=k=>S.sort.k===k?(S.sort.d==='desc'?'▼':'▲'):'⇅';
 const sbtn=(k,t)=>`<button class="so${S.sort.k===k?' on':''}" data-sort="${k}" title="Sort" aria-label="Sort by ${esc(t||(k.startsWith('r:')?'round '+(+k.slice(2)+1):k))}">${t?esc(t)+' ':''}${arrow(k)}</button>`;
 function toast(m,ms){const e=document.getElementById('msg');e.textContent=m;clearTimeout(toast.t);toast.t=setTimeout(()=>e.textContent='',ms||3500)}
@@ -410,7 +412,7 @@ document.addEventListener('click',e=>{
     if(d.armed!=='1'){const o=b.textContent;d.o=o;d.armed='1';b.textContent='Sure?';
       setTimeout(()=>{if(b.isConnected){d.armed='';b.textContent=o}},3000);return}
     if(['pts','all','seed','delc'].includes(d.arm))stash();const was=S;ACT[d.arm](b);if(S===was)S.touched=true;fix();save();render();if(b.isConnected){d.armed='';if(d.o)b.textContent=d.o}return}
-  if(d.sort!==undefined){const k=d.sort;if(S.sort.k===k)S.sort.d=S.sort.d==='desc'?'asc':'desc';else S.sort={k,d:'desc'};save();render();return}
+  if(d.sort!==undefined){const k=d.sort;if(S.sort.k===k)S.sort.d=S.sort.d==='desc'?'asc':'desc';else S.sort={k,d:(k==='nat'||k==='club')?'asc':'desc'};save();render();return}
   if(d.pv){S.pv=d.pv;save();render();return}
   if(d.tab){S.view=d.tab;save();render();return}
   if(d.addc){const c={id:'c'+nid(),name:'New month',rounds:['R1']};S.comps.push(c);S.view=c.id;S.touched=true;fix();save();render();return}
@@ -485,7 +487,7 @@ const st=SCV.map(([k])=>{const v=stat(p,k);return(ED&&(k==='goals'||k==='ass'))?
 return`<tr class="pl${i?'':' lead'}${low?' low':''}" tabindex="0" data-pl="${p.id}" aria-expanded="${o}"><td><span class="rk r${i+1}">${i+1}</span></td><td><span class="nm">${o?'▾':'▸'} ${esc(p.name)}${stDot(p)}${lvTag(p)}</span></td><td class="fg">${ED?`<input class="cl" data-id="${p.id}" data-f="nat" value="${esc(p.nat||'')}" maxlength="3" aria-label="Nationality code" style="width:52px;text-transform:uppercase">`:flagOf(p)}</td><td>${esc(p.club||'')}</td>${S.pv==='ALL'?`<td><span class="pp">${p.pos}</span></td>`:''}<td class="bc">${(av=>isN(av)&&mx>0?`<i class="pb"><b style="width:${Math.max(0,Math.min(100,av/mx*100)).toFixed(1)}%"></b></i>`:'')(ST.avg(a))}</td>${st}${MC.map((c,ci)=>{const v=ST.avg(cs(p,c)),pv=ci?ST.avg(cs(p,MC[ci-1])):null,d=isN(v)&&isN(pv)?v-pv:0,big=Math.abs(d)>=1;return`<td class="a">${fmt(v)}<span class="tr ${d>0?'up':'tdn'}"${big?` title="${d>0?'+':''}${Math.round(d*10)/10} vs ${esc(MC[ci-1].name)}"`:''}>${big?(d>0?'▲':'▼'):''}</span></td>`}).reverse().join('')}${mid}</tr>`+(o?`<tr class="det"><td colspan="30">${detail(p)}</td></tr>`:'')}).join('');
 if(!rows)rows=`<tr><td colspan="30" style="color:var(--mut)">${(FQ||FC)?'No matching players.':'No players.'}</td></tr>`;
 if(S.pv==='ALL'?pos!==POS[0]:S.pv!==pos)return;
-sh+=`<section${S.pv==='ALL'?' class="tl0"':''}><div class="sh"><h2>${PN[S.pv]}</h2><div class="flt"><input id="fq" type="search" placeholder="Search player…" aria-label="Filter by player name" value="${esc(FQ)}" autocomplete="off"><input id="fc" type="search" placeholder="Club…" aria-label="Filter by club" value="${esc(FC)}" autocomplete="off">${(FQ||FC)?`<span class="hint">${shown} of ${L.length}</span>`:''}</div></div><div class="wrap"><table><thead><tr><th></th><th>Player</th><th class="fg">Nat.</th><th>Club</th>${S.pv==='ALL'?'<th>Pos.</th>':''}<th class="bc"></th>${cols}${head}</tr></thead><tbody>${rows}</tbody></table></div></section>`});
+sh+=`<section${S.pv==='ALL'?' class="tl0"':''}><div class="sh"><h2>${PN[S.pv]}</h2><div class="flt"><input id="fq" type="search" placeholder="Search player…" aria-label="Filter by player name" value="${esc(FQ)}" autocomplete="off"><input id="fc" type="search" placeholder="Club…" aria-label="Filter by club" value="${esc(FC)}" autocomplete="off">${(FQ||FC)?`<span class="hint">${shown} of ${L.length}</span>`:''}</div></div><div class="wrap"><table><thead><tr><th></th><th>Player</th><th class="fg"><div class="hd" style="justify-content:flex-start">${sbtn('nat','')}</div><div class="dt">Nat.</div></th><th><div class="hd" style="justify-content:flex-start">${sbtn('club','')}</div><div class="dt">Club</div></th>${S.pv==='ALL'?'<th>Pos.</th>':''}<th class="bc"></th>${cols}${head}</tr></thead><tbody>${rows}</tbody></table></div></section>`});
 ge('lead').innerHTML=lh;ge('secs').innerHTML=`<div class="allbar">${ptabs}</div>`+sh+LEGEND+foot()}
 document.addEventListener('click',e=>{const tr=e.target.closest('tr[data-pl]');if(!tr||e.target.closest('input,button'))return;const id=tr.dataset.pl;SEL=SEL==id?null:id;render();const r=document.querySelector(`tr[data-pl="${id}"]`);if(r)r.focus({preventScroll:true})});
 document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches&&e.target.matches('tr[data-pl]')){e.preventDefault();e.target.click()}});
