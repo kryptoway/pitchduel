@@ -106,6 +106,16 @@ main{max-width:1680px}
 th{vertical-align:bottom}
 @media (min-width:1100px){table th,table td{padding-left:11px;padding-right:11px}}
 @media (min-width:1500px){table{font-size:16px}th{font-size:14px}}
+@media (max-width:900px){
+table tr:not(.det)>:nth-child(1),table tr:not(.det)>:nth-child(2){position:sticky;background:var(--card);z-index:2}
+table tr:not(.det)>:nth-child(1){left:0;min-width:36px;width:36px;max-width:36px;padding-left:4px;padding-right:2px}
+table tr:not(.det)>:nth-child(2){left:36px;box-shadow:8px 0 8px -8px rgba(0,0,0,.55)}
+thead th:nth-child(1),thead th:nth-child(2){z-index:3}
+tr.lead>td:nth-child(1),tr.lead>td:nth-child(2){background:var(--lead)}
+tr.pl:hover>td:nth-child(1),tr.pl:hover>td:nth-child(2){background:var(--bg)}
+tr.low>td:nth-child(1),tr.low>td:nth-child(2){opacity:1}tr.low>td:nth-child(1)>*,tr.low>td:nth-child(2)>*{opacity:.55}
+}
+
 .ft{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;margin:6px 0 20px;padding-top:10px;border-top:1px solid var(--line);font-size:13px;color:var(--mut)}.ft .cr{flex-basis:100%;font-size:12px;opacity:.75}
 .ft a{color:var(--acc);text-decoration:none;font-weight:600}.ft a:hover{text-decoration:underline}
 .bd.L{background:var(--acc);color:#fff}
