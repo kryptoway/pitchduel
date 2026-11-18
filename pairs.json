@@ -58,7 +58,8 @@
      "time": "21:00",
      "comp": "La Liga"
     },
-    "nat": "ES"
+    "nat": "ES",
+    "full": "Joan García"
    },
    "b": {
     "id": 102,
@@ -107,7 +108,8 @@
      "time": "17:30",
      "comp": "Premier League"
     },
-    "nat": "ES"
+    "nat": "ES",
+    "full": "David Raya"
    },
    "pts": [
     62.3,
@@ -160,7 +162,8 @@
      "comp": "La Liga"
     },
     "dob": "1992-05-11",
-    "nat": "BE"
+    "nat": "BE",
+    "full": "Thibaut Courtois"
    },
    "b": {
     "id": 85,
@@ -209,7 +212,8 @@
      "time": "14:00",
      "comp": "La Liga"
     },
-    "nat": "SI"
+    "nat": "SI",
+    "full": "Jan Oblak"
    },
    "pts": [
     112.8,
@@ -266,7 +270,8 @@
      "comp": "Bundesliga"
     },
     "dob": "1999-12-01",
-    "nat": "DE"
+    "nat": "DE",
+    "full": "Nico Schlotterbeck"
    },
    "b": {
     "id": 81,
@@ -304,7 +309,8 @@
      "comp": "Bundesliga"
     },
     "dob": "1997-03-18",
-    "nat": "DE"
+    "nat": "DE",
+    "full": "Maximilian Mittelstädt"
    },
    "pts": [
     104.8,
@@ -366,7 +372,8 @@
      "time": "19:00",
      "comp": "Ligue 1"
     },
-    "nat": "MA"
+    "nat": "MA",
+    "full": "Achraf Hakimi"
    },
    "b": {
     "id": 56,
@@ -411,7 +418,8 @@
      "time": "16:15",
      "comp": "La Liga"
     },
-    "nat": "ES"
+    "nat": "ES",
+    "full": "Dean Huijsen"
    },
    "pts": [
     359,
@@ -474,7 +482,8 @@
      "comp": "Premier League"
     },
     "dob": "1999-01-14",
-    "nat": "ENG"
+    "nat": "ENG",
+    "full": "Declan Rice"
    },
    "b": {
     "id": 25,
@@ -525,7 +534,8 @@
      "comp": "Serie A"
     },
     "dob": "1991-06-28",
-    "nat": "BE"
+    "nat": "BE",
+    "full": "Kevin De Bruyne"
    },
    "pts": [
     146.8,
@@ -580,7 +590,8 @@
      "comp": "Ligue 1"
     },
     "dob": "1996-04-03",
-    "nat": "ES"
+    "nat": "ES",
+    "full": "Fabián Ruiz"
    },
    "b": {
     "id": 49,
@@ -631,7 +642,8 @@
      "comp": "La Liga"
     },
     "dob": "2005-02-25",
-    "nat": "TR"
+    "nat": "TR",
+    "full": "Arda Güler"
    },
    "pts": [
     "DNP",
@@ -696,7 +708,8 @@
      "comp": "Bundesliga"
     },
     "dob": "1993-07-28",
-    "nat": "ENG"
+    "nat": "ENG",
+    "full": "Harry Kane"
    },
    "b": {
     "id": 71,
@@ -748,7 +761,8 @@
      "comp": "La Liga"
     },
     "dob": "2007-07-13",
-    "nat": "ES"
+    "nat": "ES",
+    "full": "Lamine Yamal"
    },
    "pts": [
     64.3,
@@ -812,7 +826,8 @@
      "comp": "Ligue 1"
     },
     "dob": "2005-06-03",
-    "nat": "FR"
+    "nat": "FR",
+    "full": "Désiré Doué"
    },
    "b": {
     "id": 78,
@@ -865,7 +880,8 @@
      "comp": "La Liga"
     },
     "dob": "1998-12-20",
-    "nat": "FR"
+    "nat": "FR",
+    "full": "Kylian Mbappé"
    },
    "pts": [
     "DNP",
@@ -922,7 +938,8 @@
      "comp": "Champions League"
     },
     "dob": "1992-05-11",
-    "nat": "BE"
+    "nat": "BE",
+    "full": "Thibaut Courtois"
    },
    "b": {
     "id": 58,
@@ -975,7 +992,8 @@
      "time": "21:00",
      "comp": "Champions League"
     },
-    "nat": "ES"
+    "nat": "ES",
+    "full": "Joan García"
    },
    "pts": [
     65.5,
@@ -1040,7 +1058,8 @@
      "time": "21:00",
      "comp": "Champions League"
     },
-    "nat": "ES"
+    "nat": "ES",
+    "full": "David Raya"
    },
    "b": {
     "id": 85,
@@ -1093,7 +1112,8 @@
      "time": "21:00",
      "comp": "Champions League"
     },
-    "nat": "SI"
+    "nat": "SI",
+    "full": "Jan Oblak"
    },
    "pts": [
     84.5,
@@ -1134,7 +1154,8 @@
      "comp": "Champions League"
     },
     "dob": "1998-04-27",
-    "nat": "AR"
+    "nat": "AR",
+    "full": "Cristian Gabriel Romero"
    },
    "b": {
     "id": 81,
@@ -1180,7 +1201,8 @@
      "comp": "Champions League"
     },
     "dob": "1997-03-18",
-    "nat": "DE"
+    "nat": "DE",
+    "full": "Maximilian Mittelstädt"
    },
    "pts": [
     "DNP",
@@ -1246,7 +1268,8 @@
      "comp": "Champions League"
     },
     "dob": "1997-12-19",
-    "nat": "BR"
+    "nat": "BR",
+    "full": "Gabriel Magalhães"
    },
    "b": {
     "id": 68,
@@ -1276,7 +1299,8 @@
      "comp": "Champions League"
     },
     "dob": "1998-11-12",
-    "nat": "FR"
+    "nat": "FR",
+    "full": "Jules Koundé"
    },
    "pts": [
     101.8,
@@ -1337,7 +1361,8 @@
      "time": "21:00",
      "comp": "Champions League"
     },
-    "nat": "FR"
+    "nat": "FR",
+    "full": "Michael Olise"
    },
    "b": {
     "id": 41,
@@ -1393,7 +1418,8 @@
      "comp": "Champions League"
     },
     "dob": "2000-05-28",
-    "nat": "ENG"
+    "nat": "ENG",
+    "full": "Phil Foden"
    },
    "pts": [
     152.3,
@@ -1461,7 +1487,8 @@
      "comp": "Champions League"
     },
     "dob": "1999-01-14",
-    "nat": "ENG"
+    "nat": "ENG",
+    "full": "Declan Rice"
    },
    "b": {
     "id": 49,
@@ -1517,7 +1544,8 @@
      "comp": "Champions League"
     },
     "dob": "2005-02-25",
-    "nat": "TR"
+    "nat": "TR",
+    "full": "Arda Güler"
    },
    "pts": [
     77,
@@ -1587,7 +1615,8 @@
      "comp": "Champions League"
     },
     "dob": "1993-07-28",
-    "nat": "ENG"
+    "nat": "ENG",
+    "full": "Harry Kane"
    },
    "b": {
     "id": 78,
@@ -1645,7 +1674,8 @@
      "comp": "Champions League"
     },
     "dob": "1998-12-20",
-    "nat": "FR"
+    "nat": "FR",
+    "full": "Kylian Mbappé"
    },
    "pts": [
     101.5,
@@ -1715,7 +1745,8 @@
      "comp": "Champions League"
     },
     "dob": "2007-07-13",
-    "nat": "ES"
+    "nat": "ES",
+    "full": "Lamine Yamal"
    },
    "b": {
     "id": 34,
@@ -1763,7 +1794,8 @@
      "comp": "Champions League"
     },
     "dob": "2005-06-03",
-    "nat": "FR"
+    "nat": "FR",
+    "full": "Désiré Doué"
    },
    "pts": [
     161.5,
@@ -1829,7 +1861,8 @@
      "comp": "LaLiga"
     },
     "dob": "1992-05-11",
-    "nat": "BE"
+    "nat": "BE",
+    "full": "Thibaut Courtois"
    },
    "b": {
     "id": 102,
@@ -1883,7 +1916,8 @@
      "time": "16:00",
      "comp": "Premier League"
     },
-    "nat": "ES"
+    "nat": "ES",
+    "full": "David Raya"
    },
    "pts": [
     110.5,
@@ -1949,7 +1983,8 @@
      "time": "21:00",
      "comp": "LaLiga"
     },
-    "nat": "SI"
+    "nat": "SI",
+    "full": "Jan Oblak"
    },
    "b": {
     "id": 95,
@@ -2002,7 +2037,8 @@
      "time": "21:00",
      "comp": "Premier League"
     },
-    "nat": "ENG"
+    "nat": "ENG",
+    "full": "Jordan Pickford"
    },
    "pts": [
     49.5,
@@ -2071,7 +2107,8 @@
      "time": "21:05",
      "comp": "Ligue 1"
     },
-    "nat": "MA"
+    "nat": "MA",
+    "full": "Achraf Hakimi"
    },
    "b": {
     "id": 46,
@@ -2127,7 +2164,8 @@
      "comp": "LaLiga"
     },
     "dob": "1995-09-20",
-    "nat": "ES"
+    "nat": "ES",
+    "full": "Alejandro Grimaldo"
    },
    "pts": [
     "DNP",
@@ -2194,7 +2232,8 @@
      "comp": "Premier League"
     },
     "dob": "1997-10-23",
-    "nat": "ENG"
+    "nat": "ENG",
+    "full": "Ezri Konsa"
    },
    "b": {
     "id": 113,
@@ -2248,7 +2287,8 @@
      "comp": "Bundesliga"
     },
     "dob": "1999-12-01",
-    "nat": "DE"
+    "nat": "DE",
+    "full": "Nico Schlotterbeck"
    },
    "pts": [
     144.3,
@@ -2315,7 +2355,8 @@
      "comp": "Premier League"
     },
     "dob": "1999-01-14",
-    "nat": "ENG"
+    "nat": "ENG",
+    "full": "Declan Rice"
    },
    "b": {
     "id": 87,
@@ -2371,7 +2412,8 @@
      "time": "15:30",
      "comp": "Bundesliga"
     },
-    "nat": "FR"
+    "nat": "FR",
+    "full": "Michael Olise"
    },
    "pts": [
     119.8,
@@ -2439,7 +2481,8 @@
      "comp": "Serie A"
     },
     "dob": "1996-12-08",
-    "nat": "SCT"
+    "nat": "SCT",
+    "full": "Scott McTominay"
    },
    "b": {
     "id": 91,
@@ -2493,7 +2536,8 @@
      "comp": "Premier League"
     },
     "dob": "2002-05-06",
-    "nat": "ENG"
+    "nat": "ENG",
+    "full": "Cole Palmer"
    },
    "pts": [
     60.8,
@@ -2563,7 +2607,8 @@
      "comp": "LaLiga"
     },
     "dob": "1998-12-20",
-    "nat": "FR"
+    "nat": "FR",
+    "full": "Kylian Mbappé"
    },
    "b": {
     "id": 71,
@@ -2621,7 +2666,8 @@
      "comp": "LaLiga"
     },
     "dob": "2007-07-13",
-    "nat": "ES"
+    "nat": "ES",
+    "full": "Lamine Yamal"
    },
    "pts": [
     161.8,
@@ -2689,7 +2735,8 @@
      "time": "18:30",
      "comp": "Premier League"
     },
-    "nat": "NO"
+    "nat": "NO",
+    "full": "Erling Haaland"
    },
    "b": {
     "id": 117,
@@ -2746,7 +2793,8 @@
      "comp": "Serie A"
     },
     "dob": "2003-04-15",
-    "nat": "AR"
+    "nat": "AR",
+    "full": "Matías Soulé"
    },
    "pts": [
     32.5,
@@ -2813,7 +2861,8 @@
      "date": "2026-11-13",
      "time": "20:45",
      "comp": "International"
-    }
+    },
+    "full": "Jan Oblak"
    },
    "b": {
     "id": 75,
@@ -2867,7 +2916,8 @@
      "date": "2026-11-12",
      "time": "20:45",
      "comp": "International"
-    }
+    },
+    "full": "Mike Maignan"
    },
    "pts": [
     96.5,
@@ -2936,7 +2986,8 @@
      "time": "20:45",
      "comp": "International"
     },
-    "dob": "1995-09-20"
+    "dob": "1995-09-20",
+    "full": "Alejandro Grimaldo"
    },
    "b": {
     "id": 67,
@@ -2991,7 +3042,8 @@
      "time": "20:45",
      "comp": "International"
     },
-    "dob": "1997-10-23"
+    "dob": "1997-10-23",
+    "full": "Ezri Konsa"
    },
    "pts": [
     "DNP",
@@ -3060,7 +3112,8 @@
      "time": "20:45",
      "comp": "International"
     },
-    "dob": "2003-06-29"
+    "dob": "2003-06-29",
+    "full": "Jude Bellingham"
    },
    "b": {
     "id": 49,
@@ -3118,7 +3171,8 @@
      "time": "18:00",
      "comp": "International"
     },
-    "dob": "2005-02-25"
+    "dob": "2005-02-25",
+    "full": "Arda Güler"
    },
    "pts": [
     120.3,
@@ -3187,7 +3241,8 @@
      "date": "2026-11-12",
      "time": "20:45",
      "comp": "International"
-    }
+    },
+    "full": "Michael Olise"
    },
    "b": {
     "id": 108,
@@ -3243,7 +3298,8 @@
      "time": "20:45",
      "comp": "International"
     },
-    "dob": "1996-04-03"
+    "dob": "1996-04-03",
+    "full": "Fabián Ruiz"
    },
    "pts": [
     101.8,
@@ -3313,7 +3369,8 @@
      "time": "20:45",
      "comp": "International"
     },
-    "dob": "1993-07-28"
+    "dob": "1993-07-28",
+    "full": "Harry Kane"
    },
    "b": {
     "id": 34,
@@ -3370,7 +3427,8 @@
      "time": "20:45",
      "comp": "International"
     },
-    "dob": "2005-06-03"
+    "dob": "2005-06-03",
+    "full": "Désiré Doué"
    },
    "pts": [
     100.8,
@@ -3439,7 +3497,8 @@
      "date": "2026-11-14",
      "time": "18:00",
      "comp": "International"
-    }
+    },
+    "full": "Erling Haaland"
    },
    "b": {
     "id": 94,
@@ -3493,7 +3552,8 @@
      "time": "20:45",
      "comp": "International"
     },
-    "dob": "2000-03-09"
+    "dob": "2000-03-09",
+    "full": "Pedro Neto"
    },
    "pts": [
     136.8,
@@ -3560,7 +3620,8 @@
      "date": "2026-11-15",
      "time": "20:45",
      "comp": "International"
-    }
+    },
+    "full": "Jordan Pickford"
    },
    "b": {
     "id": 85,
@@ -3614,7 +3675,8 @@
      "date": "2026-11-16",
      "time": "20:45",
      "comp": "International"
-    }
+    },
+    "full": "Jan Oblak"
    },
    "pts": [
     "DNP",
@@ -3682,7 +3744,8 @@
      "date": "2026-11-16",
      "time": "20:45",
      "comp": "International"
-    }
+    },
+    "full": "Jurriën Timber"
    },
    "b": {
     "id": 12,
@@ -3737,7 +3800,8 @@
      "date": "2026-11-15",
      "time": "20:45",
      "comp": "International"
-    }
+    },
+    "full": "Alessandro Bastoni"
    },
    "pts": [
     8.8,
@@ -3809,7 +3873,8 @@
      "date": "2026-11-15",
      "time": "20:45",
      "comp": "International"
-    }
+    },
+    "full": "Arda Güler"
    },
    "b": {
     "id": 87,
@@ -3864,7 +3929,8 @@
      "date": "2026-11-15",
      "time": "20:45",
      "comp": "International"
-    }
+    },
+    "full": "Michael Olise"
    },
    "pts": [
     105.3,
@@ -3934,7 +4000,8 @@
      "date": "2026-11-15",
      "time": "20:45",
      "comp": "International"
-    }
+    },
+    "full": "Jude Bellingham"
    },
    "b": {
     "id": 65,
@@ -3991,7 +4058,8 @@
      "date": "2026-11-16",
      "time": "20:45",
      "comp": "International"
-    }
+    },
+    "full": "Joshua Kimmich"
    },
    "pts": [
     135.5,
@@ -4062,7 +4130,8 @@
      "date": "2026-11-15",
      "time": "20:45",
      "comp": "International"
-    }
+    },
+    "full": "Harry Kane"
    },
    "b": {
     "id": 71,
@@ -4121,7 +4190,8 @@
      "date": "2026-11-15",
      "time": "20:45",
      "comp": "International"
-    }
+    },
+    "full": "Lamine Yamal"
    },
    "pts": [
     130.5,
@@ -4190,7 +4260,8 @@
      "date": "2026-11-15",
      "time": "20:45",
      "comp": "International"
-    }
+    },
+    "full": "Jérémy Doku"
    },
    "b": {
     "id": 52,
@@ -4248,7 +4319,8 @@
      "date": "2026-11-17",
      "time": "20:45",
      "comp": "International"
-    }
+    },
+    "full": "Erling Haaland"
    },
    "pts": [
     186.3,
@@ -4314,7 +4386,8 @@
      "time": "18:30",
      "comp": "Premier League"
     },
-    "nat": "ES"
+    "nat": "ES",
+    "full": "David Raya"
    },
    "b": {
     "id": 58,
@@ -4368,7 +4441,8 @@
      "time": "14:00",
      "comp": "LaLiga"
     },
-    "nat": "ES"
+    "nat": "ES",
+    "full": "Joan García"
    },
    "pts": null
   },
@@ -4431,7 +4505,8 @@
      "time": "18:00",
      "comp": "Serie A"
     },
-    "nat": "FR"
+    "nat": "FR",
+    "full": "Mike Maignan"
    },
    "b": {
     "id": 116,
@@ -4485,7 +4560,8 @@
      "time": "21:00",
      "comp": "LaLiga"
     },
-    "nat": "ES"
+    "nat": "ES",
+    "full": "Unai Simón"
    },
    "pts": null
   },
@@ -4549,7 +4625,8 @@
      "time": "18:30",
      "comp": "Premier League"
     },
-    "nat": "ENG"
+    "nat": "ENG",
+    "full": "Ezri Konsa"
    },
    "b": {
     "id": 81,
@@ -4604,7 +4681,8 @@
      "time": "18:30",
      "comp": "Bundesliga"
     },
-    "nat": "DE"
+    "nat": "DE",
+    "full": "Maximilian Mittelstädt"
    },
    "pts": null
   },
@@ -4668,7 +4746,8 @@
      "time": "18:30",
      "comp": "Premier League"
     },
-    "nat": "BR"
+    "nat": "BR",
+    "full": "Gabriel Magalhães"
    },
    "b": {
     "id": 113,
@@ -4723,7 +4802,8 @@
      "time": "15:30",
      "comp": "Bundesliga"
     },
-    "nat": "DE"
+    "nat": "DE",
+    "full": "Nico Schlotterbeck"
    },
    "pts": null
   },
@@ -4789,7 +4869,8 @@
      "time": "20:30",
      "comp": "Bundesliga"
     },
-    "nat": "DE"
+    "nat": "DE",
+    "full": "Joshua Kimmich"
    },
    "b": {
     "id": 108,
@@ -4844,7 +4925,8 @@
      "time": "17:15",
      "comp": "Ligue 1"
     },
-    "nat": "ES"
+    "nat": "ES",
+    "full": "Fabián Ruiz"
    },
    "pts": null
   },
@@ -4908,7 +4990,8 @@
      "time": "18:30",
      "comp": "Premier League"
     },
-    "nat": "ENG"
+    "nat": "ENG",
+    "full": "Declan Rice"
    },
    "b": {
     "id": 130,
@@ -4963,7 +5046,8 @@
      "time": "17:15",
      "comp": "Ligue 1"
     },
-    "nat": "PT"
+    "nat": "PT",
+    "full": "Vitinha"
    },
    "pts": null
   },
@@ -5030,7 +5114,8 @@
      "time": "20:30",
      "comp": "Bundesliga"
     },
-    "nat": "ENG"
+    "nat": "ENG",
+    "full": "Harry Kane"
    },
    "b": {
     "id": 34,
@@ -5085,7 +5170,8 @@
      "time": "17:15",
      "comp": "Ligue 1"
     },
-    "nat": "FR"
+    "nat": "FR",
+    "full": "Désiré Doué"
    },
    "pts": null
   },
@@ -5153,7 +5239,8 @@
      "time": "14:00",
      "comp": "LaLiga"
     },
-    "nat": "ES"
+    "nat": "ES",
+    "full": "Lamine Yamal"
    },
    "b": {
     "id": 78,
@@ -5210,7 +5297,8 @@
      "time": "21:00",
      "comp": "LaLiga"
     },
-    "nat": "FR"
+    "nat": "FR",
+    "full": "Kylian Mbappé"
    },
    "pts": null
   }
