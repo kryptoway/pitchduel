@@ -205,7 +205,7 @@ function fix(){
   if(S.pv!=='ALL'&&!POS.includes(S.pv))S.pv='FWD';
   const k=(S.sort||{}).k||'';const cv=S.comps.find(c=>c.id===S.view);
   const rk=/^r:\d+$/.test(k)&&S.view!=='all'&&cv&&+k.slice(2)<cv.rounds.length;
-  if(!S.sort||!(['sum','avg','apps','goals','ass','best'].includes(k)||rk||(S.view==='all'&&/^c:/.test(k)))||(S.view==='all'&&k==='sum'))S.sort={k:'avg',d:'desc'};
+  if(!S.sort||!(['sum','avg','form','apps','goals','ass','best'].includes(k)||rk||(S.view==='all'&&/^c:/.test(k)))||(S.view==='all'&&k==='sum'))S.sort={k:'avg',d:'desc'};
 }
 fix();migrate();fix();
 const cur=()=>S.comps.find(c=>c.id===S.view);
@@ -240,8 +240,8 @@ const series=p=>TF.size===3?raw(p):raw(p).filter((_,i)=>TF.has(rtype(labsAll()[i
 const cs=(p,c)=>TF.size===3?p.pts[c.id]:p.pts[c.id].filter((_,i)=>TF.has(rtype(c.rounds[i])));
 const ST={sum:a=>r1(a.filter(isN).reduce((x,y)=>x+y,0)),apps:a=>a.filter(isN).length,
  avg:a=>{const n=a.filter(isN);return n.length?r1(n.reduce((x,y)=>x+y,0)/n.length):null},
- form:a=>ST.avg(a.filter(isN).slice(-3)),best:a=>{const n=a.filter(isN);return n.length?Math.max(...n):null},dnp:a=>a.filter(v=>v==='DNP').length};
-const SC=[['avg','Avg'],['apps','Played'],['goals','Goals'],['ass','Assists'],['best','Best'],['sum','Total']];
+ form:a=>ST.avg(a.filter(isN).slice(-4)),best:a=>{const n=a.filter(isN);return n.length?Math.max(...n):null},dnp:a=>a.filter(v=>v==='DNP').length};
+const SC=[['avg','Avg'],['form','Avg L4'],['apps','Played'],['goals','Goals'],['ass','Assists'],['best','Best'],['sum','Total']];
 const gTot=(p,k)=>S.view==='all'?S.comps.reduce((x,c)=>x+(+((p[k]||{})[c.id])||0),0):(+((p[k]||{})[S.view])||0);
 const stat=(p,k)=>k==='goals'?gTot(p,'g'):k==='ass'?gTot(p,'a'):ST[k](series(p));
 const esc=s=>String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
@@ -460,7 +460,7 @@ const mm=mOf(i);if(mm){const own=mm.s?mm.s.split(':').map(Number):null,r=own?(()
 if(all&&S.comps.length>1){let off=0;S.comps.forEach((c,ci)=>{const iMax=off+c.rounds.length-1,lx=gap+(n-1-iMax)*(bw+gap)-gap/2;off+=c.rounds.length;if(ci<S.comps.length-1)s+=`<line x1="${lx}" x2="${lx}" y1="-10" y2="${HH-24}" stroke="var(--mut)" stroke-opacity=".5" stroke-dasharray="3 3"/>`;s+=`<text x="${lx+6}" y="-3" font-size="10" font-weight="700" letter-spacing=".06em" fill="var(--mut)">${esc(String(c.name).split(' ')[0]).toUpperCase()}</text>`})}
 if(avg!==null){const y=118-avg/m*90;s=s.replace(/^<svg[^>]*>/,mm=>mm+`<line x1="0" x2="${W}" y1="${y}" y2="${y}" stroke="var(--avg)" stroke-width="1" stroke-dasharray="5 4"/><text x="${W+6}" y="${y+4}" font-size="11" font-weight="700" fill="var(--avg)">Avg ${fmt(avg)}</text>`)}
 s+=`<line x1="0" x2="${W}" y1="118.5" y2="118.5" stroke="var(--line)"/></svg>`;
-const it=[['Average',avg],['Form (last 3)',ST.form(fs)],['Best',ST.best(fs)],...(all?[]:[['Total',ST.sum(fs)]]),['Played',ST.apps(fs)],['DNP',ST.dnp(fs)],['Goals',gTot(p,'g')],['Assists',gTot(p,'a')],...(tv=>tv.length>1?tv:[])(['L','C','N'].map(t=>[TN[t]+' avg',ST.avg(a.filter((_,i)=>rtype(labs[i])===t))]).filter(x=>x[1]!==null))];
+const it=[['Average',avg],['Form (last 4)',ST.form(fs)],['Best',ST.best(fs)],...(all?[]:[['Total',ST.sum(fs)]]),['Played',ST.apps(fs)],['DNP',ST.dnp(fs)],['Goals',gTot(p,'g')],['Assists',gTot(p,'a')],...(tv=>tv.length>1?tv:[])(['L','C','N'].map(t=>[TN[t]+' avg',ST.avg(a.filter((_,i)=>rtype(labs[i])===t))]).filter(x=>x[1]!==null))];
 const nxk=Object.keys(S.fx||{}).find(k=>{const[ci,r]=k.split('|'),cc=S.comps.find(x=>x.id===ci);return cc&&!cc.rounds.includes(r)&&fxOf(k,p)}),nm=nxk&&fxOf(nxk,p),nxt=nm?`<p class="hint">Next match: <b>${esc(nm.o)}</b> (${nm.h?'home':'away'})${nm.d?' · '+new Date(nm.d+'T12:00:00Z').toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',timeZone:'UTC'}):''}</p>`:'';
 const per=all?S.comps.map(c=>esc(c.name)+' '+fmt(ST.avg(cs(p,c)))).join(' · '):'';
 if(span&&!all){const cell=i=>{const v=a[i],t=rtype(labs[i]),mm=mOf(i),gg=gOf(i),hh=isN(v)?Math.max(3,v/m*80):0,icl=gg?[...Array(gg.g||0).fill(IMB),...Array(gg.a||0).fill(IMK)]:[],ic=icl.join('');const nic=gg?(gg.g||0)+(gg.a||0):0,ins=nic>0&&isN(v)&&hh>=nic*13+4;
