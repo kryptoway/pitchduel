@@ -45,8 +45,13 @@ footer{margin-top:36px;padding-top:14px;border-top:1px solid var(--line);font-si
 </head><body><main>
 <style>.brand h1{display:contents}.brand{align-items:center!important;flex-wrap:nowrap!important;white-space:nowrap;gap:0 3vw}.brand a.lg{padding:0;border:0;flex:none;display:block;line-height:0}.brand .lg img{height:96px;width:96px;display:block}.brand a:not(.lg){line-height:1;padding-bottom:4px;font-size:clamp(22px,3.6vw,40px)}@media(max-width:640px){.brand{justify-content:space-between;gap:0 4px!important}.brand .lg img{height:44px;width:44px}.brand a:not(.lg){font-size:min(calc((100vw - 104px)/17.9),22px);border-bottom-width:2px;padding-bottom:3px}}.hdr{position:relative;z-index:20;margin:0 0 16px;padding:0 18px 14px;border:1px solid rgba(255,255,255,.14);border-radius:22px;background:radial-gradient(300px 130px at 0 0,rgba(255,236,170,.13),transparent 70%),radial-gradient(300px 130px at 100% 0,rgba(255,236,170,.13),transparent 70%),linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.02));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 14px 44px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.08)}
 .hdr .brand{margin:0 -18px!important;padding:6px 18px;background:rgba(255,255,255,.075);border-radius:22px 22px 0 0}
-.hdr .brand a.on{border-bottom:3px solid transparent!important;border-image:linear-gradient(90deg,#4FB583,#F2C230) 1}
+.hdr .brand a.on{border-bottom-color:transparent!important;border-image:linear-gradient(90deg,#4FB583,#F2C230) 1}
 .hdr .brand a.lg{margin:0!important}
+html{overflow-y:scroll;scrollbar-gutter:stable}
+main{padding-top:20px!important;padding-left:14px!important;padding-right:14px!important}
+.hdr{width:100%;max-width:1072px;margin:0 auto 16px!important}
+@media(max-width:640px){main{padding-top:12px!important;padding-left:10px!important;padding-right:10px!important}.hdr{margin-bottom:10px!important}}
+
 @media(max-width:640px){.hdr{padding:0 10px 10px;border-radius:18px;margin-bottom:10px}.hdr .brand{margin:0 -10px!important;padding:5px 10px;border-radius:18px 18px 0 0}.hdr .brand a:not(.lg){font-size:min(calc((100vw - 132px)/17.9),22px)!important}}
 .hdr.solo{padding-bottom:0}.hdr.solo .brand{border-radius:22px!important}
 </style>
