@@ -16,8 +16,7 @@
 <script data-goatcounter="https://kryptoway.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 <style>
-:root{--bg:#EEF3EF;--card:#fff;--ink:#10251B;--mut:#5B6B62;--line:#CFDAD2;--acc:#1F6B4A;--gold:#F2C230;--danger:#C8402F;color-scheme:light light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root{--bg:#0F1B15;--card:#15251C;--ink:#E7F0EA;--mut:#93A69A;--line:#25382D;--acc:#4FB583;--danger:#EE7A68;color-scheme:dark}}
+:root{--bg:#0A1812;--card:#0f2118;--ink:#E7F0EA;--mut:#9FB2A6;--line:#2b4538;--acc:#4FB583;--gold:#F2C230;--danger:#EE7A68;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Barlow,system-ui,sans-serif}
 main{max-width:1680px;margin:0 auto;padding:20px 14px 40px}
 h1,h2{font-family:"Barlow Condensed",Impact,sans-serif;line-height:1.05;margin:0}
@@ -44,8 +43,13 @@ footer{margin-top:36px;padding-top:14px;border-top:1px solid var(--line);font-si
 .brand a:hover{color:var(--ink)}.brand a.on{color:var(--ink);border-bottom-color:var(--acc)}
 </style><style>@media(max-width:640px){.brand{flex-wrap:nowrap;justify-content:space-between;gap:0 6px;white-space:nowrap;margin:0 0 8px}.brand a{font-size:min(4vw,24px);border-bottom-width:2px;padding-bottom:2px}}</style>
 </head><body><main>
-<style>.brand h1{display:contents}.brand{align-items:center!important;flex-wrap:nowrap!important;white-space:nowrap;gap:0 3vw}.brand a.lg{padding:0;border:0;flex:none;display:block;line-height:0}.brand .lg img{height:96px;width:96px;display:block}.brand a:not(.lg){line-height:1;padding-bottom:4px;font-size:clamp(22px,3.6vw,40px)}@media(max-width:640px){.brand{justify-content:space-between;gap:0 4px!important}.brand .lg img{height:44px;width:44px}.brand a:not(.lg){font-size:min(calc((100vw - 104px)/17.9),22px);border-bottom-width:2px;padding-bottom:3px}}</style>
-<nav class="brand" aria-label="Pages"><a class="lg" href="./"><img src="logo.png" alt="PitchDuel logo" width="96" height="96"></a><a href="./">PitchDuel</a><a href="dashboard.html">SDF Dashboard</a><a class="on" aria-current="page" href="about.html">About the Game</a></nav>
+<style>.brand h1{display:contents}.brand{align-items:center!important;flex-wrap:nowrap!important;white-space:nowrap;gap:0 3vw}.brand a.lg{padding:0;border:0;flex:none;display:block;line-height:0}.brand .lg img{height:96px;width:96px;display:block}.brand a:not(.lg){line-height:1;padding-bottom:4px;font-size:clamp(22px,3.6vw,40px)}@media(max-width:640px){.brand{justify-content:space-between;gap:0 4px!important}.brand .lg img{height:44px;width:44px}.brand a:not(.lg){font-size:min(calc((100vw - 104px)/17.9),22px);border-bottom-width:2px;padding-bottom:3px}}.hdr{position:relative;z-index:20;margin:0 0 16px;padding:0 18px 14px;border:1px solid rgba(255,255,255,.14);border-radius:22px;background:radial-gradient(300px 130px at 0 0,rgba(255,236,170,.13),transparent 70%),radial-gradient(300px 130px at 100% 0,rgba(255,236,170,.13),transparent 70%),linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.02));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 14px 44px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.08)}
+.hdr .brand{margin:0 -18px!important;padding:6px 18px;background:rgba(255,255,255,.075);border-radius:22px 22px 0 0}
+.hdr .brand a.on{border-bottom:3px solid transparent!important;border-image:linear-gradient(90deg,#4FB583,#F2C230) 1}
+@media(max-width:640px){.hdr{padding:0 10px 10px;border-radius:18px;margin-bottom:10px}.hdr .brand{margin:0 -10px!important;padding:5px 10px;border-radius:18px 18px 0 0}.hdr .brand a:not(.lg){font-size:min(calc((100vw - 132px)/17.9),22px)!important}}
+.hdr.solo{padding-bottom:0}.hdr.solo .brand{border-radius:22px!important}
+</style>
+<div class="hdr solo"><nav class="brand" aria-label="Pages"><a class="lg" href="./"><img src="logo.png" alt="PitchDuel logo" width="96" height="96"></a><a href="./">PitchDuel</a><a href="dashboard.html">SDF Dashboard</a><a class="on" aria-current="page" href="about.html">About the Game</a></nav></div>
 <p class="eb">About the game</p>
 <h1>What is PitchDuel?</h1>
 <p class="lead">PitchDuel is a free fan game for people who follow fantasy football. Every round we put two players of the same position head to head, and you pick who will score more fantasy points in his next match. A correct pick earns 1 Duel Star, and the Stars add up to a monthly leaderboard.</p>
