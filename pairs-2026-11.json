@@ -4571,7 +4571,7 @@
    "round": "18-24 Nov",
    "pos": "DEF",
    "lock": "2026-11-21T17:30:00Z",
-   "result": null,
+   "result": "B",
    "a": {
     "id": 67,
     "name": "Konsa",
@@ -4684,7 +4684,10 @@
     "nat": "DE",
     "full": "Maximilian Mittelstädt"
    },
-   "pts": null
+   "pts": [
+    85.3,
+    174.8
+   ]
   },
   {
    "id": "r18-24-def2",
@@ -4692,7 +4695,7 @@
    "round": "18-24 Nov",
    "pos": "DEF",
    "lock": "2026-11-21T14:30:00Z",
-   "result": null,
+   "result": "B",
    "a": {
     "id": 42,
     "name": "Gabriel Magalhães",
@@ -4804,7 +4807,10 @@
     "nat": "DE",
     "full": "Nico Schlotterbeck"
    },
-   "pts": null
+   "pts": [
+    62.8,
+    107.5
+   ]
   },
   {
    "id": "r18-24-mid1",
@@ -4812,7 +4818,7 @@
    "round": "18-24 Nov",
    "pos": "MID",
    "lock": "2026-11-20T19:30:00Z",
-   "result": null,
+   "result": "A",
    "a": {
     "id": 65,
     "name": "Kimmich",
@@ -4926,7 +4932,10 @@
     "nat": "ES",
     "full": "Fabián Ruiz"
    },
-   "pts": null
+   "pts": [
+    117.8,
+    87.3
+   ]
   },
   {
    "id": "r18-24-mid2",
@@ -4934,7 +4943,7 @@
    "round": "18-24 Nov",
    "pos": "MID",
    "lock": "2026-11-21T16:15:00Z",
-   "result": null,
+   "result": "void",
    "a": {
     "id": 103,
     "name": "Rice",
@@ -5047,7 +5056,10 @@
     "nat": "PT",
     "full": "Vitinha"
    },
-   "pts": null
+   "pts": [
+    66.3,
+    "DNP"
+   ]
   },
   {
    "id": "r18-24-fwd1",
@@ -5055,7 +5067,7 @@
    "round": "18-24 Nov",
    "pos": "FWD",
    "lock": "2026-11-20T19:30:00Z",
-   "result": null,
+   "result": "B",
    "a": {
     "id": 63,
     "name": "Kane",
@@ -5170,7 +5182,10 @@
     "nat": "FR",
     "full": "Désiré Doué"
    },
-   "pts": null
+   "pts": [
+    13,
+    98.5
+   ]
   },
   {
    "id": "r18-24-fwd2",
