@@ -2,7 +2,7 @@
  "month": "2026-11",
  "round": "15-18 Nov",
  "tz": "CET",
- "generated": "2026-11-18",
+ "generated": "2026-11-22",
  "pairs": [
   {
    "id": "r30-5-gk1",
@@ -5298,6 +5298,992 @@
     },
     "nat": "FR",
     "full": "Kylian Mbappé"
+   },
+   "pts": null
+  },
+  {
+   "id": "r24-27-gk1",
+   "month": "2026-11",
+   "round": "24-27 Nov",
+   "pos": "GK",
+   "lock": "2026-11-25T20:00:00Z",
+   "result": null,
+   "a": {
+    "id": 6,
+    "name": "Alisson Becker",
+    "dob": "1992-10-02",
+    "pos": "GK",
+    "club": "LIV",
+    "avg": 65.9,
+    "played": 8,
+    "max": 121.5,
+    "form": [
+     {
+      "r": "6-9L",
+      "v": 121.5,
+      "o": "CRY",
+      "h": 0,
+      "s": "1:3",
+      "d": "2026-11-08"
+     },
+     {
+      "r": "3-5C",
+      "v": 55.8,
+      "o": "FEN",
+      "h": 0,
+      "s": "3:2",
+      "d": "2026-11-04"
+     },
+     {
+      "r": "30-3L",
+      "v": 23.3,
+      "o": "ARS",
+      "h": 1,
+      "s": "0:1",
+      "d": "2026-11-01"
+     },
+     {
+      "r": "23-29",
+      "v": 107,
+      "o": "BHA",
+      "h": 1,
+      "s": "2:0",
+      "d": "2026-10-25"
+     }
+    ],
+    "match": {
+     "opp": "CLB",
+     "oppName": "Club Brugge",
+     "clubName": "Liverpool",
+     "venue": "A",
+     "date": "2026-11-25",
+     "time": "21:00",
+     "comp": "Champions League"
+    },
+    "nat": "BR",
+    "full": "Alisson Becker"
+   },
+   "b": {
+    "id": 128,
+    "name": "Vicario",
+    "dob": "1996-10-07",
+    "pos": "GK",
+    "club": "JUV",
+    "avg": 64.8,
+    "played": 8,
+    "max": 117.8,
+    "form": [
+     {
+      "r": "6-9L",
+      "v": 50.3,
+      "o": "FIO",
+      "h": 0,
+      "s": "2:2",
+      "d": "2026-11-08"
+     },
+     {
+      "r": "3-5C",
+      "v": 48,
+      "o": "AZ",
+      "h": 0,
+      "s": "1:2",
+      "d": "2026-11-05"
+     },
+     {
+      "r": "30-3L",
+      "v": 117.8,
+      "o": "NAP",
+      "h": 1,
+      "s": "2:0",
+      "d": "2026-11-01"
+     },
+     {
+      "r": "23-29",
+      "v": 114,
+      "o": "LEC",
+      "h": 0,
+      "s": "0:2",
+      "d": "2026-10-25"
+     }
+    ],
+    "match": {
+     "opp": "OMO",
+     "oppName": "Omonia",
+     "clubName": "Juventus",
+     "venue": "H",
+     "date": "2026-11-26",
+     "time": "21:00",
+     "comp": "Europa League"
+    },
+    "nat": "IT",
+    "full": "Guglielmo Vicario"
+   },
+   "pts": null
+  },
+  {
+   "id": "r24-27-def1",
+   "month": "2026-11",
+   "round": "24-27 Nov",
+   "pos": "DEF",
+   "lock": "2026-11-24T20:00:00Z",
+   "result": null,
+   "a": {
+    "id": 53,
+    "name": "Hakimi",
+    "dob": "1998-11-04",
+    "pos": "DEF",
+    "club": "PSG",
+    "avg": 129.0,
+    "played": 7,
+    "max": 359,
+    "form": [
+     {
+      "r": "3-5C",
+      "v": 118,
+      "o": "VIL",
+      "h": 0,
+      "s": "0:6",
+      "d": "2026-11-03"
+     },
+     {
+      "r": "30-3L",
+      "v": 359,
+      "o": "LEH",
+      "h": 0,
+      "s": "1:5",
+      "d": "2026-10-30",
+      "g": 3,
+      "a": 2
+     },
+     {
+      "r": "23-29",
+      "v": 107.5,
+      "o": "OL",
+      "h": 1,
+      "s": "2:0",
+      "d": "2026-10-26"
+     },
+     {
+      "r": "20-23C",
+      "v": 153.8,
+      "o": "BAR",
+      "h": 1,
+      "s": "4:2",
+      "d": "2026-10-20",
+      "a": 1
+     }
+    ],
+    "match": {
+     "opp": "ROM",
+     "oppName": "Roma",
+     "clubName": "PSG",
+     "venue": "H",
+     "date": "2026-11-25",
+     "time": "21:00",
+     "comp": "Champions League"
+    },
+    "nat": "MA",
+    "full": "Achraf Hakimi"
+   },
+   "b": {
+    "id": 113,
+    "name": "Schlotterbeck",
+    "dob": "1999-12-01",
+    "pos": "DEF",
+    "club": "BVB",
+    "avg": 123.3,
+    "played": 8,
+    "max": 191.8,
+    "form": [
+     {
+      "r": "15-18N",
+      "v": 181.5,
+      "o": "NL",
+      "h": 1,
+      "s": "5:0",
+      "d": "2026-11-16",
+      "g": 1
+     },
+     {
+      "r": "6-9L",
+      "v": 110.3,
+      "o": "ELV",
+      "h": 1,
+      "s": "2:1",
+      "d": "2026-11-07"
+     },
+     {
+      "r": "3-5C",
+      "v": 93.3,
+      "o": "BET",
+      "h": 1,
+      "s": "2:1",
+      "d": "2026-11-04"
+     },
+     {
+      "r": "30-3L",
+      "v": 104.8,
+      "o": "FCB",
+      "h": 0,
+      "s": "2:2",
+      "d": "2026-10-31"
+     }
+    ],
+    "match": {
+     "opp": "ARS",
+     "oppName": "Arsenal",
+     "clubName": "Dortmund",
+     "venue": "A",
+     "date": "2026-11-24",
+     "time": "21:00",
+     "comp": "Champions League"
+    },
+    "nat": "DE",
+    "full": "Nico Schlotterbeck"
+   },
+   "pts": null
+  },
+  {
+   "id": "r24-27-def2",
+   "month": "2026-11",
+   "round": "24-27 Nov",
+   "pos": "DEF",
+   "lock": "2026-11-24T20:00:00Z",
+   "result": null,
+   "a": {
+    "id": 134,
+    "name": "Yoro",
+    "dob": "2005-11-13",
+    "pos": "DEF",
+    "club": "MUN",
+    "avg": 68.0,
+    "played": 8,
+    "max": 122,
+    "form": [
+     {
+      "r": "6-9L",
+      "v": 52,
+      "o": "AVL",
+      "h": 1,
+      "s": "4:4",
+      "d": "2026-11-08"
+     },
+     {
+      "r": "3-5C",
+      "v": 77.8,
+      "o": "ROM",
+      "h": 1,
+      "s": "3:2",
+      "d": "2026-11-03"
+     },
+     {
+      "r": "30-3L",
+      "v": 40.8,
+      "o": "CHE",
+      "h": 0,
+      "s": "2:0",
+      "d": "2026-10-31"
+     },
+     {
+      "r": "23-29",
+      "v": 38,
+      "o": "BOU",
+      "h": 1,
+      "s": "0:3",
+      "d": "2026-10-25"
+     }
+    ],
+    "match": {
+     "opp": "SCP",
+     "oppName": "Sporting",
+     "clubName": "Man United",
+     "venue": "A",
+     "date": "2026-11-25",
+     "time": "21:00",
+     "comp": "Champions League"
+    },
+    "nat": "FR",
+    "full": "Leny Yoro"
+   },
+   "b": {
+    "id": 119,
+    "name": "Svensson",
+    "dob": "2002-02-12",
+    "pos": "DEF",
+    "club": "BVB",
+    "avg": 67.7,
+    "played": 11,
+    "max": 174.3,
+    "form": [
+     {
+      "r": "15-18N",
+      "v": 7.8,
+      "o": "PL",
+      "h": 0,
+      "s": "1:1",
+      "d": "2026-11-17"
+     },
+     {
+      "r": "9-15N",
+      "v": 174.3,
+      "o": "BA",
+      "h": 1,
+      "s": "3:2",
+      "d": "2026-11-14",
+      "g": 1
+     },
+     {
+      "r": "6-9L",
+      "v": 45.5,
+      "o": "ELV",
+      "h": 1,
+      "s": "2:1",
+      "d": "2026-11-07"
+     },
+     {
+      "r": "3-5C",
+      "v": 66,
+      "o": "BET",
+      "h": 1,
+      "s": "2:1",
+      "d": "2026-11-04"
+     }
+    ],
+    "match": {
+     "opp": "ARS",
+     "oppName": "Arsenal",
+     "clubName": "Dortmund",
+     "venue": "A",
+     "date": "2026-11-24",
+     "time": "21:00",
+     "comp": "Champions League"
+    },
+    "nat": "SE",
+    "full": "Daniel Svensson"
+   },
+   "pts": null
+  },
+  {
+   "id": "r24-27-mid1",
+   "month": "2026-11",
+   "round": "24-27 Nov",
+   "pos": "MID",
+   "lock": "2026-11-24T20:00:00Z",
+   "result": null,
+   "a": {
+    "id": 13,
+    "name": "Bellingham",
+    "dob": "2003-06-29",
+    "pos": "MID",
+    "club": "RMD",
+    "avg": 133.1,
+    "played": 12,
+    "max": 311.3,
+    "form": [
+     {
+      "r": "15-18N",
+      "v": 135.5,
+      "o": "ES",
+      "h": 0,
+      "s": "2:3",
+      "d": "2026-11-15",
+      "a": 1
+     },
+     {
+      "r": "9-15N",
+      "v": 120.3,
+      "o": "HR",
+      "h": 1,
+      "s": "2:1",
+      "d": "2026-11-12",
+      "a": 1
+     },
+     {
+      "r": "6-9L",
+      "v": 115.8,
+      "o": "VAL",
+      "h": 0,
+      "s": "0:3",
+      "d": "2026-11-07"
+     },
+     {
+      "r": "3-5C",
+      "v": 168.3,
+      "o": "AEK",
+      "h": 0,
+      "s": "2:3",
+      "d": "2026-11-04",
+      "g": 1
+     }
+    ],
+    "match": {
+     "opp": "PSV",
+     "oppName": "PSV",
+     "clubName": "Real Madrid",
+     "venue": "H",
+     "date": "2026-11-24",
+     "time": "21:00",
+     "comp": "Champions League"
+    },
+    "nat": "ENG",
+    "full": "Jude Bellingham"
+   },
+   "b": {
+    "id": 65,
+    "name": "Kimmich",
+    "dob": "1995-02-08",
+    "pos": "MID",
+    "club": "FCB",
+    "avg": 134.8,
+    "played": 9,
+    "max": 204.5,
+    "form": [
+     {
+      "r": "18-24L",
+      "v": 117.8,
+      "o": "KOE",
+      "h": 1,
+      "s": "1:1",
+      "d": "2026-11-20"
+     },
+     {
+      "r": "15-18N",
+      "v": 114.8,
+      "o": "NL",
+      "h": 1,
+      "s": "5:0",
+      "d": "2026-11-16",
+      "a": 1
+     },
+     {
+      "r": "9-15N",
+      "v": 136.3,
+      "o": "RS",
+      "h": 0,
+      "s": "1:3",
+      "d": "2026-11-13",
+      "a": 1
+     },
+     {
+      "r": "6-9L",
+      "v": 204.5,
+      "o": "M05",
+      "h": 0,
+      "s": "1:2",
+      "d": "2026-11-07",
+      "g": 1
+     }
+    ],
+    "match": {
+     "opp": "LIL",
+     "oppName": "Lille",
+     "clubName": "Bayern",
+     "venue": "A",
+     "date": "2026-11-25",
+     "time": "21:00",
+     "comp": "Champions League"
+    },
+    "nat": "DE",
+    "full": "Joshua Kimmich"
+   },
+   "pts": null
+  },
+  {
+   "id": "r24-27-mid2",
+   "month": "2026-11",
+   "round": "24-27 Nov",
+   "pos": "MID",
+   "lock": "2026-11-24T20:00:00Z",
+   "result": null,
+   "a": {
+    "id": 103,
+    "name": "Rice",
+    "dob": "1999-01-14",
+    "pos": "MID",
+    "club": "ARS",
+    "avg": 119.3,
+    "played": 10,
+    "max": 181.5,
+    "form": [
+     {
+      "r": "15-18N",
+      "v": 97,
+      "o": "ES",
+      "h": 0,
+      "s": "2:3",
+      "d": "2026-11-15",
+      "a": 1
+     },
+     {
+      "r": "9-15N",
+      "v": 61.8,
+      "o": "HR",
+      "h": 1,
+      "s": "2:1",
+      "d": "2026-11-12"
+     },
+     {
+      "r": "6-9L",
+      "v": 119.8,
+      "o": "HUL",
+      "h": 1,
+      "s": "1:0",
+      "d": "2026-11-07"
+     },
+     {
+      "r": "3-5C",
+      "v": 77,
+      "o": "SLA",
+      "h": 0,
+      "s": "1:2",
+      "d": "2026-11-04"
+     }
+    ],
+    "match": {
+     "opp": "BVB",
+     "oppName": "Dortmund",
+     "clubName": "Arsenal",
+     "venue": "H",
+     "date": "2026-11-24",
+     "time": "21:00",
+     "comp": "Champions League"
+    },
+    "nat": "ENG",
+    "full": "Declan Rice"
+   },
+   "b": {
+    "id": 131,
+    "name": "Wirtz",
+    "dob": "2003-05-03",
+    "pos": "MID",
+    "club": "LIV",
+    "avg": 114.9,
+    "played": 12,
+    "max": 201,
+    "form": [
+     {
+      "r": "15-18N",
+      "v": 194.5,
+      "o": "NL",
+      "h": 1,
+      "s": "5:0",
+      "d": "2026-11-16",
+      "g": 2
+     },
+     {
+      "r": "9-15N",
+      "v": 150.8,
+      "o": "RS",
+      "h": 0,
+      "s": "1:3",
+      "d": "2026-11-13",
+      "g": 1
+     },
+     {
+      "r": "6-9L",
+      "v": 201,
+      "o": "CRY",
+      "h": 0,
+      "s": "1:3",
+      "d": "2026-11-08",
+      "g": 1,
+      "a": 1
+     },
+     {
+      "r": "3-5C",
+      "v": 14.5,
+      "o": "FEN",
+      "h": 0,
+      "s": "3:2",
+      "d": "2026-11-04"
+     }
+    ],
+    "match": {
+     "opp": "CLB",
+     "oppName": "Club Brugge",
+     "clubName": "Liverpool",
+     "venue": "A",
+     "date": "2026-11-25",
+     "time": "21:00",
+     "comp": "Champions League"
+    },
+    "nat": "DE",
+    "full": "Florian Wirtz"
+   },
+   "pts": null
+  },
+  {
+   "id": "r24-27-mid3",
+   "month": "2026-11",
+   "round": "24-27 Nov",
+   "pos": "MID",
+   "lock": "2026-11-25T20:00:00Z",
+   "result": null,
+   "a": {
+    "id": 98,
+    "name": "Pulisic",
+    "dob": "1998-09-18",
+    "pos": "MID",
+    "club": "ACM",
+    "avg": 89.5,
+    "played": 7,
+    "max": 152,
+    "form": [
+     {
+      "r": "6-9L",
+      "v": 141,
+      "o": "GEN",
+      "h": 0,
+      "s": "1:2",
+      "d": "2026-11-08",
+      "g": 1
+     },
+     {
+      "r": "3-5C",
+      "v": 48,
+      "o": "FER",
+      "h": 1,
+      "s": "0:2",
+      "d": "2026-11-05"
+     },
+     {
+      "r": "30-3L",
+      "v": 147.5,
+      "o": "INT",
+      "h": 1,
+      "s": "3:1",
+      "d": "2026-10-31",
+      "g": 1
+     },
+     {
+      "r": "23-29",
+      "v": 152,
+      "o": "UDI",
+      "h": 0,
+      "s": "0:2",
+      "d": "2026-10-25",
+      "g": 1
+     }
+    ],
+    "match": {
+     "opp": "OLY",
+     "oppName": "Olympiacos",
+     "clubName": "AC Milan",
+     "venue": "A",
+     "date": "2026-11-26",
+     "time": "18:45",
+     "comp": "Europa League"
+    },
+    "nat": "US",
+    "full": "Christian Pulisic"
+   },
+   "b": {
+    "id": 15,
+    "name": "Bruno Fernandes",
+    "dob": "1994-09-08",
+    "pos": "MID",
+    "club": "MUN",
+    "avg": 87.7,
+    "played": 11,
+    "max": 178.5,
+    "form": [
+     {
+      "r": "15-18N",
+      "v": 149.5,
+      "o": "WLS",
+      "h": 0,
+      "s": "2:3",
+      "d": "2026-11-17",
+      "g": 1
+     },
+     {
+      "r": "9-15N",
+      "v": 35.8,
+      "o": "DK",
+      "h": 1,
+      "s": "1:4",
+      "d": "2026-11-14"
+     },
+     {
+      "r": "6-9L",
+      "v": 167,
+      "o": "AVL",
+      "h": 1,
+      "s": "4:4",
+      "d": "2026-11-08",
+      "g": 1,
+      "a": 1
+     },
+     {
+      "r": "3-5C",
+      "v": 178.5,
+      "o": "ROM",
+      "h": 1,
+      "s": "3:2",
+      "d": "2026-11-03",
+      "g": 1,
+      "a": 1
+     }
+    ],
+    "match": {
+     "opp": "SCP",
+     "oppName": "Sporting",
+     "clubName": "Man United",
+     "venue": "A",
+     "date": "2026-11-25",
+     "time": "21:00",
+     "comp": "Champions League"
+    },
+    "nat": "PT",
+    "full": "Bruno Fernandes"
+   },
+   "pts": null
+  },
+  {
+   "id": "r24-27-fwd1",
+   "month": "2026-11",
+   "round": "24-27 Nov",
+   "pos": "FWD",
+   "lock": "2026-11-24T20:00:00Z",
+   "result": null,
+   "a": {
+    "id": 51,
+    "name": "Gyökeres",
+    "dob": "1998-06-04",
+    "pos": "FWD",
+    "club": "ARS",
+    "avg": 83.3,
+    "played": 12,
+    "max": 188.5,
+    "form": [
+     {
+      "r": "15-18N",
+      "v": 82.5,
+      "o": "PL",
+      "h": 0,
+      "s": "1:1",
+      "d": "2026-11-17",
+      "a": 1
+     },
+     {
+      "r": "9-15N",
+      "v": 188.5,
+      "o": "BA",
+      "h": 1,
+      "s": "3:2",
+      "d": "2026-11-14",
+      "g": 2
+     },
+     {
+      "r": "6-9L",
+      "v": 48,
+      "o": "HUL",
+      "h": 1,
+      "s": "1:0",
+      "d": "2026-11-07"
+     },
+     {
+      "r": "3-5C",
+      "v": 165.8,
+      "o": "SLA",
+      "h": 0,
+      "s": "1:2",
+      "d": "2026-11-04",
+      "g": 1,
+      "a": 1
+     }
+    ],
+    "match": {
+     "opp": "BVB",
+     "oppName": "Dortmund",
+     "clubName": "Arsenal",
+     "venue": "H",
+     "date": "2026-11-24",
+     "time": "21:00",
+     "comp": "Champions League"
+    },
+    "nat": "SE",
+    "full": "Viktor Gyökeres"
+   },
+   "b": {
+    "id": 55,
+    "name": "Højlund",
+    "dob": "2003-02-04",
+    "pos": "FWD",
+    "club": "NAP",
+    "avg": 84.0,
+    "played": 11,
+    "max": 183.5,
+    "form": [
+     {
+      "r": "15-18N",
+      "v": 101,
+      "o": "NO",
+      "h": 1,
+      "s": "2:3",
+      "d": "2026-11-17",
+      "g": 1
+     },
+     {
+      "r": "9-15N",
+      "v": 183.5,
+      "o": "PT",
+      "h": 0,
+      "s": "1:4",
+      "d": "2026-11-14",
+      "g": 2
+     },
+     {
+      "r": "6-9L",
+      "v": 41.8,
+      "o": "LAZ",
+      "h": 1,
+      "s": "1:1",
+      "d": "2026-11-08"
+     },
+     {
+      "r": "3-5C",
+      "v": 29.8,
+      "o": "POR",
+      "h": 0,
+      "s": "4:1",
+      "d": "2026-11-04"
+     }
+    ],
+    "match": {
+     "opp": "MCI",
+     "oppName": "Man City",
+     "clubName": "Napoli",
+     "venue": "A",
+     "date": "2026-11-24",
+     "time": "21:00",
+     "comp": "Champions League"
+    },
+    "nat": "DK",
+    "full": "Rasmus Højlund"
+   },
+   "pts": null
+  },
+  {
+   "id": "r24-27-fwd2",
+   "month": "2026-11",
+   "round": "24-27 Nov",
+   "pos": "FWD",
+   "lock": "2026-11-25T20:00:00Z",
+   "result": null,
+   "a": {
+    "id": 132,
+    "name": "Woltemade",
+    "dob": "2002-02-14",
+    "pos": "FWD",
+    "club": "JUV",
+    "avg": 71.4,
+    "played": 10,
+    "max": 157,
+    "form": [
+     {
+      "r": "6-9L",
+      "v": 133.8,
+      "o": "FIO",
+      "h": 0,
+      "s": "2:2",
+      "d": "2026-11-08",
+      "g": 1
+     },
+     {
+      "r": "3-5C",
+      "v": 66.3,
+      "o": "AZ",
+      "h": 0,
+      "s": "1:2",
+      "d": "2026-11-05",
+      "a": 1
+     },
+     {
+      "r": "30-3L",
+      "v": 74.5,
+      "o": "NAP",
+      "h": 1,
+      "s": "2:0",
+      "d": "2026-11-01"
+     },
+     {
+      "r": "23-29",
+      "v": 72.8,
+      "o": "LEC",
+      "h": 0,
+      "s": "0:2",
+      "d": "2026-10-25"
+     }
+    ],
+    "match": {
+     "opp": "OMO",
+     "oppName": "Omonia",
+     "clubName": "Juventus",
+     "venue": "H",
+     "date": "2026-11-26",
+     "time": "21:00",
+     "comp": "Europa League"
+    },
+    "nat": "DE",
+    "full": "Nick Woltemade"
+   },
+   "b": {
+    "id": 7,
+    "name": "Alvarez",
+    "dob": "2000-01-31",
+    "pos": "FWD",
+    "club": "ATM",
+    "avg": 77.8,
+    "played": 8,
+    "max": 162.8,
+    "form": [
+     {
+      "r": "6-9L",
+      "v": 61.8,
+      "o": "BAR",
+      "h": 1,
+      "s": "1:2",
+      "d": "2026-11-08",
+      "a": 1
+     },
+     {
+      "r": "3-5C",
+      "v": 5.5,
+      "o": "FCB",
+      "h": 1,
+      "s": "0:2",
+      "d": "2026-11-03"
+     },
+     {
+      "r": "30-3L",
+      "v": 58,
+      "o": "LEV",
+      "h": 0,
+      "s": "0:2",
+      "d": "2026-10-31"
+     },
+     {
+      "r": "23-29",
+      "v": 162.8,
+      "o": "DEP",
+      "h": 1,
+      "s": "1:0",
+      "d": "2026-10-24",
+      "g": 1
+     }
+    ],
+    "match": {
+     "opp": "VIK",
+     "oppName": "Viktoria Plzeň",
+     "clubName": "Atlético",
+     "venue": "H",
+     "date": "2026-11-25",
+     "time": "21:00",
+     "comp": "Champions League"
+    },
+    "nat": "AR",
+    "full": "Julián Álvarez"
    },
    "pts": null
   }
