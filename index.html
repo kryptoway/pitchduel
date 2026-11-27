@@ -665,7 +665,7 @@ function xtrim(t){let a=Array.from(t);while(a.length&&xlen(a.join(''))>XMAX)a.po
 function shareText(){const m=S.mt||{},st=m.streak||{},sr=m.stars||{},iv=m.invites||{},me=S.user.nick.toLowerCase(),aw=awardsFrom(S.tr||{}),cnt=t=>aw.filter(a=>a.t===t&&String(a.nick).toLowerCase()===me).length,c1=cnt('m1'),cp=cnt('pr'),p=[];
 if(sr.total>0)p.push('⭐ '+sr.total+' Duel Stars');if(c1>0)p.push('🥇 '+c1+'× month winner');if(cp>0)p.push('🛡️ '+cp+'× perfect round');if((st.best||0)>=3)p.push('🔥 best streak: '+st.best+' rounds');if((iv.active||0)>0)p.push('👥 '+iv.active+' friend'+(iv.active>1?'s':'')+' in my league');
 const body=p.length?p.slice(0,3).join(' · '):"I just joined and I'm collecting Duel Stars.";
-return xtrim('My PitchDuel cabinet 🏆\n'+body+'\n#PitchDuel #FantasyFootball\nThink you can beat me? 👇')}
+return xtrim('My PitchDuel cabinet 🏆\n'+body+'\n@pitch_duel #PitchDuel #FantasyFootball\nThink you can beat me? 👇')}
 
 const SHI={};function shLoad(f){return SHI[f]||(SHI[f]=new Promise((ok,no)=>{const i=new Image();i.onload=()=>ok(i);i.onerror=no;i.src='assets/'+f}))}
 async function makeShareImage(){
@@ -716,7 +716,7 @@ function shareX(mode){return postX(mode,CABX)}
 // ---- share a single duel (Pick tab)
 const dkey=p=>p.id+':'+(S.picks[p.id]||'-');
 function duelText(p){const pk=S.picks[p.id],a=p.a,b=p.b,cn=x=>CLUBN[x.club]||x.club,w=pk?p[pk.toLowerCase()]:null,o=pk?p[pk==='A'?'b':'a']:null;
-const t=pk?'Duel time ⚔️\nWho scores more points next match: '+a.name+' ('+cn(a)+') or '+b.name+' ('+cn(b)+')?\nI am backing '+w.name+' over '+o.name+' 💪\nThink you know better? Make your pick 👇\n#PitchDuel #FantasyFootball':'Duel time ⚔️\n'+a.name+' ('+cn(a)+') or '+b.name+' ('+cn(b)+'): who scores more points next match?\nI cannot decide. What is your pick? 👇\n#PitchDuel #FantasyFootball';return xtrim(t)}
+const t=pk?'Duel time ⚔️\nWho scores more points next match: '+a.name+' ('+cn(a)+') or '+b.name+' ('+cn(b)+')?\nI am backing '+w.name+' over '+o.name+' 💪\nThink you know better? Make your pick 👇\n@pitch_duel #PitchDuel #FantasyFootball':'Duel time ⚔️\n'+a.name+' ('+cn(a)+') or '+b.name+' ('+cn(b)+'): who scores more points next match?\nI cannot decide. What is your pick? 👇\n@pitch_duel #PitchDuel #FantasyFootball';return xtrim(t)}
 function duelDefault(p){const k=dkey(p);S.shdT=S.shdT||{};if(S.shdT[k]==null)S.shdT[k]=duelText(p);return S.shdT[k]}
 async function makeDuelImage(p){const W=1200,H=630,cv=document.createElement('canvas');cv.width=W;cv.height=H;const g=cv.getContext('2d'),FB='"Barlow Condensed",Impact,sans-serif',pk=S.picks[p.id];
 try{await Promise.all([document.fonts.load('700 20px "Barlow Condensed"'),document.fonts.load('600 14px Barlow')])}catch(e){}
